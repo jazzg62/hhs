@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "payApp",
+  "description": "企联多端支付项目",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}
