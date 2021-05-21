@@ -1,0 +1,72 @@
+$blue:#1989FA;
+$white:white;
+$gray:#CCCCCC;
+$black:#555555;
+
+.index-top__banner{
+  background-color: rgba(0,0,0,.1);
+  height: 24px;
+}
+.index-store__block{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 90px;
+  padding-bottom: 45px;
+  padding-left: 30px;
+}
+.index-store__avatar{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+.index-store__name{
+  margin-left: 15px;
+  font-size: 36px;
+}
+.index-line-gray{
+  width: 90%;
+  margin: 0 auto;
+  background-color: #E5E5E5;
+  height: 1px;
+}
+.index-input{
+  border: 1px solid $gray;
+  font-size: 33px;
+  margin:0 5%;
+  margin-top: 60px;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  Text{
+    color: $black;
+    width: 180px;
+    text-align: right;
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  input{
+    flex: 1;
+    margin-left: 15px;
+    max-width: 60%;
+    color: $black;
+  }
+}
+.index-pay__button{
+  background-color: $blue;
+  color: $white;
+  width: 90%;
+  border-radius: 30px;
+  margin-top: 60px;
+  font-size: 36px;
+  letter-spacing: 5px;
+  height: 85px;
+  line-height: 85px;
+}

@@ -1,13 +1,71 @@
 import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import { View, Text, Image, Button, Input } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
-import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.scss'
+import {getUserInfo} from '../../actions/user'
+import {setMoney} from '../../actions/pay';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux'
 
+const stateToIndex = function(state){
+  console.log(state);
+  return {
+    store:state.store,
+    user:state.user,
+    pay:state.pay,
+    discount:state.pay
+  }
+}
+
+const dispatchToProps = function(dispatch){
+  return {
+    getUserInfo:(phone)=>dispatch(getUserInfo(phone)),
+    setMoney:(money)=>dispatch(setMoney(money))
+  }
+}
+
+@connect(
+  stateToIndex,
+  dispatchToProps
+)
 export default class Index extends Component {
 
-  componentWillMount () { }
+  constructor(props){
+    super(props);
+    console.log('props',props);
+    // 获取用户member_id示例
+    // this.props.getUserInfo('18955756387');
+    this.handleMoneyChange = this.handleMoneyChange.bind(this);
+    this.state ={
+      showDrawer:false
+    }
+  }
+
+  getUserInfo(phone){
+    return this.props.actions.getUserInfo(phone)
+  }
+
+  handleMoneyChange(event){
+    this.props.setMoney(event.detail.value)
+  }
+
+  handelPayClick(event){
+    let {money} = this.props.pay;
+    if(money<0.01){
+      Taro.showModal({
+        title:'注意',
+        content:'支付金额不能少于0.01元'
+      })
+      return ;
+    }
+    Taro.navigateTo({
+      url:'/pages/discount/discount?id=1'
+    })
+  }
+
+  componentWillMount () {
+  }
 
   componentDidMount () { }
 
@@ -18,14 +76,28 @@ export default class Index extends Component {
   componentDidHide () { }
 
   render () {
+    const storeInfo = this.props.store;
+    const payInfo = this.props.pay;
+
     return (
       <View className='index'>
-        <Text>Hello world!</Text>
-        <AtButton type='primary'>I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type='primary' circle={true}>支持</AtButton>
-        <Text>共建？</Text>
-        <AtButton type='secondary' circle={true}>来</AtButton>
+        <View className='index-top__banner'></View>
+        <View className='index-store__block' id={storeInfo.store_id}>
+          <Image className='index-store__avatar'
+            src={storeInfo.store_avatar}
+          />
+          <Text className='index-store__name'>{storeInfo.store_name}</Text>
+        </View>
+
+        <View className='index-line-gray'></View>
+
+        <View className='index-input'>
+          <Text>付款金额:</Text>
+          <Input  type='number' placeholder='请输入支付金额' focus value={payInfo.money} onBlur={this.handleMoneyChange} />
+        </View>
+
+        <Button className='index-pay__button' onClick={this.handelPayClick.bind(this)}>支付</Button>
+
       </View>
     )
   }
