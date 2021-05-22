@@ -1,8 +1,4 @@
-$blue:#1989FA;
-$white:white;
-$gray:#CCCCCC;
-$black:#555555;
-
+@import '../../../style/themes/default.scss';
 .index-top__banner{
   background-color: rgba(0,0,0,.1);
   height: 24px;
@@ -42,7 +38,7 @@ $black:#555555;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
 
   Text{
     color: $black;
@@ -64,6 +60,7 @@ $black:#555555;
   color: $white;
   width: 90%;
   border-radius: 30px;
+  margin:0 auto;
   margin-top: 60px;
   font-size: 36px;
   letter-spacing: 5px;

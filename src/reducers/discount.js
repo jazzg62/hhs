@@ -2,18 +2,15 @@ const INITIAL_STATE = {
   dtgd_zk:100,
   xjq:0,
   xjq_id:0,
-  xjq_list:[]
+  predeposit:0
 }
 
 export default function store(state = INITIAL_STATE, action){
   switch(action.type){
-    case 'ajax':
-      const { store_id, store_name, store_avatar } = action.ajax;
+    case 'DISCOUNT':
       return {
         ...state,
-        store_id,
-        store_name,
-        store_avatar
+        ...action.payload
       }
     default:
       return state

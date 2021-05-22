@@ -1,9 +1,10 @@
 import { Component } from 'react'
 import { View, Text } from '@tarojs/components'
-import './discount.scss'
-import * as discount from '../../actions/discount'
+import './password.scss'
+
+import {getUserInfo} from '../../actions/user'
+import {setMoney} from '../../actions/pay';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux'
 
 const stateToIndex = function(state){
   console.log(state);
@@ -15,10 +16,12 @@ const stateToIndex = function(state){
   }
 }
 
-const dispatchToProps = dispatch => ({
-  actions: bindActionCreators({...discount}, dispatch)
-})
-
+const dispatchToProps = function(dispatch){
+  return {
+    getUserInfo:(phone)=>dispatch(getUserInfo(phone)),
+    setMoney:(money)=>dispatch(setMoney(money))
+  }
+}
 
 @connect(
   stateToIndex,
@@ -28,7 +31,6 @@ export default class Index extends Component {
   constructor(props){
     super(props);
     console.log(props)
-    this.props.actions.getDiscount(this.props.pay.money)
   }
 
   componentWillMount () {
@@ -48,6 +50,7 @@ export default class Index extends Component {
     return (
       <View>
         <Text>要支付的金额{money}</Text>
+        <Text>请输入您的企联支付密码</Text>
       </View>
     )
   }

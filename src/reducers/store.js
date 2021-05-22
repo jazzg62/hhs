@@ -1,24 +1,17 @@
+import Taro from '@tarojs/taro'
+
 const INITIAL_STATE = {
-  store_id:0,
-  store_name:'商家名',
+  store_id:process.env.TARO_ENV?5418:0,
+  store_name:'加载商家名中...',
   store_avatar:'https://new.cnqilian.com/wap/images/qlpt1.png'
 }
 
 export default function store(state = INITIAL_STATE, action){
   switch(action.type){
-    case 'ajax':
-      const { store_id, store_name, store_avatar } = action.ajax;
+    case 'STORE_INFO':
       return {
-        ...state,
-        store_id,
-        store_name,
-        store_avatar
-      }
-    case 'GETSTOREINFO':
-      const {storeInfo} = action.payload
-      return {
-        ...state,
-        storeInfo
+       state,
+       ...action.payload
       }
     default:
       return state

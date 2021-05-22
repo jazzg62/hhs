@@ -1,3 +1,3 @@
 export default {
-  navigationBarTitleText: '发起支付'
+  navigationBarTitleText: '收银台'
 }

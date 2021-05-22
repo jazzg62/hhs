@@ -5,13 +5,13 @@ const INITIAL_STATE = {
   store_id: 0,
   storeb_id: 0,
   member_id: 0,
-  money: 0,
+  money: '',
   discounted_money: 0,
-  xflx: Payment.SM_WXPAY,
+  xflx: process.env.TARO_ENV?Payment.SM_WXPAY:Payment.SM_ALIPAY,
   ddh: generateUnionID(),
   password: '',
-  xfq_list: "",
   use_red_envelop: 1,
+  xfq_list: "",
   is_cz: 0,
   xjq_me: 0,
   xjq_id: 0,
@@ -20,8 +20,6 @@ const INITIAL_STATE = {
 
 export default function store(state = INITIAL_STATE, action){
   switch(action.type){
-    case 'ajax':
-      return {}    // 待编写
     case 'SETMONEY':
       let {money} = action;
       return {...state, money}

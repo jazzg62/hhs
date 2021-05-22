@@ -1,29 +1,26 @@
 import { Component } from 'react'
 import { View, Text, Image, Button, Input } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 
 import './index.scss'
 import {getUserInfo} from '../../actions/user'
 import {setMoney} from '../../actions/pay';
+import * as store_actions from '../../actions/store'
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux'
 
 const stateToIndex = function(state){
-  console.log(state);
   return {
     store:state.store,
     user:state.user,
     pay:state.pay,
-    discount:state.pay
+    discount:state.discount
   }
 }
 
-const dispatchToProps = function(dispatch){
-  return {
-    getUserInfo:(phone)=>dispatch(getUserInfo(phone)),
-    setMoney:(money)=>dispatch(setMoney(money))
-  }
-}
+const dispatchToProps = dispatch => ({
+  actions: bindActionCreators({...store_actions,getUserInfo, setMoney}, dispatch)
+})
 
 @connect(
   stateToIndex,
@@ -34,12 +31,12 @@ export default class Index extends Component {
   constructor(props){
     super(props);
     console.log('props',props);
-    // 获取用户member_id示例
-    // this.props.getUserInfo('18955756387');
-    this.handleMoneyChange = this.handleMoneyChange.bind(this);
-    this.state ={
-      showDrawer:false
-    }
+
+    let datas = getCurrentInstance().router.params
+    let store_id = datas['store_id']|| 5413;
+
+    this.props.actions.getStoreInfo(store_id);
+    this.props.actions.getUserInfo('18955756387');
   }
 
   getUserInfo(phone){
@@ -47,7 +44,7 @@ export default class Index extends Component {
   }
 
   handleMoneyChange(event){
-    this.props.setMoney(event.detail.value)
+    this.props.actions.setMoney(event.detail.value)
   }
 
   handelPayClick(event){
@@ -93,7 +90,7 @@ export default class Index extends Component {
 
         <View className='index-input'>
           <Text>付款金额:</Text>
-          <Input  type='number' placeholder='请输入支付金额' focus value={payInfo.money} onBlur={this.handleMoneyChange} />
+          <Input  type='number' placeholder='请输入支付金额' focus value={payInfo.money} onBlur={this.handleMoneyChange.bind(this)} />
         </View>
 
         <Button className='index-pay__button' onClick={this.handelPayClick.bind(this)}>支付</Button>

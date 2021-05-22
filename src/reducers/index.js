@@ -10,12 +10,3 @@ export default combineReducers({
   discount,
   pay
 })
-
-// export default function(state, action={type:''}){
-//   return {
-//     user:user(state, action),
-//     store:store(state, action),
-//     discount:discount(state, action),
-//     pay:pay(state, action)
-//   }
-// }
