@@ -1,11 +1,15 @@
-import Taro from '@tarojs/taro';
+import {request} from '@tarojs/taro';
 
-// 根据手机号来获取用户信息
+/**
+ * 使用手机号来获取用户信息
+ * @example this.props.actions.getUserInfo('18955756386');
+ * @param {*} phone
+ * @returns
+ */
 export function getUserInfo(phone){
-  return  async function (dispatch, getState) {
-		// 返回的函数体内自由实现。。。
-		let res = await Taro.request({
-      url: 'https://pay.cnqilian.com/?act=index&op=getuser', //仅为示例，并非真实的接口地址
+  return async function (dispatch, getState) {
+		let res = await request({
+      url: 'https://pay.cnqilian.com/index.php?act=index&op=getuser',
       method:'GET',
       data: {
         phone:phone
@@ -16,7 +20,7 @@ export function getUserInfo(phone){
       phone:phone
     }
     dispatch({
-      type:'USER_INFO',
+      type:'USER',
       payload
     })
 	}

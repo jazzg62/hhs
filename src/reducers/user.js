@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 export default  function store(state = INITIAL_STATE, action){
   switch(action.type){
-    case 'USER_INFO':
+    case 'USER':
       return {...state,...action.payload}
     default:
       return state

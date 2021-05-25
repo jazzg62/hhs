@@ -1,14 +1,25 @@
 export default {
   pages: [
-    'pages/success/success',
-    'pages/index/index',
-    'pages/discount/discount',
+
+    'pages/scan/scan',
     'pages/password/password',
+    'pages/success/success',
+    'pages/discount/discount',
+
+
+    'pages/index/index',
+    'pages/pay/pay',
+    'pages/phone/phone',
+    'pages/share/share',
+    'pages/welcome/welcome',
+
+
+
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
+    navigationBarTitleText: '惠花生',
     navigationBarTextStyle: 'black'
   }
 }

@@ -1,10 +1,15 @@
 import {request} from '@tarojs/taro';
 
+/**
+ * 获取优惠信息，需要先获取member_id和store_id
+ * @param {*} money
+ * @returns
+ */
 export function getDiscount(money){
   return async function(dispatch, getState){
     let state = getState();
     let res = await request({
-      url: 'https://pay.cnqilian.com/?act=index&op=yhxx',
+      url: 'https://pay.cnqilian.com/index.php?act=index&op=yhxx',
       method:'GET',
       data: {
         member_id:state.user.member_id,

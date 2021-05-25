@@ -4,7 +4,11 @@ module.exports = {
   presets: [
     ['taro', {
       framework: 'react',
-      ts: false
+      ts: false,
+      targets:{
+        ios:'8',
+        android:'4.0'
+      }
     }]
   ]
 }

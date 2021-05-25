@@ -1,4 +1,8 @@
-// 生成一个唯一的id
+/**
+ * 生成一个唯一的id
+ * @example let id = generateUnionID();
+ * @returns
+ */
 export function generateUnionID() {
   // 先获取当前时间戳
   var time = new Date().getTime();
@@ -12,6 +16,13 @@ export function generateUnionID() {
   return res.join("");
 }
 
+/**
+ * 时间戳格式化
+ * @example formatDate(new Date(+res.addtime*1000), 'yyyy-MM-dd hh:mm')
+ * @param {*} date
+ * @param {*} fmt
+ * @returns
+ */
 export function formatDate(date, fmt) {
   var o = {
       "M+": date.getMonth() + 1, //月份
@@ -28,6 +39,12 @@ export function formatDate(date, fmt) {
     return fmt;
 }
 
+/**
+ * 给数字保留两位小数
+ * @example let a = toFixed(2); // return 2.00
+ * @param {*} val
+ * @returns
+ */
 export function toFixed2(val){
   try{
     return val!=0?Number(val).toFixed(2):0
@@ -37,6 +54,12 @@ export function toFixed2(val){
   }
 }
 
+/**
+ * 消费类型转译
+ * @example let a = transXFLX('SM_WXPAY'); // return 扫码微信支付
+ * @param {*} val
+ * @returns
+ */
 export function transXFLX(val){
   switch(val){
     case 'SM_WXPAY':

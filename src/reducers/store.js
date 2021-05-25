@@ -1,5 +1,3 @@
-import Taro from '@tarojs/taro'
-
 const INITIAL_STATE = {
   store_id:process.env.TARO_ENV?5418:0,
   store_name:'加载商家名中...',
@@ -8,9 +6,9 @@ const INITIAL_STATE = {
 
 export default function store(state = INITIAL_STATE, action){
   switch(action.type){
-    case 'STORE_INFO':
+    case 'STORE':
       return {
-       state,
+       ...state,
        ...action.payload
       }
     default:

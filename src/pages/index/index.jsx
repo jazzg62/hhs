@@ -1,101 +1,70 @@
-import { Component } from 'react'
-import { View, Text, Image, Button, Input } from '@tarojs/components'
-import Taro, { getCurrentInstance } from '@tarojs/taro'
+import { WebView } from '@tarojs/components'
+import React from 'react'
+import Taro from '@tarojs/taro'
+import withWeapp from '@tarojs/with-weapp'
 
-import './index.scss'
-import {getUserInfo} from '../../actions/user'
-import {setMoney} from '../../actions/pay';
-import * as store_actions from '../../actions/store'
-import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux'
+@withWeapp({
+  data: {
+    src: 'https://new.cnqilian.com/wap/gyl/index.html'
+  },
 
-const stateToIndex = function(state){
-  return {
-    store:state.store,
-    user:state.user,
-    pay:state.pay,
-    discount:state.discount
-  }
-}
-
-const dispatchToProps = dispatch => ({
-  actions: bindActionCreators({...store_actions,getUserInfo, setMoney}, dispatch)
-})
-
-@connect(
-  stateToIndex,
-  dispatchToProps
-)
-export default class Index extends Component {
-
-  constructor(props){
-    super(props);
-    console.log('props',props);
-
-    let datas = getCurrentInstance().router.params
-    let store_id = datas['store_id']|| 5413;
-
-    this.props.actions.getStoreInfo(store_id);
-    this.props.actions.getUserInfo('18955756387');
-  }
-
-  getUserInfo(phone){
-    return this.props.actions.getUserInfo(phone)
-  }
-
-  handleMoneyChange(event){
-    this.props.actions.setMoney(event.detail.value)
-  }
-
-  handelPayClick(event){
-    let {money} = this.props.pay;
-    if(money<0.01){
-      Taro.showModal({
-        title:'注意',
-        content:'支付金额不能少于0.01元'
+  onLoad: function(options) {
+    if (options && options['src'] != undefined) {
+      var src = decodeURIComponent(options.src)
+      src = src.replace(/http:\/\//, 'https://')
+      this.setData({
+        src: src
       })
-      return ;
     }
-    Taro.navigateTo({
-      url:'/pages/discount/discount?id=1'
+  },
+
+  onReady: function() {},
+
+  //定义此方法之后，点击右上角按钮弹出的菜单中"发送给朋友"菜单变为可点击
+  onShareAppMessage: function(param) {
+    var { webViewUrl } = param
+    console.log(webViewUrl)
+    try {
+      var reg = /goods_name=([^&]*)(&|$)/
+      var goods_name = decodeURIComponent(reg.exec(webViewUrl)[1])
+      if (goods_name) {
+        return {
+          title: goods_name,
+          path: '/pages/index/index?src=' + encodeURIComponent(webViewUrl)
+        }
+      }
+    } catch (e) {
+      return {
+        title: '消费当股东 天天享分红',
+        path: '/pages/index/index?src=' + encodeURIComponent(webViewUrl)
+      }
+    }
+  },
+
+  // 记录错误到服务器
+  errorHandler: function(e) {
+    var data = {
+      type: '企联商务 加载出错',
+      error: JSON.stringify(e.detail)
+    }
+    Taro.request({
+      url: 'https://new.cnqilian.com/mobile/index.php?act=index&op=sysLog',
+      data: data,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        console.error('已记录错误')
+      }
     })
   }
-
-  componentWillMount () {
-  }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    const storeInfo = this.props.store;
-    const payInfo = this.props.pay;
-
-    return (
-      <View className='index'>
-        <View className='index-top__banner'></View>
-        <View className='index-store__block' id={storeInfo.store_id}>
-          <Image className='index-store__avatar'
-            src={storeInfo.store_avatar}
-          />
-          <Text className='index-store__name'>{storeInfo.store_name}</Text>
-        </View>
-
-        <View className='index-line-gray'></View>
-
-        <View className='index-input'>
-          <Text>付款金额:</Text>
-          <Input  type='number' placeholder='请输入支付金额' focus value={payInfo.money} onBlur={this.handleMoneyChange.bind(this)} />
-        </View>
-
-        <Button className='index-pay__button' onClick={this.handelPayClick.bind(this)}>支付</Button>
-
-      </View>
-    )
+})
+class _C extends React.Component {
+  render() {
+    const { src } = this.data
+    return <WebView src={src} onError={this.errorHandler}></WebView>
   }
 }
+
+export default _C

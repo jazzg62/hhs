@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   discounted_money: 0,
   xflx: process.env.TARO_ENV?Payment.SM_WXPAY:Payment.SM_ALIPAY,
   ddh: generateUnionID(),
-  password: '',
+  password: '      ',
   use_red_envelop: 1,
   xfq_list: "",
   is_cz: 0,
@@ -21,8 +21,13 @@ const INITIAL_STATE = {
 export default function store(state = INITIAL_STATE, action){
   switch(action.type){
     case 'SETMONEY':
-      let {money} = action;
-      return {...state, money}
+      return {...state, ...action.payload}
+    case 'SETPASSWORD':
+      return {...state, ...action.payload}
+    case 'SETPREDEPPOSIT':
+      return {...state, ...action.payload}
+    case 'PAY':
+      return {...state, ...action.payload}
     default:
       return state
   }

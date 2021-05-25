@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "payApp",
 	"description": "企联多端支付项目",
-	"appid": "touristappid",
+	"appid": "wx7a8b8ab638ee44f3",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
