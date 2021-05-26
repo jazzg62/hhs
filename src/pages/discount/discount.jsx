@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import './discount.scss'
 import * as discount from '../../actions/discount'
+import Icon from '../../components/Icon'
+
 
 const stateToIndex = function (state) {
   console.log(state);
@@ -47,10 +49,11 @@ class Index extends Component {
     return (
       <View>
         <View>
-          <Text>要支付的金额{money}</Text>
+          <Text>请选择支付方式{money}</Text>
         </View>
         <View>
-
+            <Icon name='check' color='red'></Icon>
+            <Icon name='success' color='blue'></Icon>
         </View>
       </View>
     )

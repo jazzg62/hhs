@@ -2,7 +2,7 @@ import { View } from '@tarojs/components'
 import {showLoading, hideLoading} from '@tarojs/taro'
 import './index.scss'
 
-const Loading = function(props){
+const Index = function(props){
   let {isLoading} = props;
   if(isLoading){
     showLoading({
@@ -15,4 +15,4 @@ const Loading = function(props){
   }
 }
 
-export default Loading
+export default Index

@@ -29,8 +29,7 @@
     "dev:quickapp": "npm run build:quickapp -- --watch"
   },
   "browserslist": [
-    "last 3 versions",
-    "Android >= 4.1",
+    "Android >= 4.0",
     "ios >= 8"
   ],
   "author": "",

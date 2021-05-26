@@ -1,19 +1,16 @@
 export default {
   pages: [
 
+    'pages/discount/discount',
     'pages/scan/scan',
     'pages/password/password',
     'pages/success/success',
-    'pages/discount/discount',
-
 
     'pages/index/index',
     'pages/pay/pay',
     'pages/phone/phone',
     'pages/share/share',
     'pages/welcome/welcome',
-
-
 
   ],
   window: {

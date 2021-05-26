@@ -120,12 +120,12 @@ class Index extends Component {
         }
         this.props.actions.getDiscount(money)
 
-        // Taro.navigateTo({
-        //   url:'/pages/discount/discount?id=1'
-        // })
         Taro.navigateTo({
-          url: '/pages/password/password?id=1'
+          url:'/pages/discount/discount?id=1'
         })
+        // Taro.navigateTo({
+        //   url: '/pages/password/password?id=1'
+        // })
 
       })
     }else{
