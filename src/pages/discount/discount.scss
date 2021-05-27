@@ -1,0 +1,77 @@
+@import '../../../style/themes/default.scss';
+@import '../../../style/themes/icon.scss';
+
+.discount{
+  &-top__banner{
+    background-color: rgba(0,0,0,.1);
+    height: 24px;
+  }
+  &-type{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 12px;
+    box-sizing: border-box;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 30px;
+    color: $black;
+    border: 6px solid transparent;
+
+
+    &_selected{
+      border-radius:24px;
+      border: 6px solid $blue;
+      background-color: rgba($color: $blue, $alpha: 0.1);
+    }
+
+    &__text{
+      margin-left: 30px;
+      font-weight: bold;
+      font-size: 36px;
+    }
+
+    &__check{
+      margin-left: auto;
+    }
+  }
+
+  &-red__envelop{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 24px;
+    color: $black;
+    box-sizing: border-box;
+    padding-left: 36px;
+
+    &__info{
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+
+      &__red:nth-child(n+2){
+        margin-top: 12px;
+      }
+
+      &__red{
+        color: $red;
+      }
+    }
+  }
+
+  &-pay{
+    width: 90%;
+    margin: 0 auto;
+    margin-top:  60px;
+    border-radius: 30px;
+    background-color: $green;
+    color: $white;
+    font-weight: bold;
+  }
+}

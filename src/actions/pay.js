@@ -1,4 +1,4 @@
-import {generateUnionID} from '../utils/index';
+import {generateUnionID, isTrue} from '../utils/index';
 /**
  * 设置支付金额
  * @param {*} money
@@ -66,6 +66,39 @@ export function pay(){
     };
     dispatch({
       type:'PAY',
+      payload
+    })
+  }
+}
+
+/**
+ * 更改消费类型
+ * @param {string} xflx
+ * @returns
+ */
+export function changeXFLX(xflx){
+  let payload ={
+    xflx
+  }
+  return {
+    type:'CHANGEXFLX',
+    payload
+  }
+}
+
+/**
+ * 是否使用红包
+ * @returns
+ */
+export function changeRedEnvelop(){
+  return function(dispatch, getState){
+    let state = getState();
+    let use_red_envelop = state.pay.use_red_envelop;
+    let payload = {
+      use_red_envelop:isTrue(use_red_envelop)?0:1
+    }
+    dispatch({
+      type:'CHANGEREDENVELOP',
       payload
     })
   }

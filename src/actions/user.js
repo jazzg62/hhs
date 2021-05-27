@@ -25,3 +25,13 @@ export function getUserInfo(phone){
     })
 	}
 }
+
+export function setUserPhone(phone){
+  let payload = {
+    'phone':phone
+  };
+  return {
+    type:'SETPHONE',
+    payload
+  }
+}

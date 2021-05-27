@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-  store_id:process.env.TARO_ENV?5418:0,
-  store_name:'加载商家名中...',
+  store_id:0,
+  store_name:'商家名有七个字',
   store_avatar:'https://new.cnqilian.com/wap/images/qlpt1.png'
 }
 

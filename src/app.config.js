@@ -1,8 +1,8 @@
 export default {
   pages: [
 
-    'pages/discount/discount',
     'pages/scan/scan',
+    'pages/discount/discount',
     'pages/password/password',
     'pages/success/success',
 

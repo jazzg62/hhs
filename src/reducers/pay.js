@@ -7,10 +7,10 @@ const INITIAL_STATE = {
   member_id: 0,
   money: '',
   discounted_money: 0,
-  xflx: process.env.TARO_ENV?Payment.SM_WXPAY:Payment.SM_ALIPAY,
+  xflx: Payment.SM_XS,
   ddh: generateUnionID(),
   password: '      ',
-  use_red_envelop: 1,
+  use_red_envelop: 0,
   xfq_list: "",
   is_cz: 0,
   xjq_me: 0,
@@ -27,6 +27,10 @@ export default function store(state = INITIAL_STATE, action){
     case 'SETPREDEPPOSIT':
       return {...state, ...action.payload}
     case 'PAY':
+      return {...state, ...action.payload}
+    case 'CHANGEXFLX':
+      return {...state, ...action.payload}
+    case 'CHANGEREDENVELOP':
       return {...state, ...action.payload}
     default:
       return state

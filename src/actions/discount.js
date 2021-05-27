@@ -21,7 +21,8 @@ export function getDiscount(money){
     let payload = {
       dtgd_zk:Number(res.data.dtgd_info['zk']),
       xjq:res.data.xjq,
-      xjq_id:res.data.xjq_info,
+      xjq_id:res.data.xjq_info['id'],
+      xjq_me:res.data.xjq_info['me'],
       predeposit:Number(res.data.member_info.available_predeposit),
     }
     return dispatch({

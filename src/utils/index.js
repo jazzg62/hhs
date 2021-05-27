@@ -72,3 +72,34 @@ export function transXFLX(val){
       return '微信支付';
   }
 }
+
+
+/**
+ * 检查对象是否为真值
+ * @param {*} val
+ * @returns
+ */
+export function isTrue(val){
+  if(val == 0 || val == undefined || val == '' || val == ' ' || val == null || isNaN(val))
+    return false;
+  return true;
+}
+
+/**
+ * 计算折扣
+ * @example
+ * calcZK(100) // ''
+ * calcZK(80)  // 8折
+ * calcZK(89)  // 89折
+ * @param {number} val
+ */
+export function calcZK(val){
+  val = Number(val);
+  if(val>=100 || isNaN(_)){
+    return '';
+  }
+  if(val%10==0){
+    return val/10+'折'
+  }
+  return val+'折';
+}
