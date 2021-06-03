@@ -1,9 +1,11 @@
 import { Component } from 'react'
 import { View, Text, Input, Button } from '@tarojs/components'
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import './password.scss'
 
 import { setPassword } from '../../actions/pay';
+import toPay from '../../utils/pay.wxapp';
 
 const stateToIndex = function (state) {
   return {
@@ -11,11 +13,9 @@ const stateToIndex = function (state) {
   }
 }
 
-const dispatchToProps = function (dispatch) {
-  return {
-    setPassword: (password) => dispatch(setPassword(password))
-  }
-}
+const dispatchToProps = dispatch => ({
+  actions: bindActionCreators({ setPassword, toPay}, dispatch)
+})
 
 @connect(
   stateToIndex,
@@ -56,12 +56,17 @@ class Index extends Component {
   }
 
   handleInput(event) {
-    this.props.setPassword(event.detail.value);
+    this.props.actions.setPassword(event.detail.value);
+  }
+
+  handlePayClick(){
+    // 调起支付
+    this.props.actions.toPay();
   }
 
   render() {
     let { password } = this.props.pay;
-    let inputs = password.split('').map((val, idx) => {
+    let inputs = password.split('').map((val) => {
       if (val != ' ')
         return <Input className='password-input__type1' type='password' maxlength='1' value={val} disabled></Input>
       else
@@ -94,7 +99,7 @@ class Index extends Component {
           <Text>密码为6位数字</Text>
         </View>
         <View className='password-submit'>
-          <Button>提交</Button>
+          <Button onClick={this.handlePayClick.bind(this)}>提交</Button>
         </View>
       </View>
     )

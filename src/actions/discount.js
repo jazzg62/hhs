@@ -14,16 +14,18 @@ export function getDiscount(money){
       data: {
         member_id:state.user.member_id,
         xfje:money,
-        store_id:state.store.store_id
+        store_id:state.store.store_id,
+        storeb_id:state.store.storeb_id
       }
     })
 
     let payload = {
-      dtgd_zk:Number(res.data.dtgd_info['zk']),
-      xjq:res.data.xjq,
-      xjq_id:res.data.xjq_info['id'],
-      xjq_me:res.data.xjq_info['me'],
+      dtgd_zk:Number(res.data.dtgd_info['zk'] || 100),
+      xjq:res.data.xjq || 0,
+      xjq_id:res.data.xjq_info['id'] || 0,
+      xjq_me:res.data.xjq_info['me'] || 0,
       predeposit:Number(res.data.member_info.available_predeposit),
+      czye:res.data.czye
     }
     return dispatch({
       type:'DISCOUNT',

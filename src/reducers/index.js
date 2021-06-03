@@ -5,7 +5,7 @@ import discount from './discount'
 import pay from './pay'
 
 export default combineReducers({
-  user:user,
+  user,
   store,
   discount,
   pay

@@ -1,3 +1,4 @@
+import { Payment } from '../constant';
 import {generateUnionID, isTrue} from '../utils/index';
 /**
  * 设置支付金额
@@ -8,7 +9,7 @@ export function setMoney(money){
   return {
     type:'SETMONEY',
     payload:{
-      'money':Number(money)
+      'money':money
     }
   }
 }
@@ -101,5 +102,23 @@ export function changeRedEnvelop(){
       type:'CHANGEREDENVELOP',
       payload
     })
+  }
+}
+
+/**
+ * 设置为充值支付
+ */
+export function setCZ(is_cz){
+  let payload = {
+    is_cz:is_cz
+  };
+  // 使用在线充值时，只能用线上支付
+  if(isTrue(is_cz)){
+    payload.xflx = Payment.SM_XS;
+    payload.use_red_envelop = 1;
+  }
+  return {
+    type:'SETCZ',
+    payload
   }
 }

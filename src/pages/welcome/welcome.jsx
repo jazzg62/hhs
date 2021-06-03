@@ -2,6 +2,7 @@ import { View } from '@tarojs/components'
 import React from 'react'
 import Taro from '@tarojs/taro'
 import withWeapp from '@tarojs/with-weapp'
+import {parse} from 'querystring'
 import './welcome.scss'
 
 @withWeapp({
@@ -14,14 +15,13 @@ import './welcome.scss'
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      options: JSON.stringify(this.options)
-    })
-    this.setData({
-      q: this.options.q
-    })
-    if (this.options && this.options.q != undefined) {
-      let src = decodeURIComponent(this.options.q)
+    let re = /pay\.cnqilian\.com\/dist\/\?/;
+    let src ='';
+    if (options && options.q != undefined) {
+      src = decodeURIComponent(options.q)
+      if(re.test(src)){
+        src = "https://new.cnqilian.com/mobile/index.php?act=connect&op=index_xcx&store_id="+parse(src)['store_id']+'&storeb_id='+(parse(src)['storeb_id']||0);
+      }
       src = src.replace(/http:\/\//, 'https://')
       Taro.reLaunch({
         url: '/pages/index/index?src=' + encodeURIComponent(src)

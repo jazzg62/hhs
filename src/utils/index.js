@@ -40,7 +40,7 @@ export function formatDate(date, fmt) {
 }
 
 /**
- * 给数字保留两位小数
+ * 给数字保留两位小数,四舍五入
  * @example let a = toFixed(2); // return 2.00
  * @param {*} val
  * @returns
@@ -68,6 +68,8 @@ export function transXFLX(val){
       return '扫码支付宝支付';
     case 'SM_QLB':
       return '扫码红包支付';
+    case 'SM_CZ':
+      return '扫码充值支付';
     default:
       return '微信支付';
   }
@@ -80,7 +82,7 @@ export function transXFLX(val){
  * @returns
  */
 export function isTrue(val){
-  if(val == 0 || val == undefined || val == '' || val == ' ' || val == null || isNaN(val))
+  if(val == 0 || val == undefined || val == '' || val == ' ' || val == '0' || val == null )
     return false;
   return true;
 }
@@ -88,9 +90,9 @@ export function isTrue(val){
 /**
  * 计算折扣
  * @example
- * calcZK(100) // ''
- * calcZK(80)  // 8折
- * calcZK(89)  // 89折
+ * calcZK(100) // return ''
+ * calcZK(80)  // return '8折'
+ * calcZK(89)  // return '89折'
  * @param {number} val
  */
 export function calcZK(val){

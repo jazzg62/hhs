@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { View, Text, Image, Button, Input } from '@tarojs/components'
-import Taro, { getCurrentInstance, getStorage, setStorage } from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './scan.scss'
@@ -33,32 +33,14 @@ class Index extends Component {
 
   constructor(props) {
     super(props);
-
-    // 商家信息
     let params = getCurrentInstance().router.params
-    let store_id = params['store_id'] || 5413;
-    this.props.actions.getStoreInfo(store_id);
-
-
-    let { user } = this.props;
-    let { phone, member_id } = user;
-
-    phone = '18955756387';  // 假设手机号为18955756387
-
-    // 获取用户在缓存中的手机号
-    if (isTrue(member_id)) {
-      getStorage({
-        key: 'phone',
-        success: res => {
-          this.props.actions.setUserPhone(res.data);
-        }
-      })
-    }
-
-    if (isTrue(phone)) {
-      this.props.actions.getUserInfo(phone);
-    }
-
+    // store_id, member_id, phone 根据系统后台传入的值来决定
+    if (isTrue(params['store_id']))
+      this.props.actions.getStoreInfo(params['store_id'], params['storeb_id']);
+    if (isTrue(params['member_id']))
+      this.props.actions.setUserMemberID(params['member_id']);
+    if (isTrue(params['phone']))
+      this.props.actions.setUserPhone(params['phone']);
   }
 
   componentWillMount() { }
@@ -71,28 +53,9 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  getUserInfo(phone) {
-    return this.props.actions.getUserInfo(phone)
-  }
-
   handleMoneyChange(event) {
+    console.log(event)
     this.props.actions.setMoney(event.detail.value)
-  }
-
-  handlePayClick(event) {
-    let { money } = this.props.pay;
-    if (money < 0.01) {
-      Taro.showModal({
-        title: '注意',
-        content: '支付金额不能少于0.01元'
-      })
-      return;
-    }
-    this.props.actions.getDiscount(money)
-
-    Taro.navigateTo({
-      url: '/pages/password/password?id=1'
-    })
   }
 
   /**
@@ -101,24 +64,30 @@ class Index extends Component {
    */
   getPhoneNumber(e) {
     if (e.detail.errMsg == 'getPhoneNumber:ok') {
-      Taro.showLoading({
-        title: '加载中...'
-      });
-      Taro.request({
-        url: 'https://pay.cnqilian.com/index.php?act=index&op=getPhone1',
-        method: 'POST',
-        data: {
-          iv: e.detail.iv,
-          encryptedData: e.detail.encryptedData,
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
+      Taro.login({
+        success: result => {
+          Taro.request({
+            url: 'https://pay.cnqilian.com/index.php?act=index1&op=getPhone',
+            method: 'POST',
+            data: {
+              iv: e.detail.iv,
+              encryptedData: encodeURIComponent(e.detail.encryptedData),
+              code: result.code,
+              member_id: this.props.user.member_id
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            }
+          })
+            .then((res) => {
+              console.log(res.data);
+              if (res.data['state'] == 1)
+                this.props.actions.setUserPhone(res.data['phone']);
+              this.handlePayClick();
+            })
         }
       })
-        .then((res) => {
-          console.log(res.data);
-          this.handlePayClick();
-        })
+
     } else {
       console.log('用户取消了授权');
       this.handlePayClick();
@@ -135,31 +104,52 @@ class Index extends Component {
       })
       return;
     }
-
+    Taro.showLoading({
+      title: '加载中...'
+    });
     this.props.actions.getDiscount(money)
-
+    Taro.hideLoading();
     Taro.navigateTo({
       url: '/pages/discount/discount?id=1'
     })
   }
 
+  pay(is_cz) {
+    return () => {
+      this.props.actions.setCZ(is_cz);
+      this.handlePayClick();
+    }
+  }
+
+  phone(is_cz) {
+    return (e) => {
+      this.props.actions.setCZ(is_cz);
+      this.getPhoneNumber(e);
+    }
+  }
+
   render() {
     const storeInfo = this.props.store;
     const payInfo = this.props.pay;
-    let member_id = this.props.user.member_id;
+    let phone = this.props.user.phone;
 
-    let submitButton = '';
-    if (isTrue(member_id)) {
-      submitButton = <Button className='index-pay__button' onClick={this.handlePayClick.bind(this)} >提交</Button>
-    } else {
-      submitButton = <Button openType='getPhoneNumber'
-        onGetphonenumber={this.getPhoneNumber.bind(this)} className='index-pay__button'
-      >提交</Button>
-    }
-
-    console.log(storeInfo.store_id)
     if (storeInfo.store_id == 0) {
       return <View />
+    }
+
+    let submitButton = '';
+    let chongZhiButton = '';
+
+    if (isTrue(phone)) {
+      submitButton = <Button className='index-pay__button' onClick={this.pay(0).bind(this)} >支付</Button>
+      chongZhiButton = <Button className='index-chongzhi__button' onClick={this.pay(1).bind(this)} >在线充值</Button>
+    } else {
+      submitButton = <Button openType='getPhoneNumber'
+        onGetphonenumber={this.phone(0).bind(this)} className='index-pay__button'
+      >支付</Button>
+      chongZhiButton = <Button openType='getPhoneNumber'
+        onGetphonenumber={this.phone(1).bind(this)} className='index-chongzhi__button'
+      >在线充值</Button>
     }
 
     return (
@@ -169,18 +159,22 @@ class Index extends Component {
           <Image className='index-store__avatar'
             src={storeInfo.store_avatar}
           />
-          <Text className='index-store__name'>{storeInfo.store_name}</Text>
-          <Text>{storeInfo.store_id}</Text>
+          <View className='index-store__name'>
+            <Text >{storeInfo.store_name}</Text>
+            <Text className='index-store__fdmc'>{storeInfo.fdmc}</Text>
+          </View>
         </View>
 
         <View className='index-line-gray'></View>
 
         <View className='index-input'>
           <Text>付款金额:</Text>
-          <Input type='number' placeholder='请输入支付金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
+          <Input type='digit' placeholder='请输入支付金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
         </View>
 
         {submitButton}
+
+        {chongZhiButton}
 
         <View className='index-ggw'>
           <Image src={ggw} >

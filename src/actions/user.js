@@ -26,12 +26,32 @@ export function getUserInfo(phone){
 	}
 }
 
+/**
+ * 设置用户手机号
+ * @param {*} phone
+ * @returns
+ */
 export function setUserPhone(phone){
   let payload = {
     'phone':phone
   };
   return {
     type:'SETPHONE',
+    payload
+  }
+}
+
+/**
+ * 设置用户member_id
+ * @param {*} member_id
+ * @returns
+ */
+export function setUserMemberID(member_id){
+  let payload = {
+    'member_id':member_id
+  }
+  return {
+    type:'SETMEMBERID',
     payload
   }
 }

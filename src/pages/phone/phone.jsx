@@ -35,7 +35,7 @@ import './phone.scss'
             Taro.showModal({
               title: '提示',
               content: res.data.datas['error'] + '',
-              success: res => {
+              success: () => {
                 Taro.navigateBack({
                   delta: 0
                 })
@@ -47,7 +47,7 @@ import './phone.scss'
           Taro.showModal({
             title: '提示',
             content: '成功授权绑定手机号',
-            success: res => {
+            success: () => {
               if (res.confirm) {
                 let src = 'https://new.cnqilian.com/wap/gyl/my.html'
                 src = encodeURIComponent(src)

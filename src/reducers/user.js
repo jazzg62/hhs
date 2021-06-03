@@ -9,6 +9,8 @@ export default  function store(state = INITIAL_STATE, action){
       return {...state, ...action.payload}
     case 'SETPHONE':
       return {...state, ...action.payload}
+    case 'SETMEMBERID':
+      return {...state, ...action.payload}
     default:
       return state
   }

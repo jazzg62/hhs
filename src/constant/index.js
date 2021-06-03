@@ -25,3 +25,22 @@ export const Payment = {
   SM_CZ,
   SM_XS
 }
+
+export const RESET_INFO = {
+  type: "TOPAY",
+  payload: {
+    money: "",
+    xjq_me: 0,
+    xjq_id: 0,
+    use_red_envelop: 1,
+    password:'      '
+  }
+}
+
+export const CZ = {
+  use_red_envelop:0,
+  xjq_me:0,
+  xjq_id:0,
+  dtgd_zk:100,
+  is_cz:0
+}
