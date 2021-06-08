@@ -8,6 +8,12 @@ import {request} from '@tarojs/taro';
  */
 export function getStoreInfo(store_id, storeb_id){
   return async function(dispatch, getState){
+    let state = getState();
+    let store_state = state.store;
+    // 重复扫码时，不获取数据
+    if(store_state.store_id == store_id && store_state.storeb_id == storeb_id){
+      return ;
+    }
     let res = await request({
       url: 'https://pay.cnqilian.com/index.php?act=index&op=store', //仅为示例，并非真实的接口地址
       method:'GET',

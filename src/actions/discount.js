@@ -25,7 +25,8 @@ export function getDiscount(money){
       xjq_id:res.data.xjq_info['id'] || 0,
       xjq_me:res.data.xjq_info['me'] || 0,
       predeposit:Number(res.data.member_info.available_predeposit),
-      czye:res.data.czye
+      czye:res.data.czye,
+      xjq_bl:res.data.xjq_info['xjqbl']
     }
     return dispatch({
       type:'DISCOUNT',

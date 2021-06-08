@@ -27,11 +27,12 @@ export default function toPay() {
       is_cz: pay.is_cz,
       xjq_me: discount.xjq_me,
       xjq_id: discount.xjq_id,
+      xjq_bl:discount.xjq_bl,
       dtgd_zk: discount.dtgd_zk,
       code:res_login.code
     };
     // 充值支付时，数据需处理下
-    if(pay.xflx){
+    if(pay.xflx == Payment.SM_CZ){
       send_data = Object.assign(send_data, CZ);
     }
     console.log(state);

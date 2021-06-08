@@ -12,11 +12,10 @@ import circle_checked from '../../assets/icons/circle-checked.svg';
 import zaixian from '../../assets/icons/zaixian.svg';
 import chongzhi from '../../assets/icons/chongzhi.svg';
 import { Payment } from '../../constant';
-import { calcZK, isTrue, toFixed2 } from '../../utils';
+import { calcZK, toFixed2 } from '../../utils';
 
 
 const stateToIndex = function (state) {
-  console.log(state);
   return {
     store: state.store,
     user: state.user,
@@ -37,10 +36,10 @@ class Index extends Component {
   constructor(props) {
     super(props);
 
-    let _discount = this.props.discount;
-    if (_discount.dtgd_zk == 100 && !isTrue(_discount.xjq_id) && !isTrue(_discount.xjq_me) && !isTrue(_discount.xjq) && !isTrue(_discount.predeposit) && !isTrue(_discount.czye)) {
-      this.props.actions.toPay();
-    }
+    // let _discount = this.props.discount;
+    // if (_discount.dtgd_zk == 100 && !isTrue(_discount.xjq_id) && !isTrue(_discount.xjq_me) && !isTrue(_discount.xjq) && !isTrue(_discount.predeposit) && !isTrue(_discount.czye)) {
+    //   this.props.actions.toPay();
+    // }
   }
 
   componentWillMount() {
@@ -82,9 +81,13 @@ class Index extends Component {
     // 1.计算现金券
     let xjq_me = Number(this.props.discount.xjq_me) || 0;
     let xjq = Number(this.props.discount.xjq) || 0;
-    let xjq_dk = xjq_me > xjq ? xjq : xjq_me; // 现金券可抵扣的部分
+    let xjq_bl = Number(this.props.discount.xjq_bl);
     let xjqText = '';
-    if (xjq_me != 0 && xjq != 0) {
+    if(xjq_bl != 0){
+      xjq_me = this.props.pay.money * xjq_bl
+    }
+    let xjq_dk = xjq_me > xjq ? xjq : xjq_me; // 现金券可抵扣的部分
+    if (xjq_dk != 0) {
       xjqText = <Text className='discount-red__envelop__info__text discount-red__envelop__info__red'>
         消费券抵扣{xjq_dk}元
                 </Text>

@@ -96,7 +96,14 @@ class Index extends Component {
 
   handlePayClick() {
     let { money } = this.props.pay;
-
+    money = Number(money);
+    if(isNaN(money)){
+      Taro.showModal({
+        title:'注意',
+        content:'请输入正确的支付金额！'
+      })
+      return ;
+    }
     if (money < 0.01) {
       Taro.showModal({
         title: '注意',
