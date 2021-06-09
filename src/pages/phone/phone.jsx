@@ -1,17 +1,26 @@
 import { View, Image, Text, Button } from '@tarojs/components'
 import React from 'react'
-import Taro from '@tarojs/taro'
-import withWeapp from '@tarojs/with-weapp'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import './phone.scss'
 
-@withWeapp({
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    key: '',
-    loginCode: ''
-  },
+class Index extends React.Component {
+  constructor(props){
+    super(props);
+    let options = getCurrentInstance().router.params;
+    this.state = {
+      key: options.key,
+      loginCode: ''
+    }
+
+    Taro.login({
+      success: res => {
+        if (res.code) {
+          this.setState({ loginCode: res.code })
+        }
+      }
+    })
+  }
+
   getPhoneNumber(e) {
     if (e.detail.errMsg == 'getPhoneNumber:ok') {
       console.log('用户授权了获取手机号')
@@ -22,8 +31,8 @@ import './phone.scss'
         data: {
           iv: e.detail.iv,
           encryptedData: e.detail.encryptedData,
-          code: this.data.loginCode,
-          key: this.data.key
+          code: this.state.loginCode,
+          key: this.state.key
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -67,59 +76,8 @@ import './phone.scss'
       // 对取消授权手机号进行判断
       console.log('用户取消授权了手机号，暂时不做操作！')
     }
-  },
+  }
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    Taro.login({
-      success: res => {
-        if (res.code) {
-          console.log(res.code)
-          this.setState({ loginCode: res.code })
-        }
-      }
-    })
-    this.setState({ key: options.key })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () { },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () { },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () { },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () { },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () { },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () { },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () { }
-})
-class _C extends React.Component {
   render() {
     return (
       <View className='fullscreen center'>
@@ -136,7 +94,7 @@ class _C extends React.Component {
           <Button
             className='phone'
             openType='getPhoneNumber'
-            onGetphonenumber={this.getPhoneNumber}
+            onGetphonenumber={this.getPhoneNumber.bind(this)}
           >
             授权手机号
           </Button>
@@ -146,4 +104,4 @@ class _C extends React.Component {
   }
 } // pages/mobile/mobile.js
 
-export default _C
+export default Index

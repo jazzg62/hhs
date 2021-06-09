@@ -1,21 +1,16 @@
 import { View, Text } from '@tarojs/components'
 import React from 'react'
-import Taro from '@tarojs/taro'
-import withWeapp from '@tarojs/with-weapp'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import './pay.scss'
 
-@withWeapp({
-  /**
-   * 页面的初始数据
-   */
-  data: {},
+class Index extends React.Component {
+  constructor(props){
+    super(props);
+    let options = getCurrentInstance().router.params;
+    this.state = {
+      ...options
+    };
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.setData(options)
-    // 引入wexin.js
     // 传参到支付页
     // 获取code
     // 然后参数和code传到后台
@@ -26,8 +21,7 @@ import './pay.scss'
     Taro.login({
       success(res) {
         if (res.code) {
-          var decode = decodeURIComponent
-          let data = Object.assign(options, {
+          let data = Object.assign({},options, {
             code: res.code
           })
           console.log(data)
@@ -96,7 +90,6 @@ import './pay.scss'
                     return
                   }
 
-                  console.warn('出现其他错误！')
                   Taro.showModal({
                     title: '支付失败',
                     content: '需要返回缘粉中心吗',
@@ -114,7 +107,6 @@ import './pay.scss'
                     }
                   })
 
-
                 }
               })
             }
@@ -124,12 +116,12 @@ import './pay.scss'
         }
       }
     })
-  },
-})
-class Index extends React.Component {
+
+  }
+
   render() {
-    const { appId, timeStamp, nonceStr, signType, paySign } = this.data
-    const _package = this.data['package'];
+    const { appId, timeStamp, nonceStr, signType, paySign } = this.state
+    const _package = this.state['package'];
     return (
       <View className='hide'>
         <Text>{'appId:     ' + appId}</Text>

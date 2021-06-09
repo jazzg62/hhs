@@ -1,27 +1,42 @@
 import { WebView } from '@tarojs/components'
 import React from 'react'
-import Taro from '@tarojs/taro'
-import withWeapp from '@tarojs/with-weapp'
+import Taro,{getCurrentInstance} from '@tarojs/taro'
 
-@withWeapp({
-  data: {
-    src: 'https://new.cnqilian.com/wap/gyl/index.html'
-  },
-
-  onLoad: function(options) {
-    if (options && options['src'] != undefined) {
-      var src = decodeURIComponent(options.src)
-      src = src.replace(/http:\/\//, 'https://')
-      this.setData({
-        src: src
-      })
+class _C extends React.Component {
+  constructor(props){
+    super(props);
+    let params = getCurrentInstance().router.params
+    let src = params['src'];
+    let reg = /http:\/\//;
+    if( typeof src == undefined)
+      src.replace(reg, 'https://');
+    this.state = {
+      src: src || 'https://new.cnqilian.com/wap/gyl/index.html'
     }
-  },
 
-  onReady: function() {},
+  }
+
+  // 记录错误到服务器
+  errorHandler(e) {
+    var data = {
+      type: '企联商务 加载出错',
+      error: JSON.stringify(e.detail)
+    }
+    Taro.request({
+      url: 'https://new.cnqilian.com/mobile/index.php?act=index&op=sysLog',
+      data: data,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: res => {
+        console.error('已记录错误')
+      }
+    })
+  }
 
   //定义此方法之后，点击右上角按钮弹出的菜单中"发送给朋友"菜单变为可点击
-  onShareAppMessage: function(param) {
+  onShareAppMessage(param) {
     var { webViewUrl } = param
     console.log(webViewUrl)
     try {
@@ -39,31 +54,11 @@ import withWeapp from '@tarojs/with-weapp'
         path: '/pages/index/index?src=' + encodeURIComponent(webViewUrl)
       }
     }
-  },
-
-  // 记录错误到服务器
-  errorHandler: function(e) {
-    var data = {
-      type: '企联商务 加载出错',
-      error: JSON.stringify(e.detail)
-    }
-    Taro.request({
-      url: 'https://new.cnqilian.com/mobile/index.php?act=index&op=sysLog',
-      data: data,
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: res => {
-        console.error('已记录错误')
-      }
-    })
   }
-})
-class _C extends React.Component {
+
   render() {
-    const { src } = this.data
-    return <WebView src={src} onError={this.errorHandler}></WebView>
+    const { src } = this.state;
+    return <WebView src={src} onError={this.errorHandler.bind(this)}></WebView>
   }
 }
 
