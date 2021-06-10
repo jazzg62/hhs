@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import './password.scss'
 
 import { setPassword } from '../../actions/pay';
-import toPay from '../../utils/pay.wxapp';
+import toPay from '../../utils/pay.weapp';
 
 const stateToIndex = function (state) {
   return {

@@ -2,18 +2,16 @@ import { WebView } from '@tarojs/components'
 import React from 'react'
 import Taro,{getCurrentInstance} from '@tarojs/taro'
 
-class _C extends React.Component {
+class Index extends React.Component {
   constructor(props){
     super(props);
     let params = getCurrentInstance().router.params
-    let src = params['src'];
-    let reg = /http:\/\//;
-    if( typeof src == undefined)
-      src.replace(reg, 'https://');
+    let src = params['src'] || '';
+    src.replace(/http:\/\//, 'https://');
+    src = decodeURIComponent(src);
     this.state = {
       src: src || 'https://new.cnqilian.com/wap/gyl/index.html'
     }
-
   }
 
   // 记录错误到服务器
@@ -62,4 +60,4 @@ class _C extends React.Component {
   }
 }
 
-export default _C
+export default Index

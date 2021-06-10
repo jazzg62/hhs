@@ -97,7 +97,7 @@ export function isTrue(val){
  */
 export function calcZK(val){
   val = Number(val);
-  if(val>=100 || isNaN(_)){
+  if(val>=100 || isNaN(val)){
     return '';
   }
   if(val%10==0){

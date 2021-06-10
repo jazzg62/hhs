@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import './discount.scss'
 import * as discount from '../../actions/discount'
 import * as pay from '../../actions/pay'
-import toPay from '../../utils/pay.wxapp';
+import toPay from '../../utils/pay';
 import circle_normal from '../../assets/icons/circle-normal.svg';
 import circle_checked from '../../assets/icons/circle-checked.svg';
 import zaixian from '../../assets/icons/zaixian.svg';
