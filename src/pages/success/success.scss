@@ -14,7 +14,7 @@
   &__text1{
     font-size: 75px;
     font-weight: bold;
-    margin-top: 60px;
+    margin-top: 45px;
     letter-spacing: 5px;
   }
   &__text2{
@@ -22,8 +22,8 @@
     margin-top: 24px;
   }
   &__image{
-    width: 105px;
-    height: 105px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     margin-top: 30px;
     margin-bottom: 12px;
@@ -52,14 +52,36 @@
     justify-content: space-between;
     padding: 20px 0;
     border-bottom: 2px solid $border_gray;
+    &__key{
+      &-important{
+        color: $red;
+      }
+    }
     &__val{
       color: $blue;
+      position: relative;
+
+      &-important{
+        // color: $red;
+        &::after{
+          content: '';
+          display: block;
+          width: 100%;
+          height: 6px;
+          border-radius: 3px;
+          z-index: -1;
+          background-color: $gray;
+          position: absolute;
+          bottom:6px;
+          left: 0;
+        }
+      }
     }
   }
 }
 
 .success-operate{
-  margin-top: 60px;
+  margin-top: 30px;
   padding: 0 75px;
   display: flex;
   flex-direction: row;
@@ -67,7 +89,7 @@
 
   button{
     display: inline-block;
-    font-size: 36px;
+    font-size: 30px;
     letter-spacing: 3px;
     font-weight: bold;
     border-radius: 15px;

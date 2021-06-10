@@ -34,7 +34,8 @@ class Index extends Component {
       addtime: '1-1 00:01',
       xflx: '微信支付',
       sn: '000000000000000000',
-      isLoading: true
+      isLoading: true,
+      xfq:0
     }
 
     request({
@@ -57,9 +58,11 @@ class Index extends Component {
           xfdk: toFixed2(res.xfze - res.xfje),
           addtime: formatDate(new Date(+res.addtime * 1000), 'yyyy-MM-dd hh:mm'),
           xflx: transXFLX(res.xflx),
-          sn: res.sn,
+          xfq:res.xfq1 || (Number(res.xfje)/2),
+          sn: res.sn|| '000000000000',
           isLoading: false
         }
+        data['xfq'] = toFixed2(data['xfq']);
         this.setState(data);
       })
   }
@@ -81,8 +84,9 @@ class Index extends Component {
   }
 
   handleRedirectYFZX() {
+    let src= 'https://new.cnqilian.com/wap/gyl/my.html';
     Taro.reLaunch({
-      url: '/pages/index/index'
+      url: '/pages/index/index?src='+encodeURIComponent(src)
     })
   }
 
@@ -133,11 +137,15 @@ class Index extends Component {
             <Text className='success-item__key'>交易编号</Text>
             <Text className='success-item__val'>{state.sn}</Text>
           </View>
+          {state.xfq!=0?<View className='success-item'>
+            <Text className='success-item__key success-item__key-important'>商圈福利</Text>
+            <Text className='success-item__val success-item__val-important'>本次交易获得{state.xfq}元消费券</Text>
+          </View>:''}
         </View>
 
         <View className='success-operate'>
           <Button size='default' className='success-operate__button1' onClick={this.handleContinuePay.bind(this)}>继续支付</Button>
-          <Button size='default' className='success-operate__button2' onClick={this.handleRedirectYFZX.bind(this)}>返回首页</Button>
+          <Button size='default' className='success-operate__button2' onClick={this.handleRedirectYFZX.bind(this)}>返回缘粉中心</Button>
         </View>
 
         <Loading isLoading={state.isLoading} />
