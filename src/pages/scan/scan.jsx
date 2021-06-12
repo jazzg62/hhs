@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './scan.scss'
 
+import Tags from '../../components/Tags';
 import * as user_actions from '../../actions/user'
 import * as pay_actions from '../../actions/pay'
 import { getDiscount } from '../../actions/discount'
@@ -39,7 +40,7 @@ class Index extends Component {
       this.props.actions.getStoreInfo(params['store_id'], params['storeb_id']);
     if (isTrue(params['member_id']))
       this.props.actions.setUserMemberID(params['member_id']);
-    if (isTrue(params['phone']))
+    if(isTrue(params['phone']))
       this.props.actions.setUserPhone(params['phone']);
   }
 
@@ -97,7 +98,7 @@ class Index extends Component {
   handlePayClick() {
     let { money } = this.props.pay;
     money = Number(money);
-    if(isNaN(money)){
+    if(Number.isNaN(money)){
       Taro.showModal({
         title:'注意',
         content:'请输入正确的支付金额！'
@@ -115,10 +116,6 @@ class Index extends Component {
       title: '加载中...'
     });
     this.props.actions.getDiscount(money)
-    Taro.hideLoading();
-    Taro.navigateTo({
-      url: '/pages/discount/discount?id=1'
-    })
   }
 
   pay(is_cz) {
@@ -172,7 +169,10 @@ class Index extends Component {
           </View>
         </View>
 
+        <Tags store_id={storeInfo.store_id} storeb_id={storeInfo.storeb_id}></Tags>
+
         <View className='index-line-gray'></View>
+
 
         <View className='index-input'>
           <Text>付款金额:</Text>

@@ -1,0 +1,35 @@
+@import '../../../style/themes/default.scss';
+
+.tag{
+  color: $black;
+  border: 1px solid transparent;
+  background-color: $white;
+  padding: 9px 12px;
+  font-size: 30px;
+  margin-right: 9px;
+  margin-top: 9px;
+  border-radius: 3px;
+
+  &-primary{
+    color: $green;
+    border: 1px solid $green;
+  }
+
+  &-success{
+    border: 1px solid $green;
+    background: $green;
+    color: $white;
+  }
+
+  &-warning{
+    color: $red;
+    border: 1px solid $red;
+  }
+  &-danger{
+    border: 1px solid $red;
+    background: $red;
+    color: $white;
+  }
+
+}
+
