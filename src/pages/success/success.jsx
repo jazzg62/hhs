@@ -7,6 +7,7 @@ import './success.scss'
 import { formatDate, toFixed2, transXFLX } from '../../utils/index';
 import success from '../../assets/success.svg'
 import Loading from '../../components/Loading/index'
+import { Payment } from '../../constant';
 
 const stateToIndex = function (state) {
   return {
@@ -63,6 +64,9 @@ class Index extends Component {
           isLoading: false
         }
         data['xfq'] = toFixed2(data['xfq']);
+        if(res.xflx == Payment.SM_CZ){
+          data['xfq'] = 0;
+        }
         this.setState(data);
       })
   }
