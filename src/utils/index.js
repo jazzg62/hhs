@@ -1,3 +1,5 @@
+import Taro from '@tarojs/taro';
+
 /**
  * 生成一个唯一的id
  * @example let id = generateUnionID();
@@ -97,11 +99,21 @@ export function isTrue(val){
  */
 export function calcZK(val){
   val = Number(val);
-  if(val>=100 || isNaN(val)){
+  if(val>=100 || Number.isNaN(val)){
     return '';
   }
   if(val%10==0){
     return val/10+'折'
   }
   return val+'折';
+}
+
+/**
+ * 获取完折扣后调用，跳转到折扣页
+ */
+export function redirect_discount(){
+  Taro.hideLoading();
+  Taro.navigateTo({
+    url: '/pages/discount/discount?timeStamp='+new Date().getTime()
+  })
 }
