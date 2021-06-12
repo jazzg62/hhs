@@ -83,7 +83,7 @@ export default function toPay() {
     }
 
     // 支付失败，显示提示信息
-    if (message != "" && isTrue(status)) {
+    if (message != "" && status != undefined) {
       Taro.showModal({
         content: message,
         showCancel: false
