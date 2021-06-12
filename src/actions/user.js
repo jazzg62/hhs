@@ -32,6 +32,7 @@ export function getUserInfo(phone){
  * @returns
  */
 export function setUserPhone(phone){
+  if(phone == 'empty') phone = '';
   let payload = {
     'phone':phone
   };
