@@ -91,17 +91,12 @@ export function changeXFLX(xflx){
  * 是否使用红包
  * @returns
  */
-export function changeRedEnvelop(){
-  return function(dispatch, getState){
-    let state = getState();
-    let use_red_envelop = state.pay.use_red_envelop;
-    let payload = {
-      use_red_envelop:isTrue(use_red_envelop)?0:1
+export function changeRedEnvelop(val){
+  return {
+    type:'CHANGEREDENVELOP',
+    payload:{
+      use_red_envelop:val
     }
-    dispatch({
-      type:'CHANGEREDENVELOP',
-      payload
-    })
   }
 }
 

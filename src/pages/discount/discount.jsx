@@ -35,11 +35,11 @@ const dispatchToProps = dispatch => ({
 class Index extends Component {
   constructor(props) {
     super(props);
-
-    // let _discount = this.props.discount;
-    // if (_discount.dtgd_zk == 100 && !isTrue(_discount.xjq_id) && !isTrue(_discount.xjq_me) && !isTrue(_discount.xjq) && !isTrue(_discount.predeposit) && !isTrue(_discount.czye)) {
-    //   this.props.actions.toPay();
-    // }
+    if(this.props.discount.predeposit != 0){
+      this.props.actions.changeRedEnvelop(1);
+    }else{
+      this.props.actions.changeRedEnvelop(0);
+    }
   }
 
   componentWillMount() {
@@ -60,7 +60,10 @@ class Index extends Component {
   }
 
   handleRedEnvelopClick() {
-    this.props.actions.changeRedEnvelop();
+    if(this.props.pay.use_red_envelop)
+      this.props.actions.changeRedEnvelop(1);
+    else
+      this.props.actions.changeRedEnvelop(0);
   }
 
   handlePayClick() {

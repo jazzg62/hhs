@@ -1,4 +1,5 @@
 import {request} from '@tarojs/taro';
+import {redirect_discount} from '../utils/index';
 
 /**
  * 获取优惠信息，需要先获取member_id和store_id
@@ -28,6 +29,8 @@ export function getDiscount(money){
       czye:res.data.czye,
       xjq_bl:res.data.xjq_info['xjqbl'] || 0
     }
+
+    redirect_discount();
     return dispatch({
       type:'DISCOUNT',
       payload
