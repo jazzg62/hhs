@@ -1,40 +1,31 @@
 import { View } from '@tarojs/components'
-import { request } from '@tarojs/taro';
 import { Component } from 'React';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Tag from '../Tag';
 import './index.scss';
 
+const stateToIndex = function (state) {
+  return {
+    store: state.store,
+  }
+}
+
+const dispatchToProps = dispatch => ({
+  actions: bindActionCreators({ }, dispatch)
+})
+
+@connect(
+  stateToIndex,
+  dispatchToProps
+)
 class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      store_id: props.store_id,
-      storeb_id: props.storeb_id,
-      list: []
-    }
-    this.requestChongZhiYouHui();
-  }
-
-  async requestChongZhiYouHui() {
-    let res = await request({
-      url: 'https://pay.cnqilian.com/index.php?act=index&op=czgz',
-      method: 'GET',
-      data: {
-        store_id: this.state.store_id,
-        storeb_id: this.state.storeb_id
-      }
-    })
-    this.setState(Object.assign({}, this.state, {
-      ...res.data
-    }))
-  }
-
   render() {
-    if (this.state.list.length == 0) {
+    let list = this.props.store.czyh;
+    if (list.length == 0) {
       return <View></View>
     }
     let num = Number;
-    let {list} = this.state;
     return <View className='index-yhxx'>
       <Tag text='充值优惠' type='success'></Tag>
       {

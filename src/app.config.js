@@ -17,7 +17,7 @@ export default {
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '惠花生',
+    navigationBarTitleText: '企联商务',
     navigationBarTextStyle: 'black'
   }
 }

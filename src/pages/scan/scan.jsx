@@ -8,7 +8,7 @@ import './scan.scss'
 import Tags from '../../components/Tags';
 import * as user_actions from '../../actions/user'
 import * as pay_actions from '../../actions/pay'
-import { getDiscount } from '../../actions/discount'
+import * as discount_actions from '../../actions/discount'
 import * as store_actions from '../../actions/store'
 import ggw from '../../assets/ggw.jpg'
 import { isTrue } from '../../utils'
@@ -23,7 +23,7 @@ const stateToIndex = function (state) {
 }
 
 const dispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...store_actions, ...pay_actions, ...user_actions, getDiscount }, dispatch)
+  actions: bindActionCreators({ ...store_actions, ...pay_actions, ...user_actions, ...discount_actions }, dispatch)
 })
 
 @connect(
@@ -31,13 +31,14 @@ const dispatchToProps = dispatch => ({
   dispatchToProps
 )
 class Index extends Component {
-
   constructor(props) {
     super(props);
     let params = getCurrentInstance().router.params
     // store_id, member_id, phone 根据系统后台传入的值来决定
-    if (isTrue(params['store_id']))
+    if (isTrue(params['store_id'])){
       this.props.actions.getStoreInfo(params['store_id'], params['storeb_id']);
+      this.props.actions.chongZhiYouHui(params['store_id'], params['storeb_id']);
+    }
     if (isTrue(params['member_id']))
       this.props.actions.setUserMemberID(params['member_id']);
     if(isTrue(params['phone']))
@@ -72,7 +73,7 @@ class Index extends Component {
             method: 'POST',
             data: {
               iv: e.detail.iv,
-              encryptedData: encodeURIComponent(e.detail.encryptedData),
+              encryptedData: e.detail.encryptedData,
               code: result.code,
               member_id: this.props.user.member_id
             },
@@ -169,10 +170,9 @@ class Index extends Component {
           </View>
         </View>
 
-        <Tags store_id={storeInfo.store_id} storeb_id={storeInfo.storeb_id}></Tags>
+        <Tags></Tags>
 
         <View className='index-line-gray'></View>
-
 
         <View className='index-input'>
           <Text>付款金额:</Text>

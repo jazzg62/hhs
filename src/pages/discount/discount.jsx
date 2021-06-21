@@ -39,6 +39,8 @@ class Index extends Component {
       this.props.actions.changeRedEnvelop(1);
     }else{
       this.props.actions.changeRedEnvelop(0);
+      if(this.props.discount.czye == 0)
+        this.props.actions.toPay();
     }
   }
 
@@ -60,7 +62,7 @@ class Index extends Component {
   }
 
   handleRedEnvelopClick() {
-    if(this.props.pay.use_red_envelop)
+    if(this.props.pay.use_red_envelop == 0)
       this.props.actions.changeRedEnvelop(1);
     else
       this.props.actions.changeRedEnvelop(0);

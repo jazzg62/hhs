@@ -3,7 +3,8 @@ const INITIAL_STATE = {
   storeb_id:0,
   store_name:'商家名有七个字',
   store_avatar:'https://new.cnqilian.com/wap/images/qlpt1.png',
-  fdmc:''
+  fdmc:'',
+  czyh:[]
 }
 
 export default function store(state = INITIAL_STATE, action){
@@ -12,6 +13,11 @@ export default function store(state = INITIAL_STATE, action){
       return {
        ...state,
        ...action.payload
+      }
+    case 'CHONGZHIYOUHUI':
+      return {
+        ...state,
+        ...action.payload
       }
     default:
       return state

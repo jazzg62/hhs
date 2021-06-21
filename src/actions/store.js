@@ -35,3 +35,26 @@ export function getStoreInfo(store_id, storeb_id){
     })
   }
 }
+
+export function chongZhiYouHui(store_id, storeb_id){
+  return async function(dispatch){
+    let res = await request({
+      url: 'https://pay.cnqilian.com/index.php?act=index&op=czgz',
+      method: 'GET',
+      data: {
+        store_id: store_id,
+        storeb_id: storeb_id
+      }
+    })
+    let payload = {
+      czyh:[]
+    };
+    if(res.data.res != 0 ){
+      payload.czyh = res.data.list;
+    }
+    return dispatch({
+      type:'CHONGZHIYOUHUI',
+      payload
+    })
+  }
+}
