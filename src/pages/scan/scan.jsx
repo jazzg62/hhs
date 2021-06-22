@@ -43,6 +43,11 @@ class Index extends Component {
       this.props.actions.setUserMemberID(params['member_id']);
     if(isTrue(params['phone']))
       this.props.actions.setUserPhone(params['phone']);
+    Taro.login({
+      success: result => {
+        this.props.actions.setLoginCode(result.code);
+      }
+    })
   }
 
   componentWillMount() { }
@@ -66,32 +71,26 @@ class Index extends Component {
    */
   getPhoneNumber(e) {
     if (e.detail.errMsg == 'getPhoneNumber:ok') {
-      Taro.login({
-        success: result => {
-          Taro.request({
-            url: 'https://pay.cnqilian.com/index.php?act=index1&op=getPhone',
-            method: 'POST',
-            data: {
-              iv: e.detail.iv,
-              encryptedData: e.detail.encryptedData,
-              code: result.code,
-              member_id: this.props.user.member_id
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded'
-            }
-          })
-            .then((res) => {
-              console.log(res.data);
-              if (res.data['state'] == 1)
-                this.props.actions.setUserPhone(res.data['phone']);
-              this.handlePayClick();
-            })
+      Taro.request({
+        url: 'https://pay.cnqilian.com/index.php?act=index1&op=getPhone',
+        method: 'POST',
+        data: {
+          iv: e.detail.iv,
+          encryptedData: e.detail.encryptedData,
+          code: this.props.user.login_code,
+          member_id: this.props.user.member_id
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
         }
       })
-
+      .then((res) => {
+        if (res.data['state'] == 1)
+          this.props.actions.setUserPhone(res.data['phone']);
+        this.handlePayClick();
+      })
     } else {
-      console.log('用户取消了授权');
+      console.warn('用户取消了授权');
       this.handlePayClick();
     }
   }

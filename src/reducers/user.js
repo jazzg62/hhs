@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   member_id:'',
-  phone:''
+  phone:'',
+  login_code:''
 }
 
 export default  function store(state = INITIAL_STATE, action){
@@ -10,6 +11,8 @@ export default  function store(state = INITIAL_STATE, action){
     case 'SETPHONE':
       return {...state, ...action.payload}
     case 'SETMEMBERID':
+      return {...state, ...action.payload}
+    case 'SETLOGINCODE':
       return {...state, ...action.payload}
     default:
       return state

@@ -56,3 +56,18 @@ export function setUserMemberID(member_id){
     payload
   }
 }
+
+/**
+ * 设置用户登录code
+ * @param {String} login_code
+ * @returns
+ */
+export function setLoginCode(login_code){
+  let payload = {
+    'login_code':login_code
+  }
+  return {
+    type:'SETLOGINCODE',
+    payload
+  }
+}

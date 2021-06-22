@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components'
-import { Component } from 'React';
+import { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Tag from '../Tag';
