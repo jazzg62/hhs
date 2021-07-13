@@ -41,14 +41,14 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  handleClick(event) {
+  handleClick() {
     this.setState({
       inputIng: true,
       inputEnd: false
     })
   }
 
-  handleBlur(event) {
+  handleBlur() {
     this.setState({
       inputIng: false,
       inputEnd: true

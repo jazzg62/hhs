@@ -1,7 +1,7 @@
-import { View, Image } from '@tarojs/components'
 import React from 'react'
-import './share.scss'
+import { View, Image } from '@tarojs/components'
 import { getCurrentInstance } from '@tarojs/taro'
+import './share.scss'
 
 class Index extends React.Component {
   constructor(props){
@@ -41,9 +41,9 @@ class Index extends React.Component {
 
   render() {
     return (
-      <View className="fx">
+      <View className='fx'>
         <Image
-          className="fx_img"
+          className='fx_img'
           src={require('../../assets/sharemb1.png')}
         ></Image>
       </View>

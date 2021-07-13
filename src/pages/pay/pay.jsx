@@ -1,4 +1,4 @@
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import React from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import './pay.scss'
@@ -41,9 +41,9 @@ class Index extends React.Component {
             header: {
               'content-type': 'application/x-www-form-urlencoded'
             },
-            success: res => {
+            success: result => {
               Taro.hideLoading()
-              const result = res.data.datas.result
+              result = result.data.datas.result
 
               // 处理支付
               Taro.requestPayment({
@@ -52,7 +52,7 @@ class Index extends React.Component {
                 package: result.package,
                 paySign: result.paySign,
                 timeStamp: result.timeStamp,
-                success(res) {
+                success() {
                   Taro.showToast({
                     title: '支付成功！'
                   })
@@ -69,13 +69,13 @@ class Index extends React.Component {
                     url: '/pages/index/index?src=' + src
                   })
                 },
-                fail(res) {
-                  if (res == 'requestPayment:fail cancel') {
+                fail(fail_res) {
+                  if (fail_res == 'requestPayment:fail cancel') {
                     Taro.showModal({
                       title: '用户取消了支付',
                       content: '需要返回缘粉中心吗',
-                      success: res => {
-                        if (res.confirm) {
+                      success: modal_res => {
+                        if (modal_res.confirm) {
                           let src = 'https://new.cnqilian.com/wap/gyl/my.html'
                           Taro.reLaunch({
                             url: '/pages/index/index?src=' + encodeURIComponent(src)
@@ -93,8 +93,8 @@ class Index extends React.Component {
                   Taro.showModal({
                     title: '支付失败',
                     content: '需要返回缘粉中心吗',
-                    success: res => {
-                      if (res.confirm) {
+                    success: modal_res1 => {
+                      if (modal_res1.confirm) {
                         let src = 'https://new.cnqilian.com/wap/gyl/my.html'
                         Taro.reLaunch({
                           url: '/pages/index/index?src=' + encodeURIComponent(src)
@@ -120,16 +120,8 @@ class Index extends React.Component {
   }
 
   render() {
-    const { appId, timeStamp, nonceStr, signType, paySign } = this.state
-    const _package = this.state['package'];
     return (
-      <View className='hide'>
-        <Text>{'appId:     ' + appId}</Text>
-        <Text>{'timeStamp:     ' + timeStamp}</Text>
-        <Text>{'nonceStr:   ' + nonceStr}</Text>
-        <Text>{'package:  ' + _package}</Text>
-        <Text>{'signType:  ' + signType}</Text>
-        <Text>{'paySign:  ' + paySign}</Text>
+      <View>
       </View>
     )
   }

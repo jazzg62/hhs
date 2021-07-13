@@ -7,7 +7,7 @@ import {request} from '@tarojs/taro';
  * @returns
  */
 export function getUserInfo(phone){
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
 		let res = await request({
       url: 'https://pay.cnqilian.com/index.php?act=index&op=getuser',
       method:'GET',

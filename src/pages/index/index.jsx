@@ -27,7 +27,7 @@ class Index extends React.Component {
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: res => {
+      success: () => {
         console.error('已记录错误')
       }
     })
