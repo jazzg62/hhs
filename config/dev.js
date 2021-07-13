@@ -1,11 +1,10 @@
-module.exports = {
+export default {
   env: {
     NODE_ENV: '"development"'
   },
-  defineConstants: {
-  },
+  defineConstants: {},
   mini: {},
   h5: {
-    esnextModules: ['taro-ui']
+    esnextModules: ["taro-ui"]
   }
-}
+};
