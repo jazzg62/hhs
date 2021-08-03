@@ -120,10 +120,7 @@ class Index extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-      </View>
-    )
+    return null
   }
 } // pages/pay/pay.js
 

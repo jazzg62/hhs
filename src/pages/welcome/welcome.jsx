@@ -1,4 +1,3 @@
-import { View } from '@tarojs/components'
 import React from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import {parse} from 'querystring'
@@ -22,7 +21,7 @@ class Index extends React.Component {
     }
   }
   render() {
-    return <View>跳转中...</View>
+    return null
   }
 } // pages/welcome/welcome.js
 

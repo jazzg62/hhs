@@ -138,7 +138,7 @@ class Index extends Component {
     let phone = this.props.user.phone;
 
     if (storeInfo.store_id == 0) {
-      return <View />
+      return null
     }
 
     let submitButton = '';

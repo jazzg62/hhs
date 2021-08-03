@@ -23,7 +23,7 @@ class Index extends Component {
   render() {
     let list = this.props.store.czyh;
     if (list.length == 0) {
-      return <View></View>
+      return null;
     }
     let num = Number;
     return <View className='index-yhxx'>
