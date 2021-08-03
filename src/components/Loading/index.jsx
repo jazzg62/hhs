@@ -11,7 +11,7 @@ const Index = function(props){
     return <View className='loading'></View>
   }else{
     hideLoading();
-    return <View></View>
+    return null;
   }
 }
 
