@@ -71,3 +71,18 @@ export function setLoginCode(login_code){
     payload
   }
 }
+
+/**
+ * 在支付宝环境下调用，设置用户id
+ * @param {String} login_code
+ * @returns
+ */
+export function setUserId(user_id){
+  let payload = {
+    'user_id':user_id
+  }
+  return {
+    type:'SETUSERID',
+    payload
+  }
+}

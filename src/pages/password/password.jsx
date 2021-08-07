@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import './password.scss'
 
 import { setPassword } from '../../actions/pay';
-import toPay from '../../utils/pay.weapp';
+import toPay from '../../utils/pay';
 
 const stateToIndex = function (state) {
   return {
@@ -68,9 +68,9 @@ class Index extends Component {
     let { password } = this.props.pay;
     let inputs = password.split('').map((val) => {
       if (val != ' ')
-        return <Input className='password-input__type1' type='password' maxlength='1' value={val} disabled></Input>
+        return <Input className='password-input__type1' password type='password' maxlength='1' value={val} disabled></Input>
       else
-        return <Input className='password-input__type1' type='password' maxlength='1' disabled></Input>
+        return <Input className='password-input__type1' password type='password' maxlength='1' disabled></Input>
     })
 
     if (this.state.inputIng || (!this.state.inputIng && !this.state.inputEnd)) {

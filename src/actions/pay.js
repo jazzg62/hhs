@@ -1,5 +1,6 @@
-import { Payment } from '../constant';
+import { Payment, RESET_INFO } from '../constant';
 import {generateUnionID, isTrue} from '../utils/index';
+
 /**
  * 设置支付金额
  * @param {*} money
@@ -116,4 +117,12 @@ export function setCZ(is_cz){
     type:'SETCZ',
     payload
   }
+}
+
+/**
+ * 重置支付
+ * @returns
+ */
+export function resetPay(){
+  return RESET_INFO;
 }

@@ -1,10 +1,9 @@
 import Taro from "@tarojs/taro";
 import { generateUnionID, isTrue } from "./index";
-import { Payment, CZ, RESET_INFO } from "../constant";
+import { Payment, CZ} from "../constant";
 
 export default function toPay() {
   return async function(dispatch, getState) {
-    let res_login = await Taro.login({})
     Taro.showLoading({
       title: "发起支付中..."
     });
@@ -14,6 +13,7 @@ export default function toPay() {
     let user = state.user;
     let discount = state.discount;
     let ddh = generateUnionID();
+    let res_login = await Taro.login({});
     let send_data = {
       store_id: store.store_id,
       storeb_id: store.storeb_id,
@@ -78,7 +78,10 @@ export default function toPay() {
         message = "请先绑定手机号码！";
         break;
       default:
-        message = "发生未知错误！";
+        if(store.store_id == 5418)
+          message = 'err:'+data;
+        else
+          message = "发生未知错误！";
         break;
     }
 
@@ -93,7 +96,6 @@ export default function toPay() {
 
     // 准备发起支付
     if (isTrue(data.paySign) && isTrue(data.package)) {
-      try {
         Taro.requestPayment({
           nonceStr: data.nonceStr,
           package: data.package,
@@ -104,20 +106,11 @@ export default function toPay() {
             Taro.redirectTo({
               url: "/pages/success/success?ddh=" + ddh
             });
-
-            // 重置支付信息
-            dispatch(RESET_INFO);
           },
           fail: () => {
             console.log("fail");
           }
         });
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      // 重置支付信息
-      dispatch(RESET_INFO);
     }
   };
 }

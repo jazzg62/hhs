@@ -2,12 +2,14 @@ import { Component } from 'react'
 import { View, Text, Image, Button } from '@tarojs/components'
 import Taro, { getCurrentInstance, request } from '@tarojs/taro';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './success.scss'
 import { formatDate, toFixed2, transXFLX } from '../../utils/index';
 import success from '../../assets/success.svg'
 import Loading from '../../components/Loading/index'
 import { Payment } from '../../constant';
+import {resetPay} from '../../actions/pay';
 
 const stateToIndex = function (state) {
   return {
@@ -15,9 +17,13 @@ const stateToIndex = function (state) {
   }
 }
 
+const dispatchToProps = dispatch => ({
+  actions: bindActionCreators({resetPay}, dispatch)
+})
+
 @connect(
   stateToIndex,
-  {}
+  dispatchToProps
 )
 class Index extends Component {
   constructor(props) {
@@ -25,6 +31,7 @@ class Index extends Component {
     console.log(props)
     let datas = getCurrentInstance().router.params
     let ddh = datas['ddh'];
+    this.props.actions.resetPay();
 
     this.state = {
       store_name: '错误加载',
