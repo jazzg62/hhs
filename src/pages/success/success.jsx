@@ -95,7 +95,11 @@ class Index extends Component {
   }
 
   handleRedirectYFZX() {
-    let src= 'https://new.cnqilian.com/wap/gyl/my.html';
+    let src;
+    if(process.env.TARO_ENV == 'weapp')
+      src= 'https://new.cnqilian.com/wap/gyl/my.html';
+    else
+      src = 'https://new.cnqilian.com/wap/alipay1/my.html';
     Taro.reLaunch({
       url: '/pages/index/index?src='+encodeURIComponent(src)
     })
