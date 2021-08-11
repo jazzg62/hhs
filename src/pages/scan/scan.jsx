@@ -146,14 +146,16 @@ class Index extends Component {
 
     if (isTrue(phone)) {
       submitButton = <Button className='index-pay__button' onClick={this.pay(0).bind(this)} >支付</Button>
-      chongZhiButton = <Button className='index-chongzhi__button' onClick={this.pay(1).bind(this)} >在线充值</Button>
+      chongZhiButton = <View className='index-chongzhi__button'><Button  onClick={this.pay(1).bind(this)} >在线充值</Button></View>
     } else {
       submitButton = <Button openType='getPhoneNumber'
         onGetphonenumber={this.phone(0).bind(this)} className='index-pay__button'
       >支付</Button>
-      chongZhiButton = <Button openType='getPhoneNumber'
-        onGetphonenumber={this.phone(1).bind(this)} className='index-chongzhi__button'
-      >在线充值</Button>
+      chongZhiButton = <View className='index-chongzhi__button'>
+        <Button openType='getPhoneNumber'
+          onGetphonenumber={this.phone(1).bind(this)}
+        >在线充值</Button>
+      </View>
     }
 
     return (
