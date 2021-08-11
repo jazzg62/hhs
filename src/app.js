@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { Provider } from 'react-redux'
 import configStore from './store'
 import './app.scss'
+import {dealOptions} from './utils/platform';
 
 const store = configStore()
 
@@ -9,7 +10,9 @@ class App extends Component {
 
   componentDidMount () {}
 
-  componentDidShow () {}
+  componentDidShow (options) {
+    dealOptions(options);
+  }
 
   componentDidHide () {}
 
