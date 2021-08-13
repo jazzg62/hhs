@@ -6,7 +6,8 @@ const Index = function(props){
   let {isLoading} = props;
   if(isLoading){
     showLoading({
-      title:'加载中...'
+      title:'加载中...',
+      mask:true
     });
     return <View className='loading'></View>
   }else{

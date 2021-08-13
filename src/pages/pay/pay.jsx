@@ -25,7 +25,8 @@ class Index extends React.Component {
           })
           console.log(data)
           Taro.showLoading({
-            title: '发起支付中'
+            title: '发起支付中',
+            mask:true
           })
 
           const ApiUrl = 'https://new.cnqilian.com/mobile'

@@ -5,7 +5,8 @@ import { Payment, CZ} from "../constant";
 export default function toPay() {
   return async function(dispatch, getState) {
     Taro.showLoading({
-      title: "发起支付中..."
+      title: "发起支付中...",
+      mask:true
     });
     let state = getState();
     let pay = state.pay;
