@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import './scan.scss'
 
 import Tags from '../../components/Tags';
+import NumberKeyboard from '../../components/NumberKeyboard';
 import * as user_actions from '../../actions/user'
 import * as pay_actions from '../../actions/pay'
 import * as discount_actions from '../../actions/discount'
@@ -40,6 +41,10 @@ class Index extends Component {
       this.props.actions.chongZhiYouHui(params['store_id'], params['storeb_id']);
     }
 
+    this.state ={
+      showNumberKeyboard:false
+    }
+
     my.getAuthCode({
       scopes: ['auth_base'],
       // 主动授权：auth_user，静默授权：auth_base或者其它scope。如需同时获取用户多项授权，可在 scopes 中传入多个 scope 值。
@@ -71,8 +76,26 @@ class Index extends Component {
     });
   }
 
-  handleMoneyChange(event) {
-    this.props.actions.setMoney(event.detail.value)
+  showNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:true
+    })
+  }
+
+  hideNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:false
+    })
+  }
+
+  handleMoneyChange(val) {
+    this.props.actions.setMoney(this.props.pay.money+''+val);
+  }
+
+  handleMoneyDel(){
+    let money = (this.props.pay.money+'').split('');
+    money.pop();
+    this.props.actions.setMoney(money.join(''));
   }
 
   /**
@@ -115,19 +138,22 @@ class Index extends Component {
   }
 
   handlePayClick() {
+    this.hideNumberKeyboard();
     let { money } = this.props.pay;
     money = Number(money);
     if (Number.isNaN(money)) {
       Taro.showModal({
         title: '注意',
-        content: '请输入正确的支付金额！'
+        content: '请输入正确的支付金额！',
+        showCancel:false
       })
       return;
     }
     if (money < 0.01) {
       Taro.showModal({
         title: '注意',
-        content: '支付金额不能为0'
+        content: '支付金额不能为0',
+        showCancel:false
       })
       return;
     }
@@ -191,9 +217,9 @@ class Index extends Component {
 
         <View className='index-line-gray'></View>
 
-        <View className='index-input'>
+        <View className='index-input' onClick={this.showNumberKeyboard.bind(this)}>
           <Text className='index-input__text'>付款金额:</Text>
-          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
+          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money}   disabled />
         </View>
 
         {submitButton}
@@ -205,6 +231,7 @@ class Index extends Component {
           </Image>
         </View>
 
+        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar  input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
       </View>
     )
   }

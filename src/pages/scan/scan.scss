@@ -38,10 +38,10 @@ button::after{
   width: 90%;
   margin: 0 auto;
   background-color: #E5E5E5;
-  height: 1px;
+  height: 2px;
 }
 .index-input{
-  border: 1px solid $gray;
+  border: 2px solid $gray;
   margin:0 5%;
   margin-top: 60px;
   padding: 20px;
@@ -87,7 +87,7 @@ button::after{
   border-radius: 30px;
   margin:0 auto;
   margin-top: 75px;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   height: 85px;
   line-height: 85px;
   &-inline{

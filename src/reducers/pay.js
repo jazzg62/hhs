@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   discounted_money: 0,
   xflx: Payment.SM_XS,
   ddh: generateUnionID(),
-  password: '      ',
+  password: '',
   use_red_envelop: 1,
   xfq_list: "",
   is_cz: 0,

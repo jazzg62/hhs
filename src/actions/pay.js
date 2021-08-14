@@ -21,18 +21,16 @@ export function setMoney(money){
  * @returns
  */
 export function setPassword(password){
-  let _ = password.split('');
-  _.length = 6;
-  for(let i=0;i<6;i++){
-    if(!_[i]){
-      _[i] = ' ';
-    }
-  }
+  if(password.length>6)
+    return {
+      type:'SETPASSWORD',
+      payload:{}
+    } ;
 
   return {
     type:'SETPASSWORD',
     payload:{
-      'password':_.join('')
+      'password':password
     }
   }
 }

@@ -117,3 +117,16 @@ export function redirect_discount(){
     url: '/pages/discount/discount?timeStamp='+new Date().getTime()
   })
 }
+
+/**
+ * 检查对象是否是函数
+ * @param {*} val
+ * @returns {boolean}
+ */
+export function is_function(val){
+  var toString = Object.prototype.toString;
+  if(toString.call(val) === '[object Function]'){
+    return true;
+  }
+  return false;
+}

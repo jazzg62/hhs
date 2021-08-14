@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import './password.scss'
 
+import NumberKeyboard from '../../components/NumberKeyboard';
 import { setPassword } from '../../actions/pay';
 import toPay from '../../utils/pay';
 
@@ -25,74 +26,64 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputIng: false,
-      inputEnd: false,
+      showNumberKeyboard:false
     }
   }
 
-  componentWillMount() {
+  showNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:true
+    })
   }
 
-  componentDidMount() { }
+  hideNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:false
+    })
+  }
 
-  componentWillUnmount() { }
+  handleKeyboardChange(val) {
+    this.props.actions.setPassword(this.props.pay.password+''+val);
+  }
 
-  componentDidShow() { }
-
-  componentDidHide() { }
+  handleKeyboardDel(){
+    let _ = (this.props.pay.password+'').split('');
+    _.pop();
+    this.props.actions.setPassword(_.join(''));
+  }
 
   handleClick() {
     this.setState({
-      inputIng: true,
-      inputEnd: false
+      showNumberKeyboard:true
     })
   }
 
   handleBlur() {
     this.setState({
-      inputIng: false,
-      inputEnd: true
+      showNumberKeyboard:false
     })
   }
 
-  handleInput(event) {
-    this.props.actions.setPassword(event.detail.value);
-  }
-
   handlePayClick(){
-    // 调起支付
     this.props.actions.toPay();
   }
 
   render() {
-    let { password } = this.props.pay;
-    let inputs = password.split('').map((val) => {
+    let password = this.props.pay.password;
+    password = password.split('');
+    while(password.length<6){
+      password.push('');
+    }
+    let inputs = password.map((val) => {
       if (val != ' ')
         return <Input className='password-input__type1' password type='password' maxlength='1' value={val} disabled></Input>
       else
         return <Input className='password-input__type1' password type='password' maxlength='1' disabled></Input>
     })
 
-    if (this.state.inputIng || (!this.state.inputIng && !this.state.inputEnd)) {
-      inputs.push(<Input focus='true' className='password-input__type2' type='number' name='password' id='password'
-        value={password.trim()}
-        onInput={this.handleInput.bind(this)}
-        onBlur={this.handleBlur.bind(this)}
-      />)
-    } else {
-      inputs.push(
-        <Input className='password-input__type2' type='number' name='password' id='password'
-          value={password.trim()}
-          onInput={this.handleInput.bind(this)}
-          onBlur={this.handleBlur.bind(this)}
-        />
-      )
-    }
-
     return (
       <View>
-        {/* <Text>支付密码{this.state.password}</Text> */}
-        <View className='password-input' onClick={this.handleClick.bind(this)}>
+        <View className='password-input' onClick={this.showNumberKeyboard.bind(this)}>
           {inputs}
         </View>
         <View className='password-description'>
@@ -101,6 +92,8 @@ class Index extends Component {
         <View className='password-submit'>
           <Button className='password-submit__button' onClick={this.handlePayClick.bind(this)}>提交</Button>
         </View>
+
+        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]} showSidebar input={this.handleKeyboardChange.bind(this)} delete={this.handleKeyboardDel.bind(this)} done={this.handlePayClick.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
       </View>
     )
   }
