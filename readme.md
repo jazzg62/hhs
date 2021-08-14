@@ -24,3 +24,14 @@
 > one code, run everywhere
 >
 > Taro是一个开放式跨端跨框架解决方案，编译后的代码可运行在包括H5/微信/支付宝/百度/字节跳动/QQ小程序/RN（Android, IOS）的平台上
+
+## 升级指南
+
+从 v3.x 升级的同学，首先需要安装 v3.3 的 CLI 工具：
+
+> npm i -g @tarojs/cli
+
+然后进入项目，删除 node_modules、yarn.lock、package-lock.json。
+
+最后把
+`package.json` 文件中 taro 相关依赖的版本修改为`>3.3.0`，再重新安装依赖。至此升级结束。
