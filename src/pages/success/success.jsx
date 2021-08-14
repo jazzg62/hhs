@@ -159,8 +159,8 @@ class Index extends Component {
         </View>
 
         <View className='success-operate'>
-          <Button size='default' className='success-operate__button1' onClick={this.handleContinuePay.bind(this)}>继续支付</Button>
-          <Button size='default' className='success-operate__button2' onClick={this.handleRedirectYFZX.bind(this)}>返回缘粉中心</Button>
+          <Button size='default' className='success-operate__button success-operate__button1' onClick={this.handleContinuePay.bind(this)}>继续支付</Button>
+          <Button size='default' className='success-operate__button success-operate__button2' onClick={this.handleRedirectYFZX.bind(this)}>返回缘粉中心</Button>
         </View>
 
         <Loading isLoading={state.isLoading} />

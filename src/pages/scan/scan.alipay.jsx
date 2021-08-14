@@ -132,7 +132,8 @@ class Index extends Component {
       return;
     }
     Taro.showLoading({
-      title: '加载中...'
+      title: '加载中...',
+      mask:true
     });
     this.props.actions.getDiscount(money)
   }
@@ -165,11 +166,11 @@ class Index extends Component {
 
     if (isTrue(phone)) {
       submitButton = <Button className='index-pay__button' onClick={this.pay(0).bind(this)} >支付</Button>
-      chongZhiButton = <View className='index-chongzhi__button'><Button  onClick={this.pay(1).bind(this)} >在线充值</Button></View>
+      chongZhiButton = <View className='index-chongzhi__button'><Button className='index-chongzhi__button-inline'  onClick={this.pay(1).bind(this)} >在线充值</Button></View>
     } else {
       submitButton = <Button scope='phoneNumber' openType='getAuthorize' onGetAuthorize={this.phone(0).bind(this)} className='index-pay__button' >支付</Button>
-      chongZhiButton = <View>
-        <Button scope='phoneNumber' openType='getAuthorize' onGetAuthorize={this.phone(1).bind(this)}  >在线充值</Button>
+      chongZhiButton = <View className='index-chongzhi__button'>
+        <Button className='index-chongzhi__button-inline' scope='phoneNumber' openType='getAuthorize' onGetAuthorize={this.phone(1).bind(this)}  >在线充值</Button>
         </View>
     }
 
@@ -191,8 +192,8 @@ class Index extends Component {
         <View className='index-line-gray'></View>
 
         <View className='index-input'>
-          <Text>付款金额:</Text>
-          <Input type='digit' placeholder='请输入支付金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
+          <Text className='index-input__text'>付款金额:</Text>
+          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
         </View>
 
         {submitButton}
@@ -200,7 +201,7 @@ class Index extends Component {
         {chongZhiButton}
 
         <View className='index-ggw'>
-          <Image src={ggw} >
+          <Image className='index-ggw__image' src={ggw} >
           </Image>
         </View>
 

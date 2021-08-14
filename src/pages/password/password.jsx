@@ -74,7 +74,7 @@ class Index extends Component {
     })
 
     if (this.state.inputIng || (!this.state.inputIng && !this.state.inputEnd)) {
-      inputs.push(<Input focus className='password-input__type2' type='number' name='password' id='password'
+      inputs.push(<Input focus='true' className='password-input__type2' type='number' name='password' id='password'
         value={password.trim()}
         onInput={this.handleInput.bind(this)}
         onBlur={this.handleBlur.bind(this)}
@@ -99,7 +99,7 @@ class Index extends Component {
           <Text>密码为6位数字</Text>
         </View>
         <View className='password-submit'>
-          <Button onClick={this.handlePayClick.bind(this)}>提交</Button>
+          <Button className='password-submit__button' onClick={this.handlePayClick.bind(this)}>提交</Button>
         </View>
       </View>
     )

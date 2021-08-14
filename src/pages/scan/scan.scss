@@ -42,7 +42,6 @@ button::after{
 }
 .index-input{
   border: 1px solid $gray;
-  font-size: 33px;
   margin:0 5%;
   margin-top: 60px;
   padding: 20px;
@@ -51,19 +50,17 @@ button::after{
   flex-direction: row;
   align-items: center;
 
-  Text{
+  &__text{
     color: $black;
-    width: 180px;
-    text-align: right;
     font-size: 36px;
     font-weight: bold;
   }
 
-  input{
+  &__input{
+    display: flex;
     flex: 1;
-    margin-left: 15px;
-    max-width: 60%;
-    color: $black;
+    background-color: transparent;
+    border-color: transparent;
   }
 }
 .index-pay__button{
@@ -80,7 +77,9 @@ button::after{
 }
 
 .index-chongzhi__button{
-  background-color: $white;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: transparent;
   text-align: right;
   padding: 0;
   color: $white;
@@ -91,20 +90,21 @@ button::after{
   letter-spacing: 5px;
   height: 85px;
   line-height: 85px;
-  button{
-    display: inline-block;
-    background-color: white;
+  &-inline{
+    background-color: transparent;
+    color: $black;
     text-decoration: underline;
     padding: 0;
     font-size: 28px;
     border: none;
+    display: inline;
   }
 }
 
 .index-ggw{
   width: 100%;
-  margin-top: 15px;
-  image{
+  margin-top: 60px;
+  &__image{
     width: 750px;
     height: 240px;
   }
