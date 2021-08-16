@@ -33,3 +33,43 @@ export function dealOptions(options) {
     }
   }
 }
+
+export function alipay_login(){
+  Taro.showLoading({
+    'title':'登录中，请稍等',
+    mask:true
+  })
+  my.getAuthCode({
+    scopes: ['auth_base'],
+    success: (res) => {
+      if (res.authCode) {
+        Taro.request({
+          method: "POST",
+          url: "https://pay.cnqilian.com/index.php?act=index3&op=index_zfb",
+          data: {
+            code:res.authCode
+          },
+          header: {
+            "content-type": "application/x-www-form-urlencoded"
+          }
+        })
+        .then((res1)=>{
+          Taro.hideLoading();
+          let src = 'https://new.cnqilian.com/wap/alipay1/welcome.html?key='+res1.data['key']+'&member_name='+res1.data['member_name']+'&member_id='+res1.data['member_id'];
+          my.redirectTo({url:'/pages/index/index?src='+encodeURIComponent(src)})
+        })
+        .catch(()=>{
+          Taro.hideLoading();
+          Taro.showModal({
+            'title':'提示',
+            'content':'登录失败，请稍后再试',
+            'showCancel':false,
+          })
+          .then(()=>{
+            my.navigateBack();
+          })
+        })
+      }
+    },
+  });
+}

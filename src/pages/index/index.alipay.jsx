@@ -1,6 +1,7 @@
 import { WebView } from '@tarojs/components'
 import React from 'react'
 import { getCurrentInstance } from '@tarojs/taro'
+import { alipay_login } from '../../utils/platform';
 
 class Index extends React.Component {
   constructor(props) {
@@ -14,9 +15,21 @@ class Index extends React.Component {
     };
   }
 
+  onMessage(e) {
+    let { type } = e.detail;
+    console.log('onMessage:', e);
+    switch (type) {
+      case 'alipay_login':
+        alipay_login();
+        break;
+      default:
+        console.log(e);
+    }
+  }
+
   render() {
     const { src } = this.state;
-    return <WebView src={src} ></WebView>
+    return <WebView src={src} onMessage={this.onMessage.bind(this)} ></WebView>;
   }
 }
 
