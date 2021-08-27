@@ -90,6 +90,7 @@ button::after{
   letter-spacing: 5px;
   height: 85px;
   line-height: 85px;
+  position: relative;
   &-inline{
     background-color: transparent;
     color: $black;
@@ -98,6 +99,8 @@ button::after{
     font-size: 28px;
     border: none;
     display: inline;
+    position: absolute;
+    right: 0;
   }
 }
 
