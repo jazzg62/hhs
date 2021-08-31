@@ -7,6 +7,7 @@ switch (process.env.TARO_ENV) {
       "pages/phone/phone",
       "pages/share/share",
       "pages/welcome/welcome",
+      "pages/navigate/navigate",
 
       "pages/scan/scan",
       "pages/discount/discount",
