@@ -1,5 +1,5 @@
 @import '../../../style/themes/default.scss';
-Page{
+page{
   background-color: #EEEEEE;
 }
 .success-banner{
@@ -189,7 +189,7 @@ Page{
 
     &-title{
       font-size: 25px;
-      color: $gray1;
+      color: $gray3;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -206,7 +206,7 @@ Page{
     &-amount{
       font-size: 27px;
       margin-top: 12px;
-      color: $gray1;
+      color: $gray3;
     }
     &-get{
       position: absolute;
@@ -222,7 +222,7 @@ Page{
       position: absolute;
       right: 0;
       bottom: 6px;
-      background-color: $gray1;
+      background-color: $gray3;
       color: $white;
       font-size: 27px;
       padding: 9px 27px;
