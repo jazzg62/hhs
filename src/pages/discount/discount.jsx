@@ -119,7 +119,7 @@ class Index extends Component {
     }
 
     let yhxx = '';
-    if (xflx != Payment.SM_CZ && (predepositText != '' || xjqText != '' && dtgd_zkText != '')) {
+    if (xflx != Payment.SM_CZ && (predepositText != '' || xjqText != '' || dtgd_zkText != '')) {
       yhxx = <View className='discount-red__envelop' onClick={this.handleRedEnvelopClick.bind(this)}>
         <View className='discount-red__envelop_check'>
           <Image className='icon-small discount-type__check' src={use_red_envelop ? circle_checked : circle_normal}></Image>

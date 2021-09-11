@@ -117,3 +117,17 @@ export function redirect_discount(){
     url: '/pages/discount/discount?timeStamp='+new Date().getTime()
   })
 }
+
+/**
+ * 转换距离
+ * @param {*} jl
+ * @returns
+ */
+export function translate_jl(jl){
+  jl = Number(jl);
+  if(jl < 1000){
+    return jl + 'm';
+  }else {
+    return (jl/1000).toFixed(1) + 'km';
+  }
+}
