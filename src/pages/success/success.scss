@@ -1,4 +1,7 @@
 @import '../../../style/themes/default.scss';
+page{
+  background-color: #EEEEEE;
+}
 .success-banner{
   width: 100%;
   min-height: 150px;
@@ -14,27 +17,30 @@
   &__text1{
     font-size: 75px;
     font-weight: bold;
-    margin-top: 45px;
-    letter-spacing: 5px;
+    margin-top: 18px;
+    letter-spacing: 3px;
+    &-i{
+      font-size: 50px;
+    }
   }
   &__text2{
+    margin-top: 30px;
     font-size: 30px;
-    margin-top: 24px;
   }
   &__image{
-    width: 90px;
-    height: 90px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 12px;
     z-index: 1;
     background-color: $blue1;
-    border: 10px solid $blue1;
+    border: 7px solid $blue1;
     color: $white;
   }
   &::after{
     content: '';
-    background-color: $white;
+    background-color: #EEEEEE;
     width: 150%;
     height: 400px;
     position: absolute;
@@ -42,8 +48,31 @@
     border-radius: 50%;
   }
 }
+
+.success-block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-money{
+  display: flex;
+  flex-direction: row;
+  font-size:75px;
+  margin-top: 12px;
+  color: $black;
+}
+
+.success-more{
+  display: flex;
+  flex-direction: row;
+  // margin-top: 6px;
+  font-size: 27px;
+}
+
+
 .success-list{
-  padding: 0 75px;
+  padding: 0 45px;
   color: $black;
 
   .success-item{
@@ -82,6 +111,7 @@
 
 .success-operate{
   margin-top: 30px;
+  margin-bottom: 10px;
   padding: 0 75px;
   display: flex;
   flex-direction: row;
@@ -105,10 +135,259 @@
     color: $white;
     margin-left: auto;
     margin-right: 0;
-    padding: 0 75px;
+    padding: 0 45px;
   }
 }
 
 .success-loading{
   filter: blur(10px);
+}
+
+.success-reward{
+  margin: 0 30px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction:column;
+
+  &-list{
+    padding: 24px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+  }
+
+  &-item{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+  }
+
+  &-item:last-child{
+    padding-bottom: 0;
+  }
+
+  &__avatar{
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+    &-img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content{
+    margin-left: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    &-title{
+      font-size: 25px;
+      color: $gray3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &-text{
+      font-size: 30px;
+      margin-top: 12px;
+      font-weight: bold;
+      color: $black;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    &-amount{
+      font-size: 27px;
+      margin-top: 12px;
+      color: $gray3;
+    }
+    &-get{
+      position: absolute;
+      right: 0;
+      bottom: 6px;
+      background-color: $red;
+      color: $white;
+      font-size: 27px;
+      padding: 9px 27px;
+      border-radius: 15px;
+    }
+    &-geted{
+      position: absolute;
+      right: 0;
+      bottom: 6px;
+      background-color: $gray3;
+      color: $white;
+      font-size: 27px;
+      padding: 9px 27px;
+      border-radius: 15px;
+    }
+  }
+}
+
+
+// 商家列表
+.success-store{
+  margin: 0 30px;
+  margin-top: 20px;
+  border-radius: 30px;
+
+  // background-color: rgb(235, 235, 235);
+
+  &__text{
+    margin-left: 9px;
+    font-size: 45px;
+  }
+
+  &-h{
+    max-height: 54vh;
+    overflow-y: auto;
+  }
+
+  &-l{
+    max-height: 390px;
+    overflow-y: auto;
+  }
+}
+
+.store-list {
+  // margin-top: 15px;
+  padding: 24px;
+  box-sizing: border-box;
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+}
+
+.store-item{
+  display: flex;
+  flex-direction: row;
+  // border-bottom: 3px solid $gray;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-bottom: 15px;
+  // padding-top: 15px;
+}
+
+.store-item:last-child{
+  padding-bottom: 0;
+}
+
+.store-list .pic-img {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+}
+
+.store-list .info {
+  flex: 1;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.store-list .info .name {
+  font-size: 30px;
+  color: #2c2c2c;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.store-list .info .sale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.store-list .info .grade {
+  display: flex;
+  align-items: center;
+}
+
+.store-list .info .grade .grade-img {
+  height: 21px;
+  width: 21px;
+}
+
+.store-list .info .grade-text {
+  margin-left: 10px;
+  color: #2c2c2c;
+  font-size: 24px;
+}
+
+.store-list .info .number {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.tags {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.tags .tag {
+  font-weight: bold;
+  color: white;
+  background-color: #FE632D;
+  border-radius: 10px;
+  padding: 5px 12px;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.tags .comment {
+  margin-left: 10px;
+}
+
+.store-list .info .number-text {
+  margin-left: 10px;
+  color: #777;
+  font-size: 24px;
+}
+
+.store-list .info .price {
+  font-size: 36px;
+  color: #ff5400;
+  font-weight: bold;
+}
+
+.lab {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.lab-text {
+  margin-right: 10px;
+  color: #ff5400;
+  font-size: 21px;
+  border: 1px solid #ff5400;
+  border-radius: 10px;
+  padding: 4px 10px;
+  /* line-height: .32rem; */
+}
+.store-list .lab-text:nth-child(n+4) {
+  margin-top: 10px;
+}
+
+.merchant .lab-text{
+  margin-top: 10px;
+}
+
+.store-list .info .red{
+  color: red;
 }
