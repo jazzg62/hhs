@@ -32,8 +32,6 @@ export default function store(state = INITIAL_STATE, action){
       return {...state, ...action.payload}
     case 'CHANGEREDENVELOP':
       return {...state, ...action.payload}
-    case 'RESETPAY':
-      return {...state, ...INITIAL_STATE}
     case 'TOPAY':
       return {...state, ...action.payload}
     case 'SETCZ':

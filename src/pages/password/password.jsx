@@ -6,6 +6,7 @@ import './password.scss'
 
 import { setPassword } from '../../actions/pay';
 import toPay from '../../utils/pay';
+import { isTrue } from '../../utils';
 
 const stateToIndex = function (state) {
   return {
@@ -66,11 +67,14 @@ class Index extends Component {
 
   render() {
     let { password } = this.props.pay;
-    let inputs = password.split('').map((val) => {
-      if (val != ' ')
-        return <Input className='password-input__type1' password type='password' maxlength='1' value={val} disabled></Input>
-      else
-        return <Input className='password-input__type1' password type='password' maxlength='1' disabled></Input>
+    let _password= password.split('');
+    for(var i=0;i<6;i++){
+      if(!isTrue(_password[i])){
+        _password[i] = '';
+      }
+    }
+    let inputs = _password.map((val,idx) => {
+        return <Input key={idx} className='password-input__type1' password type='password' maxlength='1' value={isTrue(val)?val:''} disabled></Input>
     })
 
     if (this.state.inputIng || (!this.state.inputIng && !this.state.inputEnd)) {
