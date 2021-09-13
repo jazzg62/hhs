@@ -153,7 +153,7 @@ class Index extends Component {
       <View className='success'  >
         <View className='success-banner'>
           <Text className='success-banner__text2'>支付成功</Text>
-          <Text className='success-banner__text1'><Text className='success-banner__text1-i'>￥</Text>1.00</Text>
+          <Text className='success-banner__text1'><Text className='success-banner__text1-i'>￥</Text>{state.xfze}</Text>
           <Image className='success-banner__image' src={success}></Image>
         </View>
 
