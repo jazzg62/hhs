@@ -143,6 +143,16 @@ page{
   filter: blur(10px);
 }
 
+.success-ggw{
+  margin: 0 30px;
+  margin-top: 50px;
+
+  &__img{
+    width: 688px;
+    height: 188px;
+  }
+}
+
 .success-reward{
   margin: 0 30px;
   margin-top: 20px;

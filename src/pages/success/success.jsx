@@ -46,7 +46,8 @@ class Index extends Component {
       sn: '000000000000000000',
       isLoading: true,
       xfq: 0,
-      sq: [],
+      hasStore: false,
+      storeList: [],
       hasReward: false,
       reward: [
       ]
@@ -75,10 +76,11 @@ class Index extends Component {
           xflx: transXFLX(res.xflx),
           xfq: res.xfq1 || (Number(res.xfje) / 2),
           sn: res.sn || '000000000000',
-          sq: res.sq,
+          storeList: res.sq,
           isLoading: false
         }
         data['xfq'] = toFixed2(data['xfq']);
+        data['hasStore'] = res.sq.length>0;
         data['hasReward'] = res.wpq.length>0;
         data['reward'] = res.wpq;
         for(let i in data['reward']){
@@ -161,6 +163,11 @@ class Index extends Component {
           <Text className='success-more' onClick={this.handleChangeShow.bind(this)}>{state.show ? '查看支付详情' : '关闭支付详情'}</Text>
         </View>
 
+
+        {state.show && !state.hasReward && !state.hasStore?<View className='success-ggw'>
+          <Image className='success-ggw__img' src='https://pay.cnqilian.com/image/ggw.jpg'></Image>
+        </View>:null}
+
         {state.show && state.hasReward ? <View className='success-reward'>
           <View className='success-reward-list'>
             {state.reward.map((item, idx) => {
@@ -183,9 +190,9 @@ class Index extends Component {
         </View> : null}
 
         {state.show ? <View className={!state.hasReward?'success-store success-store-h':'success-store success-store-l'}>
-          <View className='store-list' >
+          {state.hasStore?<View className='store-list' >
             {
-              state.sq.map((item) => {
+              state.storeList.map((item) => {
                 return (
                   <View className='store-item' key={item.store_id}>
                     <View className='pic'>
@@ -228,7 +235,7 @@ class Index extends Component {
                 )
               })
             }
-          </View>
+          </View>:null}
         </View> : <View className='success-list'>
           <View className='success-item'>
             <Text className='success-item__key'>交易商家</Text>
