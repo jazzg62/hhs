@@ -5,6 +5,10 @@ module.exports = {
     "react/react-in-jsx-scope": "off"
   },
   "globals":{
-    "my":"true"
-  }
+    "my":"true",
+    "wx":"true"
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
 }

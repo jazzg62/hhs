@@ -33,7 +33,7 @@ export const RESET_INFO = {
     xjq_me: 0,
     xjq_id: 0,
     use_red_envelop: 1,
-    password:'      '
+    password:''
   }
 }
 
