@@ -68,13 +68,14 @@ class Index extends Component {
   render() {
     let { password } = this.props.pay;
     let _password= password.split('');
+    console.log(_password);
     for(var i=0;i<6;i++){
-      if(!isTrue(_password[i])){
+      if(_password[i] == ' ' || _password[i] == undefined){
         _password[i] = '';
       }
     }
     let inputs = _password.map((val,idx) => {
-        return <Input key={idx} className='password-input__type1' password type='password' maxlength='1' value={isTrue(val)?val:''} disabled></Input>
+        return <Input key={idx} className='password-input__type1' password type='password' maxlength='1' value={val} disabled></Input>
     })
 
     if (this.state.inputIng || (!this.state.inputIng && !this.state.inputEnd)) {
