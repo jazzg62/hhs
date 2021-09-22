@@ -8,6 +8,7 @@ import './success.scss'
 import { formatDate, toFixed2, transXFLX, translate_jl } from '../../utils/index';
 import success from '../../assets/success.svg'
 import Loading from '../../components/Loading/index'
+import OfficialAccount from '../../components/OfficialAccount/index'
 import { Payment } from '../../constant';
 import { resetPay } from '../../actions/pay';
 
@@ -276,6 +277,10 @@ class Index extends Component {
             <Text className='success-item__val success-item__val-important'>本次交易获得{state.xfq}元消费券</Text>
           </View> : ''}
         </View>}
+
+        <div className='success-offa'>
+          <OfficialAccount></OfficialAccount>
+        </div>
 
         <View className='success-operate'>
           <Button size='default' className='success-operate__button success-operate__button1' onClick={this.handleContinuePay.bind(this)}>继续支付</Button>

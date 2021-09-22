@@ -36,9 +36,8 @@ class Index extends Component {
     super(props);
     let params = getCurrentInstance().router.params
     // store_id,根据系统后台传入的值来决定
-    if (isTrue(params['store_id'])) {
-      this.props.actions.getStoreInfo(params['store_id'], params['storeb_id']);
-      this.props.actions.chongZhiYouHui(params['store_id'], params['storeb_id']);
+    if (isTrue(params['store_id']) || isTrue(params['sn'])) {
+      this.props.actions.getStoreInfo(params['store_id'], params['storeb_id'], params['sn']);
     }
 
     this.state ={

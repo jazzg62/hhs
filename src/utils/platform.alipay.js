@@ -8,7 +8,7 @@ export function dealOptions(options) {
   if(!(options && options.path && options.path == 'pages/welcome/welcome')){
     return ;
   }
-  let re = /pay\.cnqilian\.com\/dist\/\?name=store/;
+  let re = /pay\.cnqilian\.com\/dist\/\?/;
   let src = "";
   if (options && options.query && options.query.qrCode) {
     src = decodeURIComponent(options.query.qrCode);
@@ -16,9 +16,11 @@ export function dealOptions(options) {
       Taro.reLaunch({
         url:
           "/pages/scan/scan?store_id=" +
-          parse(src)["store_id"] +
+          (parse(src)["store_id"] || 0) +
           "&storeb_id=" +
-          (parse(src)["storeb_id"] || 0)
+          (parse(src)["storeb_id"] || 0)+
+          "&sn="+
+          (parse(src)["sn"] || 0)
       });
     } else {
       // 支付宝的扫码应该只支持扫码支付，锁粉类推广码应该在微信中使用

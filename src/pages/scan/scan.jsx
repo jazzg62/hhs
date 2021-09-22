@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import './scan.scss'
 
 import Tags from '../../components/Tags';
+import NumberKeyboard from '../../components/NumberKeyboard';
 import * as user_actions from '../../actions/user'
 import * as pay_actions from '../../actions/pay'
 import * as discount_actions from '../../actions/discount'
@@ -35,11 +36,10 @@ class Index extends Component {
     super(props);
     let params = getCurrentInstance().router.params
     // store_id, member_id, phone 根据系统后台传入的值来决定
-    if (isTrue(params['store_id'])){
-      this.props.actions.getStoreInfo(params['store_id'], params['storeb_id']);
-      this.props.actions.chongZhiYouHui(params['store_id'], params['storeb_id']);
+    if(isTrue(params['store_id']) || isTrue(params['sn'])){
+      this.props.actions.getStoreInfo(params['store_id'], params['storeb_id'], params['sn']);
     }
-    if (isTrue(params['member_id']))
+    if(isTrue(params['member_id']))
       this.props.actions.setUserMemberID(params['member_id']);
     if(isTrue(params['phone']))
       this.props.actions.setUserPhone(params['phone']);
@@ -48,21 +48,32 @@ class Index extends Component {
         this.props.actions.setLoginCode(result.code);
       }
     })
+
+    this.state ={
+      showNumberKeyboard:false
+    }
   }
 
-  componentWillMount() { }
+  showNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:true
+    })
+  }
 
-  componentDidMount() { }
+  hideNumberKeyboard(){
+    this.setState({
+      showNumberKeyboard:false
+    })
+  }
 
-  componentWillUnmount() { }
+  handleMoneyChange(val) {
+    this.props.actions.setMoney(this.props.pay.money+''+val);
+  }
 
-  componentDidShow() { }
-
-  componentDidHide() { }
-
-  handleMoneyChange(event) {
-    console.log(event)
-    this.props.actions.setMoney(event.detail.value)
+  handleMoneyDel(){
+    let money = (this.props.pay.money+'').split('');
+    money.pop();
+    this.props.actions.setMoney(money.join(''));
   }
 
   /**
@@ -176,9 +187,9 @@ class Index extends Component {
 
         <View className='index-line-gray'></View>
 
-        <View className='index-input'>
+        <View className='index-input' onClick={this.showNumberKeyboard.bind(this)}>
           <Text className='index-input__text'>付款金额:</Text>
-          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money} onInput={this.handleMoneyChange.bind(this)} />
+          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money}   disabled />
         </View>
 
         {submitButton}
@@ -189,6 +200,8 @@ class Index extends Component {
           <Image className='index-ggw__image' src={ggw} >
           </Image>
         </View>
+
+        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar  input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
 
       </View>
     )
