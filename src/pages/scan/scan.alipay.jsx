@@ -52,7 +52,7 @@ class Index extends Component {
           this.props.actions.setLoginCode(res.authCode);
           Taro.request({
             method: "POST",
-            url: "https://pay.cnqilian.com/index.php?act=index3&op=alipay_getmemberid",
+            url: "https://pay.cnql888.com/index.php?act=index3&op=alipay_getmemberid",
             data: {
               code:res.authCode
             },
@@ -104,7 +104,7 @@ class Index extends Component {
   getPhone(res){
     Taro.request({
       method: "POST",
-      url: "https://pay.cnqilian.com/index.php?act=index3&op=alipay_getPhone",
+      url: "https://pay.cnql888.com/index.php?act=index3&op=alipay_getPhone",
       data: {
         user_id:this.props.user.user_id,
         encryptedData:JSON.parse(res.response)['response']

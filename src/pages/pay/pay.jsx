@@ -29,7 +29,7 @@ class Index extends React.Component {
             mask:true
           })
 
-          const ApiUrl = 'https://new.cnqilian.com/mobile'
+          const ApiUrl = 'https://www.cnql888.com/mobile'
           let apiAct, apiOp
           apiAct = !options.apiAct ? 'fswxpay' : options.apiAct
           apiOp = !options.apiOp ? 'xdfsx' : options.apiOp
@@ -58,10 +58,10 @@ class Index extends React.Component {
                   })
                   let src = ''
                   if (/fswxpay/.test(apiAct)) {
-                    src = 'https://new.cnqilian.com/wap/fs'  // 赋商页
+                    src = 'https://www.cnql888.com/wap/fs'  // 赋商页
                   } else {
                     if (!options.src)
-                      src = 'https://new.cnqilian.com/wap/tmpl/member/order_list.html'  // 订单列表
+                      src = 'https://www.cnql888.com/wap/tmpl/member/order_list.html'  // 订单列表
                     else src = decodeURIComponent(options.src)
                   }
                   src = encodeURIComponent(src)
@@ -76,7 +76,7 @@ class Index extends React.Component {
                       content: '需要返回缘粉中心吗',
                       success: modal_res => {
                         if (modal_res.confirm) {
-                          let src = 'https://new.cnqilian.com/wap/gyl/my.html'
+                          let src = 'https://www.cnql888.com/wap/gyl/my.html'
                           Taro.reLaunch({
                             url: '/pages/index/index?src=' + encodeURIComponent(src)
                           })
@@ -95,7 +95,7 @@ class Index extends React.Component {
                     content: '需要返回缘粉中心吗',
                     success: modal_res1 => {
                       if (modal_res1.confirm) {
-                        let src = 'https://new.cnqilian.com/wap/gyl/my.html'
+                        let src = 'https://www.cnql888.com/wap/gyl/my.html'
                         Taro.reLaunch({
                           url: '/pages/index/index?src=' + encodeURIComponent(src)
                         })

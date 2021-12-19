@@ -26,7 +26,7 @@ class Index extends React.Component {
       console.log('用户授权了获取手机号')
       Taro.request({
         url:
-          'https://new.cnqilian.com/mobile/index.php?act=member_fund&op=getPhone',
+          'https://www.cnql888.com/mobile/index.php?act=member_fund&op=getPhone',
         method: 'POST',
         data: {
           iv: e.detail.iv,
@@ -58,7 +58,7 @@ class Index extends React.Component {
             content: '成功授权绑定手机号',
             success: () => {
               if (res.confirm) {
-                let src = 'https://new.cnqilian.com/wap/gyl/my.html'
+                let src = 'https://www.cnql888.com/wap/gyl/my.html'
                 src = encodeURIComponent(src)
                 Taro.reLaunch({
                   url: '/pages/index/index?src=' + src

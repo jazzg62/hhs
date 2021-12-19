@@ -12,7 +12,7 @@ class Index extends React.Component {
     if (options && options.q != undefined) {
       src = decodeURIComponent(options.q)
       if(re.test(src)){
-        src = "https://new.cnqilian.com/mobile/index.php?act=connect&op=index_xcx&store_id="+parse(src)['store_id']+'&storeb_id='+(parse(src)['storeb_id']||0);
+        src = "https://www.cnql888.com/mobile/index.php?act=connect&op=index_xcx&store_id="+parse(src)['store_id']+'&storeb_id='+(parse(src)['storeb_id']||0);
       }
       src = src.replace(/http:\/\//, 'https://')
       Taro.reLaunch({

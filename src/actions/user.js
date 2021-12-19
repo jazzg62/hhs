@@ -9,7 +9,7 @@ import {request} from '@tarojs/taro';
 export function getUserInfo(phone){
   return async function (dispatch) {
 		let res = await request({
-      url: 'https://pay.cnqilian.com/index.php?act=index&op=getuser',
+      url: 'https://pay.cnql888.com/index.php?act=index&op=getuser',
       method:'GET',
       data: {
         phone:phone

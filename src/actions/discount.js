@@ -10,7 +10,7 @@ export function getDiscount(money){
   return async function(dispatch, getState){
     let state = getState();
     let res = await request({
-      url: 'https://pay.cnqilian.com/index.php?act=index&op=yhxx',
+      url: 'https://pay.cnql888.com/index.php?act=index&op=yhxx',
       method:'GET',
       data: {
         member_id:state.user.member_id,

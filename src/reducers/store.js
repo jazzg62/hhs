@@ -3,7 +3,7 @@ const INITIAL_STATE = {
   storeb_id:0,
   sn:'',
   store_name:'商家名有七个字',
-  store_avatar:'https://new.cnqilian.com/wap/images/qlpt1.png',
+  store_avatar:'https://www.cnql888.com/wap/images/qlpt1.png',
   fdmc:'',
   czyh:[]
 }

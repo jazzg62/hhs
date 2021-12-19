@@ -47,7 +47,7 @@ export function alipay_login(){
       if (res.authCode) {
         Taro.request({
           method: "POST",
-          url: "https://pay.cnqilian.com/index.php?act=index3&op=index_zfb",
+          url: "https://pay.cnql888.com/index.php?act=index3&op=index_zfb",
           data: {
             code:res.authCode
           },
@@ -57,7 +57,7 @@ export function alipay_login(){
         })
         .then((res1)=>{
           Taro.hideLoading();
-          let src = 'https://new.cnqilian.com/wap/alipay1/welcome.html?key='+res1.data['key']+'&member_name='+res1.data['member_name']+'&member_id='+res1.data['member_id'];
+          let src = 'https://www.cnql888.com/wap/alipay1/welcome.html?key='+res1.data['key']+'&member_name='+res1.data['member_name']+'&member_id='+res1.data['member_id'];
           my.redirectTo({url:'/pages/index/index?src='+encodeURIComponent(src)})
         })
         .catch(()=>{

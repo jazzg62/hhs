@@ -55,7 +55,7 @@ class Index extends Component {
     }
 
     request({
-      url: 'https://pay.cnqilian.com/?act=index&op=ddh',
+      url: 'https://pay.cnql888.com/?act=index&op=ddh',
       method: 'POST',
       data: {
         ddh: ddh,
@@ -103,9 +103,9 @@ class Index extends Component {
   handleRedirectYFZX() {
     let src;
     if (process.env.TARO_ENV == 'weapp')
-      src = 'https://new.cnqilian.com/wap/gyl/my.html';
+      src = 'https://www.cnql888.com/wap/gyl/my.html';
     else
-      src = 'https://new.cnqilian.com/wap/alipay1/my.html';
+      src = 'https://www.cnql888.com/wap/alipay1/my.html';
     Taro.reLaunch({
       url: '/pages/index/index?src=' + encodeURIComponent(src)
     })
@@ -120,7 +120,7 @@ class Index extends Component {
   handleGetReward(idx, wpq_id) {
     if(this.state.reward[idx].status){
       request({
-        url: 'https://pay.cnqilian.com/?act=index&op=wpqlq',
+        url: 'https://pay.cnql888.com/?act=index&op=wpqlq',
         method: 'POST',
         data: {
           member_id: this.state.member_id,
@@ -166,7 +166,7 @@ class Index extends Component {
 
 
         {state.show && !state.hasReward && !state.hasStore?<View className='success-ggw'>
-          <Image className='success-ggw__img' src='https://pay.cnqilian.com/image/ggw.jpg'></Image>
+          <Image className='success-ggw__img' src='https://pay.cnql888.com/image/ggw.jpg'></Image>
         </View>:null}
 
         {state.show && state.hasReward ? <View className='success-reward'>
@@ -203,11 +203,11 @@ class Index extends Component {
                       <View className='name'>{item.store_name}</View>
                       <View className='sale'>
                         <View className='grade'>
-                          <Image className='grade-img' src='https://new.cnqilian.com/wap/gyl/images/28.png' alt='' />
-                          <Image className='grade-img' src='https://new.cnqilian.com/wap/gyl/images/28.png' alt='' />
-                          <Image className='grade-img' src='https://new.cnqilian.com/wap/gyl/images/28.png' alt='' />
-                          <Image className='grade-img' src='https://new.cnqilian.com/wap/gyl/images/28.png' alt='' />
-                          <Image className='grade-img' src='https://new.cnqilian.com/wap/gyl/images/28.png' alt='' />
+                          <Image className='grade-img' src='https://www.cnql888.com/wap/gyl/images/28.png' alt='' />
+                          <Image className='grade-img' src='https://www.cnql888.com/wap/gyl/images/28.png' alt='' />
+                          <Image className='grade-img' src='https://www.cnql888.com/wap/gyl/images/28.png' alt='' />
+                          <Image className='grade-img' src='https://www.cnql888.com/wap/gyl/images/28.png' alt='' />
+                          <Image className='grade-img' src='https://www.cnql888.com/wap/gyl/images/28.png' alt='' />
                           <Text className='grade-text'>5.0</Text>
                         </View>
                         <View className='number'>

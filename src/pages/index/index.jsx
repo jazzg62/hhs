@@ -10,7 +10,7 @@ class Index extends React.Component {
     src.replace(/http:\/\//, 'https://');
     src = decodeURIComponent(src);
     this.state = {
-      src: src || 'https://new.cnqilian.com/wap/gyl/index.html'
+      src: src || 'https://www.cnql888.com/wap/gyl/index.html'
     }
   }
 
@@ -21,7 +21,7 @@ class Index extends React.Component {
       error: JSON.stringify(e.detail)
     }
     Taro.request({
-      url: 'https://new.cnqilian.com/mobile/index.php?act=index&op=sysLog',
+      url: 'https://www.cnql888.com/mobile/index.php?act=index&op=sysLog',
       data: data,
       method: 'POST',
       header: {

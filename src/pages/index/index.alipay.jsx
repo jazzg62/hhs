@@ -11,7 +11,7 @@ class Index extends React.Component {
     src.replace(/http:\/\//, 'https://');
     src = decodeURIComponent(src);
     this.state = {
-      src: src || 'https://new.cnqilian.com/wap/alipay1/business.html'
+      src: src || 'https://www.cnql888.com/wap/alipay1/business.html'
     };
   }
 

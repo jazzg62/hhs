@@ -39,7 +39,7 @@ export default function toPay() {
     console.log(state);
     let res = await Taro.request({
       method: "POST",
-      url: "https://pay.cnqilian.com/index.php?act=index3&op=ddxr",
+      url: "https://pay.cnql888.com/index.php?act=index3&op=ddxr",
       data: send_data,
       header: {
         "content-type": "application/x-www-form-urlencoded"

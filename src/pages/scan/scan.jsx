@@ -83,7 +83,7 @@ class Index extends Component {
   getPhoneNumber(e) {
     if (e.detail.errMsg == 'getPhoneNumber:ok') {
       Taro.request({
-        url: 'https://pay.cnqilian.com/index.php?act=index1&op=getPhone',
+        url: 'https://pay.cnql888.com/index.php?act=index1&op=getPhone',
         method: 'POST',
         data: {
           iv: e.detail.iv,

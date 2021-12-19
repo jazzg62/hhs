@@ -15,7 +15,7 @@ export function getStoreInfo(store_id, storeb_id, sn){
       return ;
     }
     let res = await request({
-      url: 'https://pay.cnqilian.com/index.php?act=index&op=store', //仅为示例，并非真实的接口地址
+      url: 'https://pay.cnql888.com/index.php?act=index&op=store', //仅为示例，并非真实的接口地址
       method:'GET',
       data: {
         store_id,
@@ -56,7 +56,7 @@ export function getStoreInfo(store_id, storeb_id, sn){
 export function chongZhiYouHui(store_id, storeb_id){
   return async function(dispatch){
     let res = await request({
-      url: 'https://pay.cnqilian.com/index.php?act=index&op=czgz',
+      url: 'https://pay.cnql888.com/index.php?act=index&op=czgz',
       method: 'GET',
       data: {
         store_id: store_id,
