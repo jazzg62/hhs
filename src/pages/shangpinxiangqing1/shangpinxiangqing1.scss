@@ -1,0 +1,344 @@
+.page {
+  background-color: rgb(242, 243, 245);
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.group {
+  height: auto;
+}
+.group_5 {
+  margin-top: 35px;
+  position: relative;
+  overflow: hidden;
+}
+.group_8 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+}
+.section_1 {
+  /* padding: 57rpx 37rpx 155rpx; */
+  color: rgb(255, 255, 255);
+  font-size: 26px;
+  line-height: 30px;
+  white-space: nowrap;
+  /* background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/611b0ffc6b68fa00119f6658/61b2e72fd092020011e2563a/16391896946112026877.png');
+  background-position: 0px 0px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat; */
+  padding-bottom: 0;
+  height: 750px;
+  position: relative;
+}
+.section_1-swiper{
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+}
+.section_1-swiper_item-img{
+  width: 100%;
+  height: 100%;
+}
+.section_2 {
+  padding: 24px 11px 20px 14px;
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/611b0ffc6b68fa00119f6658/61b2e72fd092020011e2563a/16391896946195951825.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.section_4 {
+  padding: 29px 17px 43px 28px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  margin: 35px 0;
+}
+.section_5 {
+  padding: 32px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  margin: 0 ;
+  position: relative;
+}
+.download_share_img{
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  right: 32px;
+  top: 28px;
+}
+.image_1 {
+  width: 394px;
+  height: 236px;
+  position: absolute;
+  /* top: 0; */
+  right: 0;
+  transform: translate(20%, 40%);
+  bottom: 0;
+}
+.text_14 {
+  color: rgb(51, 51, 51);
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+  /* position: absolute;
+  top: 461rpx;
+  left: 50%;
+  transform: translateX(-50%); */
+}
+.section_6 {
+  margin: 0 19px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  height: 145px;
+}
+.section_7 {
+  padding: 20px 45px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 3px 6px 0px rgb(119, 119, 119);
+}
+.image {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  left:37px;
+  z-index: 100;
+}
+.text-wrapper {
+  margin-top: 398px;
+  padding: 6px 0 4px;
+  align-self: center;
+  background-color: rgba(86, 79, 73, 0.55);
+  border-radius: 20px;
+  width: 91px;
+}
+.group_1 {
+  padding-left: 3px;
+}
+.group_6 {
+  flex: 1;
+  margin-left: 10px;
+}
+.icon {
+  margin-top: 38px;
+  width: 17px;
+  height: 32px;
+}
+.text_10 {
+  color: rgb(51, 51, 51);
+  font-size: 32px;
+  line-height: 38px;
+  white-space: nowrap;
+}
+.group_7 {
+  margin-top: 26px;
+}
+.divider {
+  margin-top: 29px;
+  background-color: rgb(243, 245, 249);
+  height: 2px;
+}
+.text_13 {
+  margin-right: 11px;
+  margin-top: 29px;
+  color: rgb(51, 51, 51);
+  font-size: 26px;
+  line-height: 150%;
+  text-align: left;
+}
+.group_9 {
+  margin-top: 7px;
+  color: rgb(153, 153, 153);
+  font-size: 22px;
+  line-height: 26px;
+  white-space: nowrap;
+}
+.group_10 {
+  margin-left: 38px;
+  flex: 1 1 auto;
+  color: rgb(255, 255, 255);
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+}
+.text_1 {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  line-height: 35px;
+  white-space: nowrap;
+}
+.text_2 {
+  margin-top: 4px;
+  color: rgb(255, 255, 255);
+  font-size: 36px;
+  white-space: nowrap;
+}
+.text_7 {
+  /* margin-right: 9rpx; */
+  /* -webkit-align-self: center; */
+  /* align-self: center; */
+  color: white;
+  font-size: 30px;
+  line-height: 35px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.text_8 {
+  color: rgb(153, 153, 153);
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+}
+.text_9 {
+  margin-top: 13px;
+  color: rgb(153, 153, 153);
+  font-size: 24px;
+  line-height: 28px;
+  white-space: nowrap;
+}
+.icon_1 {
+  width: 30px;
+  height: 30px;
+}
+.text_11 {
+  margin-left: 10px;
+  color: rgb(51, 51, 51);
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+}
+.text_12 {
+  margin-left: 15px;
+  color: rgb(102, 102, 102);
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+}
+.sy{
+  margin-left: auto;
+  color: #F9844D;
+  font-size: 28px;
+  line-height: 33px;
+  white-space: nowrap;
+}
+.ys{
+  background-color: #D46228;
+  color: white;
+  font-size: 22px;
+  margin-left: 15px;
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 20px;
+}
+.image_2 {
+  width: 36px;
+  height: 33px;
+}
+.text_15 {
+  margin-top: 12px;
+}
+.button {
+  padding: 24px 0;
+  background-color: rgb(249, 107, 39);
+  border-radius: 40px;
+}
+.group_4 {
+  white-space: nowrap;
+  height: 54px;
+}
+.section_3 {
+  margin-left: 8px;
+  // padding: 7px 22px 6px;
+  /* background-color: white; */
+  border-radius: 26px;
+  display: flex;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  color: rgba(255,255,255,0.6);
+  text-decoration: line-through;
+}
+.text_3 {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  line-height: 39px;
+  letter-spacing: -0.6px;
+}
+.text_4 {
+  color: rgb(255, 255, 255);
+  font-size: 55px;
+  line-height: 55px;
+  letter-spacing: -0.92px;
+}
+.text_5 {
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  white-space: nowrap;
+}
+.text_6 {
+  font-size: 28px;
+  letter-spacing: -0.56px;
+  white-space: nowrap;
+}
+.tabs{
+  display: flex;
+  font-size: 28px;
+  background-color: white;
+  border-bottom: 1px solid #999999;
+  color: #333333;
+
+  &-tab{
+    flex: 1;
+    text-align: center;
+    padding: 28px 0;
+  }
+}
+.tw{
+  margin-bottom: 121px;
+}
+
+.wxParse image{
+  display: block;
+}
+
+.buyer_list{
+  height: 70px;
+  display: flex;
+  flex: 1;
+}
+
+.buyer_swiper_item{
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.buyer_avatar{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.buyer_name{
+  font-size: 28px;
+  margin-left: 15px;
+  color: #333333;
+}
+
+.buyer_addtime{
+  margin-left: auto;
+  margin-right: 20px;
+  font-size: 24px;
+  margin-left: auto;
+  color: #999999;
+}
+
+.align-end{
+  display: flex;
+  align-items: flex-end;
+}
