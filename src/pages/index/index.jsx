@@ -48,7 +48,7 @@ class Index extends React.Component {
       }
     } catch (e) {
       return {
-        title: '消费当股东 天天享分红',
+        title: '让每一笔消费都有价值',
         path: '/pages/index/index?src=' + encodeURIComponent(webViewUrl)
       }
     }
