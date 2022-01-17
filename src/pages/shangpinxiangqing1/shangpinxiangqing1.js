@@ -4,7 +4,8 @@ import {
   Image,
   Swiper,
   SwiperItem,
-  Text
+  Text,
+  Button
 } from '@tarojs/components'
 import React from 'react'
 import Taro from '@tarojs/taro'
@@ -28,7 +29,9 @@ import './shangpinxiangqing1.scss'
     imagePath: '',
     image:'',
     template:{},
-    goods_details:''
+    goods_details:'',
+    is_show_popup:false,
+    ly:'',
   },
   onLoad(options) {
     console.log(options)
@@ -40,6 +43,11 @@ import './shangpinxiangqing1.scss'
     if(options.member_id){
       Taro.getApp().globalData['member_id'] = options.member_id;
       Taro.getApp().globalData['key'] = options.key;
+      if(options.ly){
+        this.setData({
+          ly:options.ly
+        })
+      }
     }
     this.request_goods_detail(options.id)
   },
@@ -55,18 +63,29 @@ import './shangpinxiangqing1.scss'
     }
   },
   onShareAppMessage() {
-    console.log('/pages/index/index?src=' +encodeURIComponent('https://www.cnql888.com/wap/welcome/yltk.html?id='+this.data.goods_info.id+'&tjr_id='+Taro.getApp().globalData.member_id));
+    if(this.data.goods_info.goods_xckh){
+      return {
+        title: this.data.goods_info.goods_xckh,
+        path:
+          '/pages/index/index?src=' +encodeURIComponent('https://www.cnql888.com/wap/welcome/yltk.html?id='+this.data.goods_info.id+'&tjr_id='+Taro.getApp().globalData.member_id),
+        imageUrl: this.data.goods_info.pic[0]
+      };
+    }
+
     return {
-      title: this.data.goods_info.goods_name,
+      title: Number(this.data.goods_info.price)+'元抢'+this.data.goods_info.goods_name,
       path:
         '/pages/index/index?src=' +encodeURIComponent('https://www.cnql888.com/wap/welcome/yltk.html?id='+this.data.goods_info.id+'&tjr_id='+Taro.getApp().globalData.member_id),
       imageUrl: this.data.goods_info.pic[0]
     }
   },
   navigate_back() {
-    Taro.navigateBack({
-      delta: 0
-    })
+    if(this.data.ly == 'h5'){
+      Taro.navigateBack({
+        delta: 0
+      });
+      return ;
+    }
     wx.switchTab({url:'/pages/shouye/shouye'})
   },
   request_goods_detail(id) {
@@ -81,15 +100,6 @@ import './shangpinxiangqing1.scss'
         console.log(res)
         let goods_info = res.data.datas.goods_info
         let interval = 0
-        let app = Taro.getApp()
-        goods_info['jl'] = this.translate_jl(
-          this.get_distance(
-            goods_info.store_wd,
-            goods_info.store_jd,
-            app.globalData['latitude'],
-            app.globalData['longitude']
-          )
-        )
         let list = [];
         for(let i in goods_info['pic']){
           if(goods_info['pic'][i].endsWith('jpg')){
@@ -156,7 +166,7 @@ import './shangpinxiangqing1.scss'
             member_avatar:goods_info.member_avatar,
             member_name:goods_info.member_name,
           }),
-          goods_details:goods_info.goods_details,
+          goods_details:goods_info.goods_details+'<br><span style="font-size:12px;color:#999999;text-indent:10px;">注：此商品订单支付后，平台不接受退款。</span><br>',
         })
       }
     })
@@ -207,7 +217,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: data.goods_name,
+                  text: data.goods_name.length<12?data.goods_name:data.goods_name.substr(0,12)+'...',
                   css: {
                       width: '430px',
                       top: '825px',
@@ -218,7 +228,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: data.goods_des, // 长度最多为30
+                  text: data.goods_des.length<32?data.goods_des:data.goods_des.substr(0,32)+'...' , // 长度最多为30
                   css: {
                       width: '430px',
                       top: '882px',
@@ -277,7 +287,7 @@ import './shangpinxiangqing1.scss'
                   text: '￥'+data.goods_market_price,
                   css: {
                       top: '1122px',
-                      left: '175px',
+                      left: '195px',
                       color: '#AEAEAE',
                       fontSize: '25px',
                       textDecoration: 'line-through'
@@ -343,20 +353,30 @@ import './shangpinxiangqing1.scss'
   },
   download_share_img(){
     console.log('download_share_img');
-    console.log(this.data.imagePath )
+    console.log(this.data.imagePath );
     if (this.data.imagePath && typeof this.data.imagePath === 'string') {
       this.data.isSave = false;
       wx.saveImageToPhotosAlbum({
         filePath: this.data.imagePath,
         success: () => {
           Taro.showToast({
-            title: '保存分享图成功',
+            title: '保存成功',
             icon: 'success',
             duration: 1000
           })
         }
       });
     }
+  },
+  show_popup(){
+    this.setData({
+      is_show_popup:true
+    })
+  },
+  hide_popup(){
+    this.setData({
+      is_show_popup:false
+    })
   },
   open_location() {
     Taro.openLocation({
@@ -381,19 +401,6 @@ import './shangpinxiangqing1.scss'
     s = s * 6378.137 // EARTH_RADIUS;
     s = Math.round(s * 10000) / 10000
     return s
-  },
-  translate_jl(jl) {
-    var res = 0
-    if (jl < 1000) {
-      res = jl
-      res = res.toFixed(2)
-      res += '米'
-    } else {
-      res = jl / 1000
-      res = res.toFixed(2)
-      res += '千米'
-    }
-    return res
   },
   buy() {
     Taro.login({
@@ -528,14 +535,14 @@ class _C extends React.Component {
               {this.data.imagePath!=''?<Image
                 src={require('../../res/local/0b521bd7486185285d48c51202a596a8.png')}
                 className='image_1'
-                onClick={this.download_share_img}
+                onClick={this.show_popup}
               ></Image>:null}
           </View>
           {goods_info.sale_list.length ==0 ? null : <View className='section_4 flex-row'>
             <Text decode='decode' className='text_8'>
               购买用户
             </Text>
-              <Swiper className='buyer_list' vertical autoplay circular>
+              <Swiper className='buyer_list' vertical autoplay circular interval='2000' >
                 {goods_info.sale_list.map((item) => {
                   return (
                   <SwiperItem className='buyer_swiper_item' key={item.index}>
@@ -563,8 +570,9 @@ class _C extends React.Component {
               </Text>
             </View>
             <Image
-              src={require('../../res/local/db192582e970a8499fb9894257423aa2.png')}
+              src={require('../../res/local/location.png')}
               className='icon'
+              mode='widthFix'
             ></Image>
           </View>
         </View>
@@ -606,9 +614,22 @@ class _C extends React.Component {
         <View className='wxParse tw'>
           <wxParse html={this.data.goods_details}></wxParse>
         </View>
-        {/* <View>
-          <Image src={this.data.imagePath}></Image>
-        </View> */}
+
+        <View className={this.data.is_show_popup?'popup popup-show':'popup popup-hide'} onClick={this.hide_popup} >
+          <View className='popup-bg' style={'margin-top:' + ( menuButtonBoundingClientRect.top + menuButtonBoundingClientRect.height + 15) +'px'}>
+            <Image className='popup-img' mode='widthFix'  src={this.data.imagePath}></Image>
+          </View>
+          <View className='popup-op'>
+            <Button className='popup-save' onClick={this.download_share_img}>
+              <Image src={require('../../res/local/download.png')} mode='widthFix'></Image>
+              保存到本地
+            </Button>
+            <Button className='popup-share' openType='share'>
+              <Image src={require('../../res/local/share.png')} mode='widthFix'></Image>
+              分享此商品
+            </Button>
+          </View>
+        </View>
       </ScrollView>
     )
   }

@@ -124,8 +124,8 @@
   margin-left: 10px;
 }
 .icon {
-  margin-top: 38px;
-  width: 17px;
+  margin-top: 34px;
+  width: 40px;
   height: 32px;
 }
 .text_10 {
@@ -298,7 +298,8 @@
   }
 }
 .tw{
-  margin-bottom: 121px;
+  padding-bottom: 121px;
+  background-color: white;
 }
 
 .wxParse image{
@@ -341,4 +342,63 @@
 .align-end{
   display: flex;
   align-items: flex-end;
+}
+
+.popup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #333333;
+  z-index: 200;
+
+  &-bg{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-op{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 95%;
+    margin-top: 45px;
+    font-size: 32px;
+
+    Image{
+      width: 35px;
+      margin-right: 5px;
+    }
+  }
+
+  &-save{
+    color: white;
+    background-color: #F9844D;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  &-share{
+    color: white;
+    background-color: #00B26A;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.popup-show{
+  visibility: visible;
+}
+
+.popup-hide{
+  visibility: hidden;
 }

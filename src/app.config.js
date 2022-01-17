@@ -5,24 +5,50 @@ switch (process.env.TARO_ENV) {
     _ = {
         pages:[
           "pages/index/index",
+          "pages/welcome/welcome",
           "pages/pay/pay",
           "pages/phone/phone",
           "pages/share/share",
-          "pages/welcome/welcome",
           "pages/navigate/navigate",
 
           "pages/scan/scan",
           "pages/discount/discount",
           "pages/password/password",
           "pages/success/success",
-          'pages/shouye/shouye',
 
           //2021年12月19日 引流拓客
-          'pages/quanbudingdan/quanbudingdan',
-          'pages/zichanmingxi2/zichanmingxi2',
-          'pages/shangpinxiangqing1/shangpinxiangqing1',
-          'pages/chakanquanma2/chakanquanma2',
+          'pages/shouye/shouye',
           'pages/wode/wode'
+          // 'pages/quanbudingdan/quanbudingdan',
+          // 'pages/zichanmingxi2/zichanmingxi2',
+          // 'pages/shangpinxiangqing1/shangpinxiangqing1',
+          // 'pages/chakanquanma2/chakanquanma2',
+        ],
+        "subpackages":[
+          {
+            "root": "pages/quanbudingdan",
+            "pages": [
+              "quanbudingdan",
+            ]
+          },
+          {
+            "root": "pages/zichanmingxi2",
+            "pages": [
+              "zichanmingxi2",
+            ]
+          },
+          {
+            "root": "pages/shangpinxiangqing1",
+            "pages": [
+              "shangpinxiangqing1",
+            ]
+          },
+          {
+            "root": "pages/chakanquanma2",
+            "pages": [
+              "chakanquanma2",
+            ]
+          },
         ],
         window: {
           backgroundTextStyle: "light",
