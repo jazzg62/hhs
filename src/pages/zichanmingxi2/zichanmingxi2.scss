@@ -47,9 +47,15 @@
 }
 .text_1 {
   margin-right: 13px;
-  color: rgb(102, 102, 102);
-  font-size: 30px;
-  line-height: 35px;
+  color: #999999;
+  font-size: 24px;
+  text-align: left;
+  margin-top: 5px;
+}
+.text_2 {
+  margin-right: 13px;
+  color: #333;
+  font-size: 28px;
   text-align: left;
 }
 .text_3 {
@@ -198,8 +204,8 @@
 .image_21 {
   font-size: 26px;
   color: rgb(102, 102, 102);
-  flex: 2;
-  text-align: center;
+  flex: 3;
+  text-align: right;
 }
 .orange{
   color:#FC7C44 !important;

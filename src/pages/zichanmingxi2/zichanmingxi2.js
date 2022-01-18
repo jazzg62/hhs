@@ -39,7 +39,9 @@ import './zichanmingxi2.scss'
       },
       success: res => {
         console.log('order_list', res.data)
-        this.list = res.data.datas.list
+        this.setData({
+          list: res.data.datas.list
+        })
       }
     })
   }
@@ -124,6 +126,9 @@ class _C extends React.Component {
                   <View className='bottom-group flex-row'>
                     <Image src={item.goods_pic} className='image_13'></Image>
                     <View className='right-group flex-col'>
+                      <Text decode='decode' className='text_2'>
+                        {item.goods_name}
+                      </Text>
                       <Text decode='decode' className='text_1'>
                         {item.goods_des}
                       </Text>
@@ -137,7 +142,7 @@ class _C extends React.Component {
                 <View className='bottom-group_1 flex-col'>
                   <View className='justify-between group_4'>
                     <Text className='image_20'>姓名：</Text>
-                    <Text className='image_21'>{item.member_name}</Text>
+                    <Text className='image_21'>{item.buyer_name}</Text>
                   </View>
                   <View className='justify-between group_4'>
                     <Text className='image_20'>联系方式：</Text>
