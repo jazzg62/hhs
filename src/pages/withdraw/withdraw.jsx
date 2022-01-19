@@ -115,7 +115,7 @@ class Index extends Component {
 
   navigate_list(){
     Taro.navigateTo({
-      url:'/pages/withdrawlist/withdrawlist'
+      url:'/pages/withdrawList/withdrawList'
     })
   }
 
