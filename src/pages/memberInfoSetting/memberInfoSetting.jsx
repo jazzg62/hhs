@@ -89,7 +89,7 @@ class Index extends Component {
   }
 
   render() {
-    let {name, bank_name, bank_account} = this.state.form;
+    let {name} = this.state.form;
     return (
       <View class='content' >
         <View class='yhk-form'>
@@ -97,14 +97,14 @@ class Index extends Component {
                 <Text className='tag'>真实姓名</Text>
                 <Input className='input' type='text' value={name} data-name='name' onInput={this.onInput.bind(this)} />
             </View>
-            <View className='column'>
+            {/* <View className='column'>
                 <Text className='tag'>开户行名称</Text>
                 <Input className='input' type='text' value={bank_name} data-name='bank_name' onInput={this.onInput.bind(this)} />
             </View>
             <View className='column'>
                 <Text className='tag'>银行账号</Text>
                 <Input className='input' type='number' value={bank_account} data-name='bank_account' onInput={this.onInput.bind(this)} />
-            </View>
+            </View> */}
             <View className='row'>
                 <View class='submit' onClick={this.onSubmit.bind(this)}>提交个人信息</View>
             </View>

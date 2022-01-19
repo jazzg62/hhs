@@ -56,9 +56,9 @@ switch (process.env.TARO_ENV) {
             ]
           },
           {
-            "root": "pages/withdrawlist",
+            "root": "pages/withdrawList",
             "pages": [
-              "withdrawlist"
+              "withdrawList"
             ]
           },
           {
