@@ -408,7 +408,7 @@ import './shangpinxiangqing1.scss'
         Taro.request({
           url:
             'https://www.cnql888.com/mobile/index.php?act=member_tkpay&op=pay',
-          method: 'post',
+          method: 'POST',
           header: { 'content-type': 'application/x-www-form-urlencoded' },
           data: {
             key: Taro.getApp().globalData['key'],

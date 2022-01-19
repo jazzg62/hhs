@@ -61,6 +61,12 @@ switch (process.env.TARO_ENV) {
               "withdrawlist"
             ]
           },
+          {
+            "root": "pages/memberInfoSetting",
+            "pages": [
+              "memberInfoSetting"
+            ]
+          }
         ],
         window: {
           backgroundTextStyle: "light",

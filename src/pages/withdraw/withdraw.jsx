@@ -107,7 +107,7 @@ class Index extends Component {
     })
   }
 
-  onChangeMoney(e){
+  onInputMoney(e){
     this.setState({
       money: e.detail.value
     })
@@ -119,15 +119,22 @@ class Index extends Component {
     })
   }
 
+  navigate_setting(){
+    Taro.navigateTo({
+      url:'/pages/memberInfoSetting/memberInfoSetting'
+    })
+  }
+
   render() {
     return (
       <View class='content' id='slot1'>
         <View class='row ktx-row'>
             <Text className='h2'>可提现余额：{this.state.ktxye}</Text>
+            <View className='a' onClick={this.navigate_list.bind(this)}>查看提现记录</View>
         </View>
         <View class='row input-row'>
             <Text className='h3'>￥</Text>
-            <Input className='input' type='number' id='money' name='money' value={this.state.money} onChange={this.onChangeMoney.bind(this)} placeholder='请输入需要提现金额' />
+            <Input className='input' type='number' id='money' name='money' value={this.state.money} onInput={this.onInputMoney.bind(this)} placeholder='请输入需要提现金额' />
         </View>
         <View class='row des-row'>
             <Text className='h3'>
@@ -135,7 +142,7 @@ class Index extends Component {
             </Text>
             <Text className='h3' id='yhm'>{this.state.member_truename} 的微信账户</Text>
             <Text className='h3' id='yhhh'> </Text>
-            <Text className='a' onClick={this.navigate_list.bind(this)}>查看提现记录</Text>
+            <Text className='a' onClick={this.navigate_setting.bind(this)}>设置</Text>
         </View>
         <View class='row submit-row'>
             <Text className='button' onClick={this.withdraw.bind(this)}>提现</Text>

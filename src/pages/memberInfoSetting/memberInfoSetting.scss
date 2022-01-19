@@ -1,0 +1,52 @@
+.content{
+  padding: 20px 40px;
+}
+.yhk-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.yhk-form .column {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.yhk-form .row {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.yhk-form .tag {
+  font-size: 32px;
+}
+
+.yhk-form .input{
+  border: none;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+  font-size: 32px;
+  padding: 20px;
+  /* font-weight: bold; */
+  letter-spacing: 2px;
+  color: #626262;
+}
+
+.yhk-form .submit{
+  border: none;
+  background-image: linear-gradient(to right, #F1902C -4%, #F1902C 85%);
+  color: white;
+  border-radius: 20px;
+  font-size: 32px;
+  box-shadow: 2px 2px 2px #F1902C;
+  margin-top: 1rem;
+  width: 80%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 80px;
+}
