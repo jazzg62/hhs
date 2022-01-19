@@ -58,14 +58,6 @@ class Index extends Component {
       })
       return ;
     }
-    if(this.state.money<1.5){
-      Taro.showModal({
-        title: '提示',
-        showCancel:false,
-        content:'提现金额不能于1.5元',
-      })
-      return ;
-    }
     if(this.state.money>this.state.ktxye){
       Taro.showModal({
         title: '提示',
