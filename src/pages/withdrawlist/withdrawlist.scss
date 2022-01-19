@@ -1,0 +1,55 @@
+.content{
+  padding: 0 20px;
+}
+.list {
+  height: 100vh;
+}
+
+.list-item {
+  position: relative;
+  /* margin: .5rem 0; */
+  padding: 20px 12px;
+  /* padding-bottom: .3rem; */
+  border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+}
+
+.list-item-name {
+  font-size: 30px;
+  font-weight: bold;
+}
+.list-item-time {
+  font-size: 26px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.list-item-comment {
+  font-size: 26px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.list-item-money {
+  color: #ec2c2c;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-left: auto;
+}
+
+.list-item-tag {
+  position: absolute;
+  right: 0;
+  top: 75%;
+  transform: translate(0, -50%);
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background-color: #f2f2f2;
+  padding:4px 12px;
+  border-radius: 5px;
+}
+
+.sh {
+  color: #ff7549;
+}
+
+.done {
+  color: #a9a9a9;
+}

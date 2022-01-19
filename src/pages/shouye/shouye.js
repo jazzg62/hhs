@@ -230,6 +230,7 @@ class _C extends React.Component {
             className='flex-col list'
             onScrollToLower={this.load_more_list}
             scrollY
+            enableFlex
           >
             {list.map((item) => {
               return (

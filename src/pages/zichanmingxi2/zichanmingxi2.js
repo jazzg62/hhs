@@ -1,4 +1,4 @@
-import { View, Image, Text } from '@tarojs/components'
+import { View, Image, Text, Button } from '@tarojs/components'
 import React from 'react'
 import Taro from '@tarojs/taro'
 import withWeapp from '@tarojs/with-weapp'
@@ -8,22 +8,25 @@ import './zichanmingxi2.scss'
   data: {
     menuButtonBoundingClientRect: Taro.getMenuButtonBoundingClientRect(),
     zsy: '0.00',
-    yjs: '0.00',
-    wjs: '0.00',
+    zhye: '0.00',
     list: []
   },
   onLoad(options) {
-    let { zsy, wjs, yjs } = options
+    let { zsy, zhye} = options
     this.setData({
       zsy,
-      yjs,
-      wjs
+      zhye,
     })
     this.request_order_list()
   },
   navigate_back() {
     Taro.navigateBack({
       delta: 0
+    })
+  },
+  navigate_withdraw(){
+    Taro.navigateTo({
+      url:'/pages/withdraw/withdraw'
     })
   },
   set_clipboard(e) {
@@ -48,7 +51,7 @@ import './zichanmingxi2.scss'
 })
 class _C extends React.Component {
   render() {
-    const { menuButtonBoundingClientRect, zsy, yjs, wjs, list } = this.data
+    const { menuButtonBoundingClientRect, zsy, zhye, list } = this.data
     return (
       <View className='flex-col page'>
         <View className='flex-col group'>
@@ -72,42 +75,14 @@ class _C extends React.Component {
               资产明细
             </Text>
           </View>
-          <View className='flex-col section_2'>
-            <View className='justify-between group_1'>
-              <View className='flex-col'>
-                <Text className='image'>总收入金额（元）</Text>
-                <Text className='image_1'>{zsy}</Text>
-                {/*  <image src="/res/local/c105d3a0659cd51126123c9f59fa124e.png" class="image" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <image src="/res/local/fa4a0da021632997c81b4f8723214cc5.png" class="image_1" /> */}
-              </View>
-              <View className='flex-row section_3'>
-                <Image
-                  src={require('../../res/local/aa51fd56d05a15c7c80dd7f2dc433903.png')}
-                  className='image_2'
-                ></Image>
-                <Image
-                  src={require('../../res/local/5ecbb4d76cceda92e515dfead7f8c787.png')}
-                  className='image_3'
-                ></Image>
-              </View>
+          <View className='balance'>
+            <View className='balance-column'>
+              <Text className='balance-des'>总收入</Text>
+              <Text className='balance-price'>{this.data.zsy}</Text>
             </View>
-            <Image
-              src={require('../../res/local/5c2889f9b00eb08fe1f6dd3360d8c4b0.png')}
-              className='image_4'
-            ></Image>
-            <View className='flex-row equal-division'>
-              <View className='flex-col equal-division-item'>
-                <Text className='image_8'>已结算（元）</Text>
-                <Text className='image_6'>{yjs}</Text>
-              </View>
-              <Image
-                src={require('../../res/local/1b6cd7fba5cf82d72cd33bf1ee98a6e6.png')}
-                className='horiz-divider'
-              ></Image>
-              <View className='flex-col equal-division-item_1'>
-                <Text className='image_8'>待结算（元）</Text>
-                <Text className='image_6'>{wjs}</Text>
-              </View>
+            <View className='balance-column'>
+              <Text className='balance-des'>可提现</Text>
+              <View className='balance-price'>{this.data.zhye} <Text className='balance-withdraw' onClick={this.navigate_withdraw}>提现</Text></View>
             </View>
           </View>
         </View>

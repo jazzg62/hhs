@@ -235,7 +235,6 @@ class _C extends React.Component {
     const { request, icon_ml, list, isloading, hasmore } = this.data
     return (
       <View className='flex-col page'>
-        <View className='flex-col group_2'>
           <View className='flex-col section_2'>
             <View className='justify-between'>
               <Text
@@ -285,6 +284,7 @@ class _C extends React.Component {
             className='flex-col list'
             onScrollToLower={this.load_more_list}
             scrollY
+            enableFlex
           >
             {list.map((item, index) => {
               return (
@@ -362,7 +362,6 @@ class _C extends React.Component {
             )}
           </ScrollView>
         </View>
-      </View>
     )
   }
 }

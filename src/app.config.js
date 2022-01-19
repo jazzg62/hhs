@@ -49,6 +49,18 @@ switch (process.env.TARO_ENV) {
               "chakanquanma2",
             ]
           },
+          {
+            "root": "pages/withdraw",
+            "pages": [
+              "withdraw",
+            ]
+          },
+          {
+            "root": "pages/withdrawlist",
+            "pages": [
+              "withdrawlist"
+            ]
+          },
         ],
         window: {
           backgroundTextStyle: "light",

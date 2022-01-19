@@ -9,10 +9,9 @@ import './wode.scss'
     menuButtonBoundingClientRect: Taro.getMenuButtonBoundingClientRect(),
     member_name: '加载中...',
     member_des: '稍后会显示更多信息',
-    member_avatar: 'https://www.cnql888.com/wap/image/qlpt1.jpg',
-    wjs: '0.00',
-    yjs: '0.00',
-    zsy: '0.00'
+    member_avatar: '',
+    zsy: '0.00',
+    zhye: '0.00',
   },
   onLoad() {
     const my = [
@@ -59,23 +58,20 @@ import './wode.scss'
         }
         let res_data = res.data.datas.account_info
         res_data['zsy'] = Number(res_data['zsy']).toFixed(2)
-        res_data['wjs'] = Number(res_data['wjs']).toFixed(2)
-        res_data['yjs'] = Number(res_data['yjs']).toFixed(2)
+        res_data['zhye'] = Number(res_data['zhye']).toFixed(2)
         this.setData(res_data)
         wx.stopPullDownRefresh();
       }
     })
   },
   navigate_zicangzhognxin() {
-    let { zsy, yjs, wjs } = this.data
+    let { zsy, zhye } = this.data
     Taro.navigateTo({
       url:
         '/pages/zichanmingxi2/zichanmingxi2?zsy=' +
         zsy +
-        '&yjs=' +
-        yjs +
-        '&wjs=' +
-        wjs
+        '&zhye=' +
+        zhye
     })
   },
   navigate_dingdan(e) {
@@ -93,20 +89,9 @@ import './wode.scss'
 })
 class _C extends React.Component {
   render() {
-    const { member_avatar, member_name, member_des, zsy, yjs, wjs, menuButtonBoundingClientRect } = this.data
+    const { member_avatar, member_name, member_des, zsy, yjs, wjs } = this.data
     return (
       <View className='flex-col page'>
-        {/* <View className='navbar' style={
-                'margin-top:' +
-                menuButtonBoundingClientRect.top +
-                'px;height: ' +
-                menuButtonBoundingClientRect.height +
-                'px;'
-              }
-        >
-          <View className='navbar-left' onClick={this.navigate_yf}>切换缘粉中心</View>
-          <View className='navbar-title'>我的</View>
-        </View> */}
         <View className='flex-col group'>
           <View className='flex-row'>
             <Image src={member_avatar} className='image_4'></Image>
@@ -127,7 +112,7 @@ class _C extends React.Component {
               <View className='justify-between'>
                 <View className='flex-col'>
                   <Text decode='decode' className='text_2'>
-                    总资产
+                    总收入金额
                   </Text>
                   <View className='group_6'>
                     <Text decode='decode' className='text_3'>
@@ -143,7 +128,7 @@ class _C extends React.Component {
                   className='icon'
                 ></Image>
               </View>
-              <View className='flex-row group_7'>
+              {/* <View className='flex-row group_7'>
                 <View className='flex-row'>
                   <Text decode='decode' className='text_5'>
                     已结算
@@ -174,7 +159,7 @@ class _C extends React.Component {
                     </Text>
                   </View>
                 </View>
-              </View>
+              </View> */}
             </View>
             <View
               className='justify-between section_3'
