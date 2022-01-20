@@ -39,10 +39,10 @@ import './shouye.scss'
     let { key } = options
     if(key){
       Taro.getApp().globalData['key'] = key
-      this.setData({ request: { ...this.data.request, key: key } })
     }else{
       key = Taro.getApp().globalData.key
     }
+    this.setData({ request: { ...this.data.request, key: key } })
     this.setData({list:[]})
     this.get_location()
     this.getMember_id(key)
