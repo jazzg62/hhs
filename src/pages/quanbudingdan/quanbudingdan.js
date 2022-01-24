@@ -27,7 +27,7 @@ import './quanbudingdan.scss'
         all: '25rpx',
         '1': '221rpx',
         '2': '403rpx',
-        '3': '583rpx'
+        '4': '583rpx'
       }
       icon_ml = ml_left[lx]
     }
@@ -53,7 +53,7 @@ import './quanbudingdan.scss'
         console.log(res)
         let { list } = res.data.datas
         for (let i in list) {
-          list[i]['zts'] = this.translate_message(list[i]['zt'])
+          list[i]['zts'] = this.translate_message(list[i])
         }
         console.log(list)
         let list1 = this.data.list
@@ -78,18 +78,28 @@ import './quanbudingdan.scss'
     })
     this.request_order_list()
   },
-  translate_message(zt) {
-    if (zt == '0') return '取消订单'
-    else if (zt == '1') return '待付款'
-    else if (zt == '2') return '待核销'
-    else if (zt == '3') return '已完成'
+  translate_message(item) {
+    let zt = item['zt'];
+    let lx = item['lx'];
+    if(zt == '2' && lx == '1') return '待发货';
+    if(zt == '3' && lx == '1') return '待收货';
+
+    if (zt == '0') return '取消订单';
+    if (zt == '1') return '待付款';
+    if (zt == '2') return '待核销';
+    if (zt == '4') return '已完成';
     return '未知'
   },
   switch_tab(event) {
     // margin-left
     // 25rpx  221rpx  403rpx  583rpx
     let { idx, lx } = event.currentTarget.dataset
-    const ml_left = ['25rpx', '221rpx', '403rpx', '583rpx']
+    const ml_left = {
+      all: '25rpx',
+      '1': '221rpx',
+      '2': '403rpx',
+      '4': '583rpx'
+    }
     let { request } = this.data
     this.setData({
       icon_ml: ml_left[idx],
@@ -228,6 +238,33 @@ import './quanbudingdan.scss'
           }
         })
       }})
+  },
+  confirm_receive(e){
+    let {ddh} = e.currentTarget.dataset;
+    Taro.request({
+      method:'POST',
+      url:'https://www.cnql888.com/mobile/index.php?act=member_tk&op=receive',
+      header:{'content-type':'application/x-www-form-urlencoded'},
+      data:{
+        key:this.data.request.key,
+        ddh:ddh
+      },
+      success:(res)=>{
+        console.log(res)
+        if(res.data.datas.error){
+          Taro.showModal({
+            title: '提示',
+            content: res.data.datas.error,
+            showCancel: false
+          });
+          return ;
+        }
+        Taro.showToast({
+          title: '确认收货成功'
+        })
+        this.switch_tab({currentTarget:{dataset:{idx:4,lx:4}}})
+      }
+    })
   }
 })
 class _C extends React.Component {
@@ -262,14 +299,14 @@ class _C extends React.Component {
                 data-idx='2'
                 data-lx='2'
               >
-                未使用
+                已支付
               </Text>
               <Text
                 decode='decode'
-                className={'text_' + (request.lx == '3' ? 1 : 2)}
+                className={'text_' + (request.lx == '4' ? 1 : 2)}
                 onClick={this.switch_tab}
-                data-idx='3'
-                data-lx='3'
+                data-idx='4'
+                data-lx='4'
               >
                 已使用
               </Text>
@@ -330,10 +367,10 @@ class _C extends React.Component {
                           </Text>
                         </View>
                         <Text decode='decode' className='text_13'>
-                          共1件
+                          共{item.number}件
                         </Text>
                       </View>
-                      <View className='bottom-text-wrapper flex-col items-center'>
+                      { item.zt!=4 && (item.zt!=2 || item.lx!=1)?<View className='bottom-text-wrapper flex-col items-center'>
                         {item.zt == 1 && <Text decode='decode' onClick={this.buy} data-ddh={item.ddh}>现在付款</Text>}
                         {item.zt == 2 && (
                           <Text
@@ -344,11 +381,18 @@ class _C extends React.Component {
                             去核销
                           </Text>
                         )}
-                        {item.zt == 3 && <Text decode='decode' onClick={this.buy_again} data-inviter_id={item.inviter_id} data-goods_id>再来一单</Text>}
+                        {item.zt == 3 && item.lx==1 && <Text decode='decode' onClick={this.confirm_receive} data-ddh={item.ddh} >确认收货</Text>}
                         {item.zt == 0 && <Text decode='decode'>已取消</Text>}
-                      </View>
+                      </View>:null }
+
                     </View>
                   </View>
+                  {
+                  item.zt == 3&&item.lx==1?<View className='address_info'>
+                    <View>物流公司：{item.company}</View>
+                    <View>发货单号：{item.order_number}</View>
+                  </View>:null
+                  }
                 </View>
               )
             })}

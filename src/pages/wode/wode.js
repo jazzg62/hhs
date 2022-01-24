@@ -13,7 +13,7 @@ import './wode.scss'
     zsy: '0.00',
     zhye: '0.00',
   },
-  onLoad() {
+  onLoad(options) {
     const my = [
       '没有行动的承诺，不过是一席空话。',
       '没有所谓失败，除非你不再尝试。',
@@ -30,7 +30,10 @@ import './wode.scss'
     this.setData({
       member_des: my[new Date().getDay() % my.length]
     })
-    this.request_my()
+    this.request_my();
+    if(options.online_tk == 1){
+      this.navigate_dingdan({currentTarget:{dataset:{lx:'all'}}});
+    }
   },
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -221,10 +224,10 @@ class _C extends React.Component {
               <View className='flex-row group_14'>
                 <View className='flex-col group_15'>
                   <Text decode='decode' className='text_17'>
-                    未使用
+                    已支付
                   </Text>
                   <Text decode='decode' className='text_18'>
-                    点击查看未使用订单
+                    点击查看已支付订单
                   </Text>
                 </View>
                 <View className='flex-col items-center image-wrapper_2'>
@@ -242,15 +245,15 @@ class _C extends React.Component {
             <View
               className='justify-between section_6'
               onClick={this.navigate_dingdan}
-              data-lx='3'
+              data-lx='4'
             >
               <View className='flex-row group_16'>
                 <View className='flex-col group_17'>
                   <Text decode='decode' className='text_19'>
-                    已使用
+                    已完成
                   </Text>
                   <Text decode='decode' className='text_20'>
-                    点击查看已使用订单
+                    点击查看已完成订单
                   </Text>
                 </View>
                 <View className='flex-col items-center image-wrapper_3'>

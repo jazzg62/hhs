@@ -141,3 +141,14 @@
   line-height: 38px;
   white-space: nowrap;
 }
+.address_info{
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeeee;
+  padding: 10px 15px;
+  font-size: 25px;
+  color: #777777;
+  line-height: 150%;
+  border-radius: 10px;
+  margin-top: 15px;
+}
