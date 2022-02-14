@@ -103,7 +103,7 @@ import './shangpinxiangqing1.scss'
         let interval = 0
         let list = [];
         for(let i in goods_info['pic']){
-          if(goods_info['pic'][i].endsWith('jpg')){
+          if(!goods_info['pic'][i].endsWith('/')){
             list.push(goods_info['pic'][i]);
           }
         }
@@ -547,11 +547,11 @@ class _C extends React.Component {
                 onClick={this.show_popup}
               ></Image>:null}
           </View>
-          {goods_info.sale_list.length ==0 ? null : <View className='section_4 flex-row'>
-            <Text decode='decode' className='text_8'>
-              购买用户
-            </Text>
-              <Swiper className='buyer_list' vertical autoplay circular interval='2000' >
+          <View className='section_4 flex-column'>
+            <View className='flex-row gmrs'>
+              已购买<Text className='orange'>{goods_info.sale_num}</Text>人&nbsp;&nbsp;|&nbsp;&nbsp;<Text className='orange'>{goods_info.goods_click}</Text>次浏览
+            </View>
+              {goods_info.sale_list.length == 0? null:<Swiper className='buyer_list' vertical autoplay circular interval='2000' >
                 {goods_info.sale_list.map((item) => {
                   return (
                   <SwiperItem className='buyer_swiper_item' key={item.index}>
@@ -562,9 +562,8 @@ class _C extends React.Component {
                 )
                 })
                 }
-              </Swiper>
+              </Swiper>}
           </View>
-          }
           <View className='section_4 flex-row' onClick={this.open_location}>
             <Text decode='decode' className='text_8'>
               可用门店
