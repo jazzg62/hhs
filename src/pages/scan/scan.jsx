@@ -36,12 +36,12 @@ class Index extends Component {
     super(props);
     let params = getCurrentInstance().router.params
     // store_id, member_id, phone 根据系统后台传入的值来决定
-    if(isTrue(params['store_id']) || isTrue(params['sn'])){
+    if (isTrue(params['store_id']) || isTrue(params['sn'])) {
       this.props.actions.getStoreInfo(params['store_id'], params['storeb_id'], params['sn']);
     }
-    if(isTrue(params['member_id']))
+    if (isTrue(params['member_id']))
       this.props.actions.setUserMemberID(params['member_id']);
-    if(isTrue(params['phone']))
+    if (isTrue(params['phone']))
       this.props.actions.setUserPhone(params['phone']);
     Taro.login({
       success: result => {
@@ -49,29 +49,29 @@ class Index extends Component {
       }
     })
 
-    this.state ={
-      showNumberKeyboard:false
+    this.state = {
+      showNumberKeyboard: false
     }
   }
 
-  showNumberKeyboard(){
+  showNumberKeyboard() {
     this.setState({
-      showNumberKeyboard:true
+      showNumberKeyboard: true
     })
   }
 
-  hideNumberKeyboard(){
+  hideNumberKeyboard() {
     this.setState({
-      showNumberKeyboard:false
+      showNumberKeyboard: false
     })
   }
 
   handleMoneyChange(val) {
-    this.props.actions.setMoney(this.props.pay.money+''+val);
+    this.props.actions.setMoney(this.props.pay.money + '' + val);
   }
 
-  handleMoneyDel(){
-    let money = (this.props.pay.money+'').split('');
+  handleMoneyDel() {
+    let money = (this.props.pay.money + '').split('');
     money.pop();
     this.props.actions.setMoney(money.join(''));
   }
@@ -95,11 +95,11 @@ class Index extends Component {
           'content-type': 'application/x-www-form-urlencoded'
         }
       })
-      .then((res) => {
-        if (res.data['state'] == 1)
-          this.props.actions.setUserPhone(res.data['phone']);
-        this.handlePayClick();
-      })
+        .then((res) => {
+          if (res.data['state'] == 1)
+            this.props.actions.setUserPhone(res.data['phone']);
+          this.handlePayClick();
+        })
     } else {
       console.warn('用户取消了授权');
       this.handlePayClick();
@@ -109,12 +109,12 @@ class Index extends Component {
   handlePayClick() {
     let { money } = this.props.pay;
     money = Number(money);
-    if(Number.isNaN(money)){
+    if (Number.isNaN(money)) {
       Taro.showModal({
-        title:'注意',
-        content:'请输入正确的支付金额！'
+        title: '注意',
+        content: '请输入正确的支付金额！'
       })
-      return ;
+      return;
     }
     if (money < 0.01) {
       Taro.showModal({
@@ -125,7 +125,7 @@ class Index extends Component {
     }
     Taro.showLoading({
       title: '加载中...',
-      mask:true
+      mask: true
     });
     this.props.actions.getDiscount(money)
   }
@@ -159,15 +159,15 @@ class Index extends Component {
     if (isTrue(phone)) {
       submitButton = <Button className='index-pay__button' onClick={this.pay(0).bind(this)} >支付</Button>
       chongZhiButton = (<View className='index-chongzhi__button'>
-                          <Button className='index-chongzhi__button-inline' onClick={this.pay(1).bind(this)} >在线充值</Button>
-                      </View>);
+        <Button className='index-chongzhi__button-inline' onClick={this.pay(1).bind(this)} >在线充值</Button>
+      </View>);
     } else {
       submitButton = <Button openType='getPhoneNumber'
         onGetphonenumber={this.phone(0).bind(this)} className='index-pay__button'
       >支付</Button>
       chongZhiButton = (<View className='index-chongzhi__button'>
-                        <Button className='index-chongzhi__button-inline' openType='getPhoneNumber' onGetphonenumber={this.phone(1).bind(this)} >在线充值</Button>
-                       </View>);
+        <Button className='index-chongzhi__button-inline' openType='getPhoneNumber' onGetphonenumber={this.phone(1).bind(this)} >在线充值</Button>
+      </View>);
     }
 
     return (
@@ -178,7 +178,7 @@ class Index extends Component {
             src={storeInfo.store_avatar}
           />
           <View className='index-store__name'>
-            <Text >{storeInfo.store_name}</Text>
+            <Text className='index-store__a'>{storeInfo.store_name}</Text>
             <Text className='index-store__fdmc'>{storeInfo.fdmc}</Text>
           </View>
         </View>
@@ -189,7 +189,7 @@ class Index extends Component {
 
         <View className='index-input' onClick={this.showNumberKeyboard.bind(this)}>
           <Text className='index-input__text'>付款金额:</Text>
-          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money}   disabled />
+          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money} disabled />
         </View>
 
         {submitButton}
@@ -201,7 +201,7 @@ class Index extends Component {
           </Image>
         </View>
 
-        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar  input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
+        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
 
       </View>
     )

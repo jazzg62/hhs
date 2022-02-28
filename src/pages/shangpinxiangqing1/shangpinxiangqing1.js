@@ -427,6 +427,14 @@ import './shangpinxiangqing1.scss'
           },
           success: res1 => {
             console.log(res1)
+            if(res1.data.datas.error){
+              Taro.showModal({
+                title: '提示',
+                content: res1.data.datas.error,
+                showCancel: false
+              })
+              return ;
+            }
             let { result } = res1.data.datas
             Taro.requestPayment({
               timeStamp: result.timeStamp,

@@ -40,8 +40,8 @@ class Index extends Component {
       this.props.actions.getStoreInfo(params['store_id'], params['storeb_id'], params['sn']);
     }
 
-    this.state ={
-      showNumberKeyboard:false
+    this.state = {
+      showNumberKeyboard: false
     }
 
     my.getAuthCode({
@@ -54,45 +54,45 @@ class Index extends Component {
             method: "POST",
             url: "https://pay.cnql888.com/index.php?act=index3&op=alipay_getmemberid",
             data: {
-              code:res.authCode
+              code: res.authCode
             },
             header: {
               "content-type": "application/x-www-form-urlencoded"
             }
           })
-          .then((res1)=>{
-            res1 = res1.data;
-            this.props.actions.setUserId(res1.user_id);
-            if(res1['member_id'] && res1['member_id']!='-1'){
-              this.props.actions.setUserMemberID(res1['member_id']);
-            }
-            if(res1['member_mobile'] && res1['member_mobile']!='-1'){
-              this.props.actions.setUserPhone(res1['member_mobile']);
-            }
-          })
+            .then((res1) => {
+              res1 = res1.data;
+              this.props.actions.setUserId(res1.user_id);
+              if (res1['member_id'] && res1['member_id'] != '-1') {
+                this.props.actions.setUserMemberID(res1['member_id']);
+              }
+              if (res1['member_mobile'] && res1['member_mobile'] != '-1') {
+                this.props.actions.setUserPhone(res1['member_mobile']);
+              }
+            })
         }
       },
     });
   }
 
-  showNumberKeyboard(){
+  showNumberKeyboard() {
     this.setState({
-      showNumberKeyboard:true
+      showNumberKeyboard: true
     })
   }
 
-  hideNumberKeyboard(){
+  hideNumberKeyboard() {
     this.setState({
-      showNumberKeyboard:false
+      showNumberKeyboard: false
     })
   }
 
   handleMoneyChange(val) {
-    this.props.actions.setMoney(this.props.pay.money+''+val);
+    this.props.actions.setMoney(this.props.pay.money + '' + val);
   }
 
-  handleMoneyDel(){
-    let money = (this.props.pay.money+'').split('');
+  handleMoneyDel() {
+    let money = (this.props.pay.money + '').split('');
     money.pop();
     this.props.actions.setMoney(money.join(''));
   }
@@ -101,28 +101,28 @@ class Index extends Component {
    * 请求后端，获取手机号信息
    * @param {*} res
    */
-  getPhone(res){
+  getPhone(res) {
     Taro.request({
       method: "POST",
       url: "https://pay.cnql888.com/index.php?act=index3&op=alipay_getPhone",
       data: {
-        user_id:this.props.user.user_id,
-        encryptedData:JSON.parse(res.response)['response']
+        user_id: this.props.user.user_id,
+        encryptedData: JSON.parse(res.response)['response']
       },
       header: {
         "content-type": "application/x-www-form-urlencoded"
       }
     })
-    .then((res1)=>{
-      res1 = res1.data;
-      if(res1['member_id'] && res1['member_id']!='-1'){
-        this.props.actions.setUserMemberID(res1['member_id']);
-      }
-      if(res1['member_mobile'] && res1['member_mobile']!='-1'){
-        this.props.actions.setUserPhone(res1['member_mobile']);
-      }
-      this.handlePayClick();
-    })
+      .then((res1) => {
+        res1 = res1.data;
+        if (res1['member_id'] && res1['member_id'] != '-1') {
+          this.props.actions.setUserMemberID(res1['member_id']);
+        }
+        if (res1['member_mobile'] && res1['member_mobile'] != '-1') {
+          this.props.actions.setUserPhone(res1['member_mobile']);
+        }
+        this.handlePayClick();
+      })
   }
 
   /**
@@ -144,7 +144,7 @@ class Index extends Component {
       Taro.showModal({
         title: '注意',
         content: '请输入正确的支付金额！',
-        showCancel:false
+        showCancel: false
       })
       return;
     }
@@ -152,13 +152,13 @@ class Index extends Component {
       Taro.showModal({
         title: '注意',
         content: '支付金额不能为0',
-        showCancel:false
+        showCancel: false
       })
       return;
     }
     Taro.showLoading({
       title: '加载中...',
-      mask:true
+      mask: true
     });
     this.props.actions.getDiscount(money)
   }
@@ -191,12 +191,12 @@ class Index extends Component {
 
     if (isTrue(phone)) {
       submitButton = <Button className='index-pay__button' onClick={this.pay(0).bind(this)} >支付</Button>
-      chongZhiButton = <View className='index-chongzhi__button'><Button className='index-chongzhi__button-inline'  onClick={this.pay(1).bind(this)} >在线充值</Button></View>
+      chongZhiButton = <View className='index-chongzhi__button'><Button className='index-chongzhi__button-inline' onClick={this.pay(1).bind(this)} >在线充值</Button></View>
     } else {
       submitButton = <Button scope='phoneNumber' openType='getAuthorize' onGetAuthorize={this.phone(0).bind(this)} className='index-pay__button' >支付</Button>
       chongZhiButton = <View className='index-chongzhi__button'>
         <Button className='index-chongzhi__button-inline' scope='phoneNumber' openType='getAuthorize' onGetAuthorize={this.phone(1).bind(this)}  >在线充值</Button>
-        </View>
+      </View>
     }
 
     return (
@@ -207,7 +207,7 @@ class Index extends Component {
             src={storeInfo.store_avatar}
           />
           <View className='index-store__name'>
-            <Text >{storeInfo.store_name}</Text>
+            <Text className='index-store__a'>{storeInfo.store_name}</Text>
             <Text className='index-store__fdmc'>{storeInfo.fdmc}</Text>
           </View>
         </View>
@@ -218,7 +218,7 @@ class Index extends Component {
 
         <View className='index-input' onClick={this.showNumberKeyboard.bind(this)}>
           <Text className='index-input__text'>付款金额:</Text>
-          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money}   disabled />
+          <Input className='index-input__input' type='digit' placeholder='请输入付款金额' value={payInfo.money} disabled />
         </View>
 
         {submitButton}
@@ -230,7 +230,7 @@ class Index extends Component {
           </Image>
         </View>
 
-        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar  input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
+        <NumberKeyboard show={this.state.showNumberKeyboard} keyList={[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0]} showSidebar input={this.handleMoneyChange.bind(this)} delete={this.handleMoneyDel.bind(this)} done={this.hideNumberKeyboard.bind(this)} blur={this.hideNumberKeyboard.bind(this)} />
       </View>
     )
   }
