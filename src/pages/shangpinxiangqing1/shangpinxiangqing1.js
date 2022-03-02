@@ -404,8 +404,8 @@ import './shangpinxiangqing1.scss'
     return s
   },
   buy() {
-    let {lx, id} = this.data.goods_info;
-    if(lx == 1){
+    let {goods_lx, id} = this.data.goods_info;
+    if(goods_lx == 1){
       let url = 'https://www.cnql888.com/wap/tmpl/order/buy_step1_yltk.html?goods_id='+id+'&buynum=1&key='+Taro.getApp().globalData['key']+'&tjr_id='+this.data.tjr_id;
       wx.navigateTo({
         url: '/pages/index/index?src=' + encodeURIComponent(url)
@@ -544,6 +544,18 @@ class _C extends React.Component {
               </Text>
               <Text className='sy'>剩余{goods_info.goods_count}份</Text>
             </View>
+            {goods_info.goods_lx == 0 && goods_info.dh_end_date != '' ?<View className='flex-row group_7'>
+              <Image
+                src={require('../../res/local/end.png')}
+                className='icon_1'
+              ></Image>
+              <Text decode='decode' className='text_11'>
+                使用截至时间
+              </Text>
+              <Text decode='decode' className='text_12'>
+                {goods_info.dh_end_date}
+              </Text>
+            </View>:null}
             <View className='divider'></View>
             <Text decode='decode' className='text_13'>
               {goods_info.goods_des}

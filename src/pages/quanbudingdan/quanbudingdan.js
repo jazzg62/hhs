@@ -80,7 +80,7 @@ import './quanbudingdan.scss'
   },
   translate_message(item) {
     let zt = item['zt'];
-    let lx = item['lx'];
+    let lx = item['goods_lx'];
     if(zt == '2' && lx == '1') return '待发货';
     if(zt == '3' && lx == '1') return '待收货';
 
@@ -137,7 +137,7 @@ import './quanbudingdan.scss'
         '&goods_des=' +
         item.goods_des +
         '&end_time=' +
-        item.end_time +
+        item.dh_end_date +
         '&store_name=' +
         item.store_name +
         '&store_avatar=' +
@@ -370,7 +370,7 @@ class _C extends React.Component {
                           共{item.number}件
                         </Text>
                       </View>
-                      { item.zt!=4 && (item.zt!=2 || item.lx!=1)?<View className='bottom-text-wrapper flex-col items-center'>
+                      { item.zt!=4 && (item.zt!=2 || item.goods_lx!=1)?<View className='bottom-text-wrapper flex-col items-center'>
                         {item.zt == 1 && <Text decode='decode' onClick={this.buy} data-ddh={item.ddh}>现在付款</Text>}
                         {item.zt == 2 && (
                           <Text
