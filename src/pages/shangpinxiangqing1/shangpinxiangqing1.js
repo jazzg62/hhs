@@ -176,6 +176,11 @@ import './shangpinxiangqing1.scss'
     Taro.makePhoneCall({ phoneNumber: this.data.goods_info.seller_name })
   },
   goods_share_pic(data) {
+    let {store_name, goods_name, goods_des, store_address, member_name} = data;
+    let {getLengthCN, getSubstrCN} = this;
+    if(goods_des == '') goods_des = goods_name;
+    goods_des = goods_des.replace("\n", "");
+    store_address = '商家地址：'+store_address;
       return ({
           width: '750px',
           height: '1189px',
@@ -207,7 +212,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: data.store_name,
+                  text:getLengthCN(store_name)<=34?store_name:getSubstrCN(store_name, 0, 31)+'...',
                   css: {
                       maxWidth: '430px',
                       top: '783px',
@@ -218,7 +223,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: data.goods_name.length<12?data.goods_name:data.goods_name.substr(0,12)+'...',
+                  text: getLengthCN(goods_name)<=24?goods_name:getSubstrCN(goods_name, 0, 21) + '...',
                   css: {
                       width: '430px',
                       top: '825px',
@@ -229,7 +234,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: data.goods_des.length<32?data.goods_des:data.goods_des.substr(0,32)+'...' , // 长度最多为30
+                  text: getLengthCN(goods_des)<=68?goods_des:getSubstrCN(goods_des, 0, 65)+'...',
                   css: {
                       width: '430px',
                       top: '882px',
@@ -253,7 +258,7 @@ import './shangpinxiangqing1.scss'
               },
               {
                   type: 'text',
-                  text: '商家地址：'+data.store_address,
+                  text: getLengthCN(store_address)<=64?store_address:getSubstrCN(store_address, 0, 61)+'...',
                   css: {
                       width: '430px',
                       top: '1010px',
@@ -329,7 +334,7 @@ import './shangpinxiangqing1.scss'
             },
             {
                 type: 'text',
-                text: data.member_name,
+                text: getLengthCN(member_name)<=14?member_name:getSubstrCN(member_name, 0, 11) + '...',
                 css: {
                     maxWidth: '50px',
                     top: '1038px',
@@ -340,6 +345,20 @@ import './shangpinxiangqing1.scss'
             },
           ]
       })
+  },
+  getLengthCN(str){
+    return str.replace(/[\u0391-\uFFE5]/g,"aa").length
+  },
+  getSubstrCN(str, s, e){
+    let total = e-s;
+    let list = str.split('');
+    let res = [];
+    for(let i in list){
+        if(total<=0) break;
+        res.push(list[i]);
+        total-= /[\u0391-\uFFE5]/.test(list[i]) ? 2 : 1;
+    }
+    return res.join('');
   },
   ImgOK(e){
     console.log('img ok:',e);
