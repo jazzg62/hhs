@@ -52,3 +52,9 @@
 
 通过props来进行显示的控制
 只暴露一个接口 change(e)   e.type=[1,2,3,4,5,6,7,8,9,0,del,done]
+
+## wxparse
+解析html为小程序
+
+## painter.js
+绘图
