@@ -431,6 +431,10 @@ import './shangpinxiangqing1.scss'
       })
       return ;
     }
+    Taro.showLoading({
+      title: "发起支付中...",
+      mask:true
+    });
     Taro.login({
       success: res => {
         Taro.request({
@@ -445,6 +449,7 @@ import './shangpinxiangqing1.scss'
             code: res.code
           },
           success: res1 => {
+            Taro.hideLoading();
             console.log(res1)
             if(res1.data.datas.error){
               Taro.showModal({
