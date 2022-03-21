@@ -1,12 +1,13 @@
 @import '../../../style/themes/default.scss';
 @import '../../../style/themes/icon.scss';
 
-.discount{
-  &-top__banner{
-    background-color: rgba(0,0,0,.1);
+.discount {
+  &-top__banner {
+    background-color: rgba(0, 0, 0, .1);
     height: 24px;
   }
-  &-type{
+
+  &-type {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -18,29 +19,29 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 30px;
-    border-radius:24px;
+    border-radius: 24px;
     color: $black;
     border: 6px solid transparent;
     transition: all .2s ease;
 
 
-    &_selected{
+    &_selected {
       border: 6px solid $blue;
       background-color: rgba($color: $blue, $alpha: 0.1);
     }
 
-    &__text{
+    &__text {
       margin-left: 30px;
       font-weight: bold;
       font-size: 36px;
     }
 
-    &__check{
+    &__check {
       margin-left: auto;
     }
   }
 
-  &-red__envelop{
+  &-red__envelop {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -51,25 +52,28 @@
     box-sizing: border-box;
     padding-left: 36px;
 
-    &__info{
+    &__info {
       display: flex;
       flex-direction: column;
       margin-left: 12px;
 
-      &__red:nth-child(n+2){
+      &__red:nth-child(n+2) {
         margin-top: 12px;
       }
 
-      &__red{
+      &__red {
         color: $red;
       }
     }
   }
 
-  &-pay{
+  &-pay {
     width: 90%;
+    height: 100px;
+    font-size: 40px;
+    line-height: 100px;
     margin: 0 auto;
-    margin-top:  60px;
+    margin-top: 60px;
     border-radius: 30px;
     background-color: $green;
     color: $white;
