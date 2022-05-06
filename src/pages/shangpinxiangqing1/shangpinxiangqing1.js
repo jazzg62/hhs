@@ -167,7 +167,7 @@ import './shangpinxiangqing1.scss'
             member_avatar:goods_info.member_avatar,
             member_name:goods_info.member_name,
           }),
-          goods_details:goods_info.goods_details+'<br><span style="font-size:12px;color:#999999;text-indent:10px;">注：此商品订单支付后，平台不接受退款。</span><br>',
+          goods_details:goods_info.goods_details,
         })
       }
     })

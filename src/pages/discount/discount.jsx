@@ -35,12 +35,18 @@ const dispatchToProps = dispatch => ({
 class Index extends Component {
   constructor(props) {
     super(props);
-    if(this.props.discount.predeposit != 0){
+    if (this.props.discount.predeposit != 0) {
       this.props.actions.changeRedEnvelop(1);
-    }else{
+    } else {
       this.props.actions.changeRedEnvelop(0);
-      if(this.props.discount.czye == 0)
+      if (this.props.discount.czye == 0)
         this.props.actions.toPay();
+    }
+
+    // 2022/4/2-2022/4/7红包不可用
+    let now = new Date().getTime();
+    if (now >= (new Date('2022/4/2').getTime()) && now < (new Date('2022/4/7').getTime())) {
+      this.props.actions.changeRedEnvelop(0);
     }
   }
 
@@ -62,7 +68,7 @@ class Index extends Component {
   }
 
   handleRedEnvelopClick() {
-    if(this.props.pay.use_red_envelop == 0)
+    if (this.props.pay.use_red_envelop == 0)
       this.props.actions.changeRedEnvelop(1);
     else
       this.props.actions.changeRedEnvelop(0);
@@ -88,14 +94,14 @@ class Index extends Component {
     let xjq = Number(this.props.discount.xjq) || 0;
     let xjq_bl = Number(this.props.discount.xjq_bl);
     let xjqText = '';
-    if(xjq_bl != 0){
+    if (xjq_bl != 0) {
       xjq_me = this.props.pay.money * xjq_bl
     }
     let xjq_dk = xjq_me > xjq ? xjq : xjq_me; // 现金券可抵扣的部分
     if (xjq_dk != 0) {
       xjqText = <Text className='discount-red__envelop__info__text discount-red__envelop__info__red'>
         消费券抵扣{xjq_dk}元
-                </Text>
+      </Text>
     }
 
     // 2.计算动态股东折扣
@@ -104,29 +110,40 @@ class Index extends Component {
     if (dtgd_zk < 100)
       dtgd_zkText = <Text className='discount-red__envelop__info__text discount-red__envelop__info__red'>
         享受共享股东{calcZK(dtgd_zk)}优惠
-                    </Text>;
+      </Text>;
 
     // 3.计算红包
     let predeposit = this.props.discount.predeposit;
     let predepositText = '';
+    let ban_predepositText = null;
     let { money } = this.props.pay;
     let xfje = (money - xjq_dk) * dtgd_zk / 100;
     let discountedPredeposit = predeposit > xfje ? xfje : predeposit;
     if (predeposit != 0) {
       predepositText = <Text className='discount-red__envelop__info__text' >
         使用<Text className='discount-red__envelop__info__red'>红包{toFixed2(discountedPredeposit)}</Text>元
-                      </Text>
+      </Text>
+    }
+
+    // 2022/4/2-2022/4/7红包不可用
+    let now = new Date().getTime();
+    if (now >= (new Date('2022/4/2').getTime()) && now < (new Date('2022/4/7').getTime())) {
+      predepositText = '';
+      ban_predepositText = <Text className='discount-red__envelop__info__text' >
+        系统升级，红包暂时无法使用
+      </Text>;
     }
 
     let yhxx = '';
     if (xflx != Payment.SM_CZ && (predepositText != '' || xjqText != '' || dtgd_zkText != '')) {
       yhxx = <View className='discount-red__envelop' onClick={this.handleRedEnvelopClick.bind(this)}>
-        {predepositText!=''?<View className='discount-red__envelop_check'>
+        {predepositText != '' ? <View className='discount-red__envelop_check'>
           <Image className='icon-small discount-type__check' src={use_red_envelop ? circle_checked : circle_normal}></Image>
-        </View>:null}
+        </View> : null}
 
         <View className='discount-red__envelop__info'>
           {predepositText}
+          {ban_predepositText}
           {xjqText}
           {dtgd_zkText}
         </View>

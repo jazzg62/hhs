@@ -18,7 +18,7 @@ import './shouye.scss'
     list: [],
     latitude: '',
     longitude: '',
-    isloading: false,
+    isloading: true,
     hasmore: false,
     request: {
       curpage: 1,

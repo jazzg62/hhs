@@ -12,7 +12,7 @@ class Index extends Component {
       img: params['img'],
       title: params['title'],
       appId: params['appId'],
-      path: params['path']
+      path: decodeURIComponent(params['path'])
     }
   }
 
