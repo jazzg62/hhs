@@ -1,4 +1,4 @@
-import { View, Image, Text, Button } from '@tarojs/components'
+import { View, Image, Text, ScrollView } from '@tarojs/components'
 import React from 'react'
 import Taro from '@tarojs/taro'
 import withWeapp from '@tarojs/with-weapp'
@@ -9,14 +9,20 @@ import './zichanmingxi2.scss'
     menuButtonBoundingClientRect: Taro.getMenuButtonBoundingClientRect(),
     zsy: '0.00',
     zhye: '0.00',
-    list: []
+    list: [],
+    isloading: true,
+    hasmore: false,
+    request: {
+      curpage: 1,
+      page: Taro.getApp().globalData.page,
+      key: Taro.getApp().globalData.key,
+    },
   },
   onLoad(options) {
     let { zsy, zhye} = options
-    this.setData({
-      zsy,
-      zhye,
-    })
+    let key = Taro.getApp().globalData.key;
+    let page = Taro.getApp().globalData.page;
+    this.setData({zsy,zhye,list:[], request: { ...this.data.request, key: key, page } })
     this.request_order_list()
   },
   navigate_back() {
@@ -34,24 +40,39 @@ import './zichanmingxi2.scss'
     Taro.setClipboardData({ data: data })
   },
   request_order_list() {
-    let { key } = Taro.getApp().globalData
     Taro.request({
       url: 'https://www.cnql888.com/mobile/index.php?act=member_tk&op=sy_list',
-      data: {
-        key
-      },
+      data: this.data.request,
       success: res => {
-        console.log('order_list', res.data)
+        let list1 = this.data.list
+        list1.push(...res.data.datas.list)
         this.setData({
-          list: res.data.datas.list
+          hasmore:res.data.hasmore,
+          isloading:false,
+          list: list1,
         })
       }
     })
+  },
+  load_more_list(){
+    console.log('load_more', this.data);
+    if (this.data.isloading || !this.data.hasmore) {
+      return
+    }
+    let { request } = this.data
+    this.setData({
+      isloading: true,
+      request: {
+        ...request,
+        curpage: request.curpage + 1
+      }
+    })
+    this.request_order_list()
   }
 })
 class _C extends React.Component {
   render() {
-    const { menuButtonBoundingClientRect, zsy, zhye, list } = this.data
+    const { menuButtonBoundingClientRect, zsy, zhye, list, isloading, hasmore } = this.data
     return (
       <View className='flex-col page'>
         <View className='flex-col group'>
@@ -78,15 +99,18 @@ class _C extends React.Component {
           <View className='balance'>
             <View className='balance-column'>
               <Text className='balance-des'>总收入</Text>
-              <Text className='balance-price'>{this.data.zsy}</Text>
+              <Text className='balance-price'>{zsy}</Text>
             </View>
             <View className='balance-column'>
               <Text className='balance-des'>可提现</Text>
-              <View className='balance-price'>{this.data.zhye} <Text className='balance-withdraw' onClick={this.navigate_withdraw}>提现</Text></View>
+              <View className='balance-price'>{zhye} <Text className='balance-withdraw' onClick={this.navigate_withdraw}>提现</Text></View>
             </View>
           </View>
         </View>
-        <View className='flex-col list'>
+        <ScrollView className='flex-col list' onScrollToLower={this.load_more_list}
+          scrollY
+          enableFlex
+        >
           {list.map((item) => {
             return (
               <View className='list-item flex-col' key='index'>
@@ -135,7 +159,15 @@ class _C extends React.Component {
               </View>
             )
           })}
-        </View>
+          {(isloading || hasmore) && (
+              <View className='more'>
+                <View className='spinner'>
+                  <View className='spinner-item'></View>
+                </View>
+                <Text className='more-text'>数据加载中</Text>
+              </View>
+            )}
+        </ScrollView>
       </View>
     )
   }
