@@ -19,15 +19,20 @@ export function getDiscount(money){
         storeb_id:state.store.storeb_id
       }
     })
+    let predeposit = Number(res.data.member_info.available_predeposit);
+    let is_hyk = res.data.is_hyk;
+    let hyk_text = res.data.hyk_text || '您是本店会员，红包仅异店消费可用';
 
     let payload = {
       dtgd_zk:Number(res.data.dtgd_info['zk'] || 100),
       xjq:res.data.xjq || 0,
       xjq_id:res.data.xjq_info['id'] || 0,
       xjq_me:res.data.xjq_info['me'] || 0,
-      predeposit:Number(res.data.member_info.available_predeposit),
+      predeposit:predeposit,
       czye:res.data.czye,
-      xjq_bl:res.data.xjq_info['xjqbl'] || 0
+      xjq_bl:res.data.xjq_info['xjqbl'] || 0,
+      is_hyk:is_hyk,
+      hyk_text:hyk_text
     }
 
     redirect_discount();

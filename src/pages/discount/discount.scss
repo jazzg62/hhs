@@ -52,10 +52,22 @@
     box-sizing: border-box;
     padding-left: 36px;
 
+    &_select {
+      display: flex;
+    }
+
     &__info {
       display: flex;
       flex-direction: column;
       margin-left: 12px;
+
+      &__gray {
+        color: $gray3;
+      }
+
+      &__text {
+        // padding-left: 50px;
+      }
 
       &__red:nth-child(n+2) {
         margin-top: 12px;
@@ -69,9 +81,6 @@
 
   &-pay {
     width: 90%;
-    height: 100px;
-    font-size: 40px;
-    line-height: 100px;
     margin: 0 auto;
     margin-top: 60px;
     border-radius: 30px;

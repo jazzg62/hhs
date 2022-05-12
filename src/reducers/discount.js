@@ -5,7 +5,9 @@ const INITIAL_STATE = {
   xjq:0,         // 用户消费券余额
   xjq_bl:0,      // 消费券比例优惠
   predeposit:0,   // 红包余额
-  czye:0          // 充值余额
+  czye:0,          // 充值余额
+  is_hyk:0,        // 是否是商家的会员卡用户
+  hyk_text:'您是本店会员，红包仅异店消费可用'
 }
 
 export default function store(state = INITIAL_STATE, action){
