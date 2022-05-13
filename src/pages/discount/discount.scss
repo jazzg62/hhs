@@ -41,44 +41,6 @@
     }
   }
 
-  &-red__envelop {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 24px;
-    color: $black;
-    box-sizing: border-box;
-    padding-left: 36px;
-
-    &_select {
-      display: flex;
-    }
-
-    &__info {
-      display: flex;
-      flex-direction: column;
-      margin-left: 12px;
-
-      &__gray {
-        color: $gray3;
-      }
-
-      &__text {
-        // padding-left: 50px;
-      }
-
-      &__red:nth-child(n+2) {
-        margin-top: 12px;
-      }
-
-      &__red {
-        color: $red;
-      }
-    }
-  }
-
   &-pay {
     width: 90%;
     margin: 0 auto;
@@ -87,5 +49,48 @@
     background-color: $green;
     color: $white;
     font-weight: bold;
+  }
+}
+
+.discount-info{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 24px;
+  box-sizing: border-box;
+  padding-left: 34px;
+
+  .row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &:nth-child(n+2){
+      margin-top: 5px;
+    }
+
+    .left{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      margin-right: 10px;
+    }
+
+    .red{
+      color: $red;
+    }
+    .gray{
+      color: $gray3;
+    }
+  }
+}
+
+.align-left{
+  .row{
+    margin-left: -45px;
   }
 }

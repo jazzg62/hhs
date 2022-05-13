@@ -100,6 +100,20 @@ export function changeRedEnvelop(val){
 }
 
 /**
+ * 是否使用消费券
+ * @param {*} val
+ * @returns
+ */
+export function changeXFQ(val){
+  return {
+    type:'CHANGEXFQ',
+    payload:{
+      use_xfq:val
+    }
+  }
+}
+
+/**
  * 设置为充值支付
  */
 export function setCZ(is_cz){

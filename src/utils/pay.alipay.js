@@ -31,7 +31,8 @@ export default function toPay() {
       xjq_id: discount.xjq_id,
       xjq_bl:discount.xjq_bl,
       dtgd_zk: discount.dtgd_zk,
-      code:res_login.code
+      code:res_login.code,
+      xfq:pay.use_xfq?discount.xfq:0
     };
     // 充值支付时，数据需处理下
     if(pay.xflx == Payment.SM_CZ){

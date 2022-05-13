@@ -7,7 +7,8 @@ const INITIAL_STATE = {
   predeposit:0,   // 红包余额
   czye:0,          // 充值余额
   is_hyk:0,        // 是否是商家的会员卡用户
-  hyk_text:'您是本店会员，红包仅异店消费可用'
+  hyk_text:'您是本店会员，红包仅异店消费可用',
+  xfq:0,          // 优惠券
 }
 
 export default function store(state = INITIAL_STATE, action){

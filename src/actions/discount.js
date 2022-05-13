@@ -22,6 +22,7 @@ export function getDiscount(money){
     let predeposit = Number(res.data.member_info.available_predeposit);
     let is_hyk = res.data.is_hyk;
     let hyk_text = res.data.hyk_text || '您是本店会员，红包仅异店消费可用';
+    let xfq = res.data.xfq || 0;
 
     let payload = {
       dtgd_zk:Number(res.data.dtgd_info['zk'] || 100),
@@ -32,7 +33,8 @@ export function getDiscount(money){
       czye:res.data.czye,
       xjq_bl:res.data.xjq_info['xjqbl'] || 0,
       is_hyk:is_hyk,
-      hyk_text:hyk_text
+      hyk_text:hyk_text,
+      xfq:xfq
     }
 
     redirect_discount();

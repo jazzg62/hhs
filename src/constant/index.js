@@ -38,6 +38,7 @@ export const RESET_INFO = {
 }
 
 export const CZ = {
+  xfq:0,
   use_red_envelop:0,
   xjq_me:0,
   xjq_id:0,

@@ -10,12 +10,13 @@ const INITIAL_STATE = {
   xflx: Payment.SM_XS,
   ddh: generateUnionID(),
   password: '',
-  use_red_envelop: 1,
+  use_red_envelop: 1,  // 默认使用红包
   xfq_list: "",
   is_cz: 0,
   xjq_me: 0,
   xjq_id: 0,
   dtgd_zk: 100,
+  use_xfq: 1, // 默认使用优惠券
 };
 
 export default function store(state = INITIAL_STATE, action){
@@ -35,6 +36,8 @@ export default function store(state = INITIAL_STATE, action){
     case 'TOPAY':
       return {...state, ...action.payload}
     case 'SETCZ':
+      return {...state, ...action.payload}
+    case 'CHANGEXFQ':
       return {...state, ...action.payload}
     default:
       return state
