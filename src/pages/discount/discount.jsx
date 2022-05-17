@@ -35,7 +35,7 @@ const dispatchToProps = dispatch => ({
 class Index extends Component {
   constructor(props) {
     super(props);
-    if (this.props.discount.predeposit > 0 && this.props.discount.is_hyk == 0) {
+    if (this.props.discount.predeposit > 0 && this.props.discount.is_hyk == 0 && this.props.discount.aff > 0) {
       this.props.actions.changeRedEnvelop(1);
     }
     else {
@@ -167,13 +167,34 @@ class Index extends Component {
       </View>
     }
 
+    // 4. 阿福分规则
+    let aff = this.props.discount.aff;
+    let aff_zk = 100-aff;
+    if(aff_zk%10 == 0)
+      aff_zk = aff_zk/10+'折';
+    else
+      aff_zk = aff_zk+'折'
+    let affText = null;
+    if(aff > 0){
+      affText = <View className='row'>
+        <View className='left'></View>
+        <View className='right'>
+          <View className='red'>阿福分用户，享受{aff_zk}</View>
+        </View>
+      </View>
+    }
+
     let yhxx = '';
-    if (xflx != Payment.SM_CZ && (predepositText || hykText || yhqText || xjqText || dtgd_zkText )) {
+    if (xflx != Payment.SM_CZ && (predepositText || hykText || yhqText || xjqText || dtgd_zkText ) && affText == null) {
       yhxx = <View className={'discount-info '+ (align_left?'align-left':'')}>
         {predepositText} {hykText}
         {yhqText}
         {xjqText}
         {dtgd_zkText}
+      </View>;
+    }else if(xflx != Payment.SM_CZ && affText){
+      yhxx = <View className={'discount-info '+ (align_left?'align-left':'')}>
+        {affText}
       </View>;
     }
 

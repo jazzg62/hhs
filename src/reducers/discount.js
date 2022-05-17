@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   is_hyk:0,        // 是否是商家的会员卡用户
   hyk_text:'您是本店会员，红包仅异店消费可用',
   xfq:0,          // 优惠券
+  aff:0           // 阿福分优惠比例
 }
 
 export default function store(state = INITIAL_STATE, action){
